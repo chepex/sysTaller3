@@ -4,6 +4,7 @@ import com.entities.util.JsfUtil;
 import com.entities.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,12 +26,32 @@ public class ClienteController implements Serializable {
     private com.entities.ClienteFacade ejbFacade;
     private List<Cliente> items = null;
     private Cliente selected;
-    
-    
+    private Vehiculo selectedvehiculo;
+    private List<Vehiculo> lvehiculo =new ArrayList<>();
     
     public ClienteController() {
     }
-  
+
+    public List<Vehiculo> getLvehiculo() {
+        return lvehiculo;
+    }
+
+    public void setLvehiculo(List<Vehiculo> lvehiculo) {
+        this.lvehiculo = lvehiculo;
+    }
+
+    
+    
+    public Vehiculo getSelectedvehiculo() {
+        return selectedvehiculo;
+    }
+
+    public void setSelectedvehiculo(Vehiculo selectedvehiculo) {
+        this.selectedvehiculo = selectedvehiculo;
+    }
+ 
+    
+    
     public Cliente getSelected() {
         return selected;
     }
@@ -54,11 +75,12 @@ public class ClienteController implements Serializable {
        
         selected = new Cliente();
         initializeEmbeddableKey();
-     
+        selectedvehiculo = new  Vehiculo(0);
         return selected;
     }
 
     public void create() {
+        System.out.println("aqui guardado-->");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClienteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -168,6 +190,13 @@ public class ClienteController implements Serializable {
         
     } 
     
+    public void limpiar(){
+    selected= null;
+    }
     
+    public void addVechiculo(){
+    
+    this.lvehiculo.add(selectedvehiculo);
+    }
 
 }

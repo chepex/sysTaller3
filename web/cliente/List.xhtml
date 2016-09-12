@@ -15,104 +15,135 @@
 
         <ui:define name="body">
             <h:form id="ClienteListForm">
-                <p:panel header="#{bundle.ListClienteTitle}">
-                    <p:dataTable id="datalist" value="#{clienteController.items}" var="item"
-                                 selectionMode="single" selection="#{clienteController.selected}"
+                <p:commandButton id="nuevoButton" icon="ui-icon-plus"   value="Nuevo" actionListener="#{clienteController.prepareCreate}" disabled="#{clienteController.selected != null}" update="@form,:growl" />
+                <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{clienteController.create()}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
+             <p:commandButton id="limpiarButton" icon="ui-icon-trash"   value="Limpiar" actionListener="#{clienteController.limpiar}" update="@form,:growl" />
+             <p:panel header="Cliente">
+                 <center>
+                     <h:panelGroup id="display" rendered="#{clienteController.selected != null}">
+                    <p:panelGrid columns="4" >
+                      
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_empresa}" for="empresa" />
+                        <p:inputText id="empresa" value="#{clienteController.selected.empresa}" title="#{bundle.CreateClienteTitle_empresa}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_telefonoFijo}" for="telefonoFijo" />
+                        <p:inputText id="telefonoFijo" value="#{clienteController.selected.telefonoFijo}" title="#{bundle.CreateClienteTitle_telefonoFijo}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{clienteController.selected.direccion}" title="#{bundle.CreateClienteTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_nit}" for="nit" />
+                        <p:inputText id="nit" value="#{clienteController.selected.nit}" title="#{bundle.CreateClienteTitle_nit}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_registroFiscal}" for="registroFiscal" />
+                        <p:inputText id="registroFiscal" value="#{clienteController.selected.registroFiscal}" title="#{bundle.CreateClienteTitle_registroFiscal}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{bundle.CreateClienteTitle_nombre}"  requiredMessage="#{bundle.CreateClienteRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{clienteController.selected.apellido}" title="#{bundle.CreateClienteTitle_apellido}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_celular}" for="celular" />
+                        <p:inputText id="celular" value="#{clienteController.selected.celular}" title="#{bundle.CreateClienteTitle_celular}"  requiredMessage="#{bundle.CreateClienteRequiredMessage_celular}"/>
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{clienteController.selected.correo}" title="#{bundle.CreateClienteTitle_correo}" />
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_ciudad}" for="ciudad" />
+                        <p:inputText id="ciudad" value="#{clienteController.selected.ciudad}" title="#{bundle.CreateClienteTitle_ciudad}" requiredMessage="#{bundle.CreateClienteRequiredMessage_ciudad}"/>
+                        <p:outputLabel value="#{bundle.CreateClienteLabel_departamento}" for="departamento" />
+                        <p:inputText id="departamento"  value="#{clienteController.selected.departamento}" title="#{bundle.EditClienteTitle_departamento}"  requiredMessage="#{bundle.EditClienteRequiredMessage_departamento}"  />
+                    </p:panelGrid>
+                     
+                </h:panelGroup>
+             </center>
+              </p:panel>
+             <center>
+             <p:panel header="Vehiculos" rendered="#{clienteController.selectedvehiculo != null}">
+                    <p:panelGrid columns="7" >
+                      
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{clienteController.selectedvehiculo.anio}" title="#{bundle.CreateVehiculoTitle_anio}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_anio}"/>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_numPlaca}" for="numPlaca" />
+                        <p:inputText id="numPlaca" value="#{clienteController.selectedvehiculo.numPlaca}" title="#{bundle.CreateVehiculoTitle_numPlaca}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_numPlaca}"/>
+                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_numMotor}" for="numMotor" />
+                        <p:inputText id="numMotor" value="#{clienteController.selectedvehiculo.numMotor}" title="#{bundle.CreateVehiculoTitle_numMotor}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_numMotor}"/>
+                        *
+                        <p:outputLabel value="Tipo" for="tipoVehiculoidTipoVehiculo" />
+                        <p:selectOneMenu id="tipoVehiculoidTipoVehiculo" value="#{clienteController.selectedvehiculo.tipoVehiculoidTipoVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_tipoVehiculoidTipoVehiculo}">
+                            <f:selectItems value="#{tipoVehiculoController.itemsAvailableSelectOne}"
+                                           var="tipoVehiculoidTipoVehiculoItem"
+                                           itemLabel="#{tipoVehiculoidTipoVehiculoItem.nombre}"
+                                           itemValue="#{tipoVehiculoidTipoVehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Marca" for="marcaidMarca" />
+                        <p:selectOneMenu id="marcaidMarca" value="#{clienteController.selectedvehiculo.marcaidMarca}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_marcaidMarca}">
+                            <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
+                                           var="marcaidMarcaItem"
+                                           itemLabel="#{marcaidMarcaItem.nombre}"
+                                           itemValue="#{marcaidMarcaItem}"/>
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Modelo" for="modeloidModelo" />
+                        <p:selectOneMenu id="modeloidModelo" value="#{clienteController.selectedvehiculo.modeloidModelo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_modeloidModelo}">
+                            <f:selectItems value="#{modeloController.itemsAvailableSelectOne}"
+                                           var="modeloidModeloItem"
+                                           itemLabel="#{modeloidModeloItem.nombre}"
+                                           itemValue="#{modeloidModeloItem}"/>
+                        </p:selectOneMenu>
+                      
+                          <p:commandButton id="agregarButton" icon="ui-icon-plus"    actionListener="#{clienteController.addVechiculo()}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
+                       
+                          
+                          
+                    </p:panelGrid>                 
+                 <p:dataTable id="datalist" value="#{clienteController.lvehiculo}" var="item"
+                                 selectionMode="single" selection="#{vehiculoController.selected }"
                                  paginator="true"
-                                 rowKey="#{item.idCliente}"
+                                 rowKey="#{item.idvehiculo}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoVehiculoidTipoVehiculo}"/>
+                        </p:column>                     
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca"/>
+                            </f:facet>
+                            <h:outputText value="#{item.marcaidMarca}"/>
+                        </p:column>                   
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modelo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.modeloidModelo}"/>
+                        </p:column>                     
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Año"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_numPlaca}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numPlaca}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVehiculoTitle_numMotor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numMotor}"/>
+                        </p:column>
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_idCliente}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idCliente}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_empresa}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.empresa}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_telefonoFijo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.telefonoFijo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_direccion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.direccion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_nit}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nit}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_registroFiscal}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.registroFiscal}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_apellido}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apellido}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_celular}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.celular}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_correo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.correo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_ciudad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.ciudad}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListClienteTitle_departamento}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.departamento}"/>
-                                
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clienteController.prepareCreate}" update=":ClienteCreateForm" oncomplete="PF('ClienteCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClienteViewForm" oncomplete="PF('ClienteViewDialog').show()" disabled="#{empty clienteController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClienteEditForm" oncomplete="PF('ClienteEditDialog').show()" disabled="#{empty clienteController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{clienteController.destroy}" update=":growl,datalist" disabled="#{empty clienteController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
+               
+                
+                       
+                    </p:dataTable>   
+                 
+             </p:panel>
+             </center>
+             
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+            
         </ui:define>
     </ui:composition>
 

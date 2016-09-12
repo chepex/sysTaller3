@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewProveedorLabel_descripcion}"/>
                         <h:outputText value="#{proveedorController.selected.descripcion}" title="#{bundle.ViewProveedorTitle_descripcion}"/>
                         <h:outputText value="#{bundle.ViewProveedorLabel_activo}"/>
-                        <h:outputText value="#{proveedorController.selected.activo}" title="#{bundle.ViewProveedorTitle_activo}"/>
+                       <p:selectBooleanCheckbox  value="#{proveedorController.selected.activo}" title="#{bundle.ViewProveedorTitle_activo}"/>
                         <h:outputText value="#{bundle.ViewProveedorLabel_saldo}"/>
                         <h:outputText value="#{proveedorController.selected.saldo}" title="#{bundle.ViewProveedorTitle_saldo}"/>
                     </p:panelGrid>

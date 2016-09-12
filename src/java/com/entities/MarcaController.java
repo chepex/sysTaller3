@@ -41,6 +41,7 @@ public class MarcaController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        selected.setIdMarca(0);
     }
 
     private MarcaFacade getFacade() {

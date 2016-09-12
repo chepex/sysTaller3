@@ -17,7 +17,7 @@
                         <h:outputText value="#{bundle.ViewMarcaLabel_nombre}"/>
                         <h:outputText value="#{marcaController.selected.nombre}" title="#{bundle.ViewMarcaTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewMarcaLabel_activo}"/>
-                        <h:outputText value="#{marcaController.selected.activo}" title="#{bundle.ViewMarcaTitle_activo}"/>
+                       <p:selectBooleanCheckbox  value="#{marcaController.selected.activo}" title="#{bundle.ViewMarcaTitle_activo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MarcaViewDialog.hide()"/>
                 </h:panelGroup>

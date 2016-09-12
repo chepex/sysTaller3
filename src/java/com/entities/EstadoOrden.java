@@ -51,9 +51,9 @@ public class EstadoOrden implements Serializable {
     @Size(max = 45)
     @Column(name = "Descripcion")
     private String descripcion;
-    @Size(max = 45)
+
     @Column(name = "activo")
-    private String activo;
+    private Boolean activo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoOrdenidEstadoOrden")
     private List<OrdenTrabajo> ordenTrabajoList;
 
@@ -93,14 +93,15 @@ public class EstadoOrden implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
 
+    
     @XmlTransient
     public List<OrdenTrabajo> getOrdenTrabajoList() {
         return ordenTrabajoList;

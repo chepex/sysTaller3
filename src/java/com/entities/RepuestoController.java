@@ -41,6 +41,7 @@ public class RepuestoController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        selected.setIdRepuesto(0);
     }
 
     private RepuestoFacade getFacade() {

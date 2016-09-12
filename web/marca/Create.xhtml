@@ -12,12 +12,11 @@
             <h:form id="MarcaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{marcaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMarcaLabel_idMarca}" for="idMarca" />
-                        <p:inputText id="idMarca" value="#{marcaController.selected.idMarca}" title="#{bundle.CreateMarcaTitle_idMarca}" required="true" requiredMessage="#{bundle.CreateMarcaRequiredMessage_idMarca}"/>
+                    
                         <p:outputLabel value="#{bundle.CreateMarcaLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{marcaController.selected.nombre}" title="#{bundle.CreateMarcaTitle_nombre}" required="true" requiredMessage="#{bundle.CreateMarcaRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateMarcaLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{marcaController.selected.activo}" title="#{bundle.CreateMarcaTitle_activo}" />
+                     <p:selectBooleanCheckbox  id="activo" value="#{marcaController.selected.activo}" title="#{bundle.CreateMarcaTitle_activo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{marcaController.create}" value="#{bundle.Save}" update="display,:MarcaListForm:datalist,:growl" oncomplete="handleSubmit(args,'MarcaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MarcaCreateDialog.hide()"/>

@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditModeloLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{modeloController.selected.nombre}" title="#{bundle.EditModeloTitle_nombre}" required="true" requiredMessage="#{bundle.EditModeloRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditModeloLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{modeloController.selected.activo}" title="#{bundle.EditModeloTitle_activo}" />
+                       <p:selectBooleanCheckbox  id="activo" value="#{modeloController.selected.activo}" title="#{bundle.EditModeloTitle_activo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{modeloController.update}" value="#{bundle.Save}" update="display,:ModeloListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ModeloEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ModeloEditDialog.hide()"/>

@@ -47,9 +47,9 @@ public class Modelo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 45)
+    
     @Column(name = "activo")
-    private String activo;
+    private Boolean activo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "modeloidModelo")
     private List<Vehiculo> vehiculoList;
 
@@ -81,13 +81,15 @@ public class Modelo implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+    
 
     @XmlTransient
     public List<Vehiculo> getVehiculoList() {

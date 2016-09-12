@@ -43,7 +43,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMarcaTitle_activo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.activo}"/>
+                           <p:selectBooleanCheckbox value="#{item.activo}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{marcaController.prepareCreate}" update=":MarcaCreateForm" oncomplete="PF('MarcaCreateDialog').show()"/>

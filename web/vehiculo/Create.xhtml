@@ -12,8 +12,7 @@
             <h:form id="VehiculoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{vehiculoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateVehiculoLabel_idvehiculo}" for="idvehiculo" />
-                        <p:inputText id="idvehiculo" value="#{vehiculoController.selected.idvehiculo}" title="#{bundle.CreateVehiculoTitle_idvehiculo}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_idvehiculo}"/>
+                      
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{vehiculoController.selected.anio}" title="#{bundle.CreateVehiculoTitle_anio}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_anio}"/>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_numPlaca}" for="numPlaca" />

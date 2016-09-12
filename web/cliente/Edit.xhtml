@@ -35,7 +35,7 @@
                         <p:outputLabel value="#{bundle.EditClienteLabel_ciudad}" for="ciudad" />
                         <p:inputText id="ciudad" value="#{clienteController.selected.ciudad}" title="#{bundle.EditClienteTitle_ciudad}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_ciudad}"/>
                         <p:outputLabel value="#{bundle.EditClienteLabel_departamento}" for="departamento" />
-                        <p:calendar id="departamento" pattern="MM/dd/yyyy" value="#{clienteController.selected.departamento}" title="#{bundle.EditClienteTitle_departamento}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_departamento}" showOn="button"/>
+                       <p:inputText id="departamento"   value="#{clienteController.selected.departamento}" title="#{bundle.EditClienteTitle_departamento}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_departamento}"  />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{clienteController.update}" value="#{bundle.Save}" update="display,:ClienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClienteEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClienteEditDialog.hide()"/>

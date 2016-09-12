@@ -17,7 +17,7 @@
                         <h:outputText value="#{bundle.ViewTipoPagoLabel_nombre}"/>
                         <h:outputText value="#{tipoPagoController.selected.nombre}" title="#{bundle.ViewTipoPagoTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewTipoPagoLabel_activo}"/>
-                        <h:outputText value="#{tipoPagoController.selected.activo}" title="#{bundle.ViewTipoPagoTitle_activo}"/>
+                      <p:selectBooleanCheckbox value="#{tipoPagoController.selected.activo}" title="#{bundle.ViewTipoPagoTitle_activo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TipoPagoViewDialog.hide()"/>
                 </h:panelGroup>

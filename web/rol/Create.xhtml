@@ -12,8 +12,7 @@
             <h:form id="RolCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRolLabel_idRol}" for="idRol" />
-                        <p:inputText id="idRol" value="#{rolController.selected.idRol}" title="#{bundle.CreateRolTitle_idRol}" required="true" requiredMessage="#{bundle.CreateRolRequiredMessage_idRol}"/>
+                    
                         <p:outputLabel value="#{bundle.CreateRolLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{rolController.selected.nombre}" title="#{bundle.CreateRolTitle_nombre}" required="true" requiredMessage="#{bundle.CreateRolRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateRolLabel_activo}" for="activo" />

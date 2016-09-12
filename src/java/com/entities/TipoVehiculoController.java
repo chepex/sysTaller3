@@ -41,6 +41,7 @@ public class TipoVehiculoController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        this.selected.setIdTipoVehiculo(0);
     }
 
     private TipoVehiculoFacade getFacade() {

@@ -41,6 +41,7 @@ public class ModeloController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        selected.setIdModelo(0);
     }
 
     private ModeloFacade getFacade() {

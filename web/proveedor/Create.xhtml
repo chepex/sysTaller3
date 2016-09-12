@@ -12,14 +12,13 @@
             <h:form id="ProveedorCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{proveedorController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateProveedorLabel_idProveedor}" for="idProveedor" />
-                        <p:inputText id="idProveedor" value="#{proveedorController.selected.idProveedor}" title="#{bundle.CreateProveedorTitle_idProveedor}" required="true" requiredMessage="#{bundle.CreateProveedorRequiredMessage_idProveedor}"/>
+                      
                         <p:outputLabel value="#{bundle.CreateProveedorLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{proveedorController.selected.nombre}" title="#{bundle.CreateProveedorTitle_nombre}" required="true" requiredMessage="#{bundle.CreateProveedorRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateProveedorLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{proveedorController.selected.descripcion}" title="#{bundle.CreateProveedorTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateProveedorRequiredMessage_descripcion}"/>
                         <p:outputLabel value="#{bundle.CreateProveedorLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{proveedorController.selected.activo}" title="#{bundle.CreateProveedorTitle_activo}" />
+                     <p:selectBooleanCheckbox  id="activo" value="#{proveedorController.selected.activo}" title="#{bundle.CreateProveedorTitle_activo}" />
                         <p:outputLabel value="#{bundle.CreateProveedorLabel_saldo}" for="saldo" />
                         <p:inputText id="saldo" value="#{proveedorController.selected.saldo}" title="#{bundle.CreateProveedorTitle_saldo}" />
                     </p:panelGrid>

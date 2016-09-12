@@ -17,7 +17,7 @@
                         <h:outputText value="#{bundle.ViewModeloLabel_nombre}"/>
                         <h:outputText value="#{modeloController.selected.nombre}" title="#{bundle.ViewModeloTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewModeloLabel_activo}"/>
-                        <h:outputText value="#{modeloController.selected.activo}" title="#{bundle.ViewModeloTitle_activo}"/>
+                        <p:selectBooleanCheckbox  value="#{modeloController.selected.activo}" title="#{bundle.ViewModeloTitle_activo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ModeloViewDialog.hide()"/>
                 </h:panelGroup>

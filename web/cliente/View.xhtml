@@ -35,9 +35,8 @@
                         <h:outputText value="#{bundle.ViewClienteLabel_ciudad}"/>
                         <h:outputText value="#{clienteController.selected.ciudad}" title="#{bundle.ViewClienteTitle_ciudad}"/>
                         <h:outputText value="#{bundle.ViewClienteLabel_departamento}"/>
-                        <h:outputText value="#{clienteController.selected.departamento}" title="#{bundle.ViewClienteTitle_departamento}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
+                        <h:outputText value="#{clienteController.selected.departamento}" title="#{bundle.ViewClienteTitle_departamento}"/>
+                          
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ClienteViewDialog.hide()"/>
                 </h:panelGroup>

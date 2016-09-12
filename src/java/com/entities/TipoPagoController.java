@@ -41,6 +41,7 @@ public class TipoPagoController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        selected.setIdTipoPago(0);
     }
 
     private TipoPagoFacade getFacade() {

@@ -12,14 +12,13 @@
             <h:form id="EstadoOrdenCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{estadoOrdenController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEstadoOrdenLabel_idEstadoOrden}" for="idEstadoOrden" />
-                        <p:inputText id="idEstadoOrden" value="#{estadoOrdenController.selected.idEstadoOrden}" title="#{bundle.CreateEstadoOrdenTitle_idEstadoOrden}" required="true" requiredMessage="#{bundle.CreateEstadoOrdenRequiredMessage_idEstadoOrden}"/>
+                      
                         <p:outputLabel value="#{bundle.CreateEstadoOrdenLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{estadoOrdenController.selected.nombre}" title="#{bundle.CreateEstadoOrdenTitle_nombre}" required="true" requiredMessage="#{bundle.CreateEstadoOrdenRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateEstadoOrdenLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{estadoOrdenController.selected.descripcion}" title="#{bundle.CreateEstadoOrdenTitle_descripcion}" />
                         <p:outputLabel value="#{bundle.CreateEstadoOrdenLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{estadoOrdenController.selected.activo}" title="#{bundle.CreateEstadoOrdenTitle_activo}" />
+                       <p:selectBooleanCheckbox id="activo" value="#{estadoOrdenController.selected.activo}" title="#{bundle.CreateEstadoOrdenTitle_activo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{estadoOrdenController.create}" value="#{bundle.Save}" update="display,:EstadoOrdenListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstadoOrdenCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EstadoOrdenCreateDialog.hide()"/>

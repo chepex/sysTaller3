@@ -55,9 +55,9 @@ public class Proveedor implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "descripcion")
     private String descripcion;
-    @Size(max = 45)
+    
     @Column(name = "activo")
-    private String activo;
+    private Boolean activo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "saldo")
     private BigDecimal saldo;
@@ -101,13 +101,15 @@ public class Proveedor implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+
 
     public BigDecimal getSaldo() {
         return saldo;

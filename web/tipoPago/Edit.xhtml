@@ -12,12 +12,11 @@
             <h:form id="TipoPagoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoPagoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTipoPagoLabel_idTipoPago}" for="idTipoPago" />
-                        <p:inputText id="idTipoPago" value="#{tipoPagoController.selected.idTipoPago}" title="#{bundle.EditTipoPagoTitle_idTipoPago}" required="true" requiredMessage="#{bundle.EditTipoPagoRequiredMessage_idTipoPago}"/>
+                       
                         <p:outputLabel value="#{bundle.EditTipoPagoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tipoPagoController.selected.nombre}" title="#{bundle.EditTipoPagoTitle_nombre}" required="true" requiredMessage="#{bundle.EditTipoPagoRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.EditTipoPagoLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{tipoPagoController.selected.activo}" title="#{bundle.EditTipoPagoTitle_activo}" />
+                        <p:selectBooleanCheckbox  id="activo" value="#{tipoPagoController.selected.activo}" title="#{bundle.EditTipoPagoTitle_activo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tipoPagoController.update}" value="#{bundle.Save}" update="display,:TipoPagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoPagoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoPagoEditDialog.hide()"/>

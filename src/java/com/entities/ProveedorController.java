@@ -41,6 +41,7 @@ public class ProveedorController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        selected.setIdProveedor(0);
     }
 
     private ProveedorFacade getFacade() {

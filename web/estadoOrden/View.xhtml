@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewEstadoOrdenLabel_descripcion}"/>
                         <h:outputText value="#{estadoOrdenController.selected.descripcion}" title="#{bundle.ViewEstadoOrdenTitle_descripcion}"/>
                         <h:outputText value="#{bundle.ViewEstadoOrdenLabel_activo}"/>
-                        <h:outputText value="#{estadoOrdenController.selected.activo}" title="#{bundle.ViewEstadoOrdenTitle_activo}"/>
+                    <p:selectBooleanCheckbox  value="#{estadoOrdenController.selected.activo}" title="#{bundle.ViewEstadoOrdenTitle_activo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="EstadoOrdenViewDialog.hide()"/>
                 </h:panelGroup>

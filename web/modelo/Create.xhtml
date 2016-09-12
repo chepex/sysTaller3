@@ -12,12 +12,11 @@
             <h:form id="ModeloCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{modeloController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateModeloLabel_idModelo}" for="idModelo" />
-                        <p:inputText id="idModelo" value="#{modeloController.selected.idModelo}" title="#{bundle.CreateModeloTitle_idModelo}" required="true" requiredMessage="#{bundle.CreateModeloRequiredMessage_idModelo}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateModeloLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{modeloController.selected.nombre}" title="#{bundle.CreateModeloTitle_nombre}" required="true" requiredMessage="#{bundle.CreateModeloRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateModeloLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{modeloController.selected.activo}" title="#{bundle.CreateModeloTitle_activo}" />
+                      <p:selectBooleanCheckbox  id="activo" value="#{modeloController.selected.activo}" title="#{bundle.CreateModeloTitle_activo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{modeloController.create}" value="#{bundle.Save}" update="display,:ModeloListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModeloCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ModeloCreateDialog.hide()"/>

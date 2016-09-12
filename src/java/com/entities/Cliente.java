@@ -93,9 +93,8 @@ public class Cliente implements Serializable {
     private BigDecimal ciudad;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "departamento")
-    @Temporal(TemporalType.DATE)
-    private Date departamento;
+    @Column(name = "departamento") 
+    private String departamento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteidCliente")
     private List<OrdenTrabajo> ordenTrabajoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteidCliente")
@@ -108,7 +107,7 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Cliente(Integer idCliente, String nombre, String celular, BigDecimal ciudad, Date departamento) {
+    public Cliente(Integer idCliente, String nombre, String celular, BigDecimal ciudad, String departamento) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.celular = celular;
@@ -204,13 +203,15 @@ public class Cliente implements Serializable {
         this.ciudad = ciudad;
     }
 
-    public Date getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(Date departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
+
+ 
 
     @XmlTransient
     public List<OrdenTrabajo> getOrdenTrabajoList() {

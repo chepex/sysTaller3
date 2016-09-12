@@ -17,7 +17,7 @@
                         <h:outputText value="#{bundle.ViewTipoVehiculoLabel_nombre}"/>
                         <h:outputText value="#{tipoVehiculoController.selected.nombre}" title="#{bundle.ViewTipoVehiculoTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewTipoVehiculoLabel_activo}"/>
-                        <h:outputText value="#{tipoVehiculoController.selected.activo}" title="#{bundle.ViewTipoVehiculoTitle_activo}"/>
+                      <p:selectBooleanCheckbox  value="#{tipoVehiculoController.selected.activo}" title="#{bundle.ViewTipoVehiculoTitle_activo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TipoVehiculoViewDialog.hide()"/>
                 </h:panelGroup>

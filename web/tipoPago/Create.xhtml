@@ -12,12 +12,11 @@
             <h:form id="TipoPagoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoPagoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateTipoPagoLabel_idTipoPago}" for="idTipoPago" />
-                        <p:inputText id="idTipoPago" value="#{tipoPagoController.selected.idTipoPago}" title="#{bundle.CreateTipoPagoTitle_idTipoPago}" required="true" requiredMessage="#{bundle.CreateTipoPagoRequiredMessage_idTipoPago}"/>
+                      
                         <p:outputLabel value="#{bundle.CreateTipoPagoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{tipoPagoController.selected.nombre}" title="#{bundle.CreateTipoPagoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateTipoPagoRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateTipoPagoLabel_activo}" for="activo" />
-                        <p:inputText id="activo" value="#{tipoPagoController.selected.activo}" title="#{bundle.CreateTipoPagoTitle_activo}" />
+                       <p:selectBooleanCheckbox id="activo" value="#{tipoPagoController.selected.activo}" title="#{bundle.CreateTipoPagoTitle_activo}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tipoPagoController.create}" value="#{bundle.Save}" update="display,:TipoPagoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoPagoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoPagoCreateDialog.hide()"/>

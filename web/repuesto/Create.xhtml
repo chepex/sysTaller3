@@ -12,8 +12,7 @@
             <h:form id="RepuestoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{repuestoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_idRepuesto}" for="idRepuesto" />
-                        <p:inputText id="idRepuesto" value="#{repuestoController.selected.idRepuesto}" title="#{bundle.CreateRepuestoTitle_idRepuesto}" required="true" requiredMessage="#{bundle.CreateRepuestoRequiredMessage_idRepuesto}"/>
+                       
                         <p:outputLabel value="#{bundle.CreateRepuestoLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{repuestoController.selected.nombre}" title="#{bundle.CreateRepuestoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateRepuestoRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateRepuestoLabel_precio}" for="precio" />

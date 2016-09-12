@@ -31,7 +31,7 @@
                                 <p:autoComplete id="cliente" minQueryLength="3" 
                                                 value="#{ordenTrabajoController.selected.clienteidCliente}"                                         
                                               var="cliente"
-                                              itemLabel="#{cliente.nombre }" 
+                                              itemLabel="#{cliente.nombre } #{cliente.apellido }" 
                                               itemValue="#{cliente}"
                                               completeMethod="#{clienteController.autoCompleteCliente(valor)}" 
                                               converter="#{ClienteControllerConverter}" 

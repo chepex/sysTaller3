@@ -175,27 +175,19 @@ public class OrdenTrabajoController implements Serializable {
        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("OrdenTrabajoCreated"));
           int vid2= this.presupuestoFacade.findById();
-         for(Presupuesto p : this.lpresupuesto){
-             if(p.getIdpresupuesto()==0){
-                p.setIdpresupuesto(vid2);
-             }
-            
-           
-            p.setOrdenTrabajoidOrdenTrabajo1(selected);
-            System.out.println("p---->"+p);
-            System.out.println("ot---->"+selected); 
-            System.out.println("cantidad---->"+p.getCantidad());
-            System.out.println("precio---->"+p.getPrecio());
-            System.out.println("iva---->"+p.getIva());
-            System.out.println("factura---->"+p.getFactura());
-            System.out.println("tipo pago---->"+p.getTipoPagoidTipoPago());
-            try{
-              presupuestoFacade.edit(p);
-              vid2 =vid2+1;
-            }catch(Exception ex){
-                System.out.println("---->"+ex.getMessage());
-            }
-            
+          if(!lpresupuesto.isEmpty()){
+            for(Presupuesto p : this.lpresupuesto){
+                if(p.getIdpresupuesto()==0){
+                    p.setIdpresupuesto(vid2);
+                }            
+                p.setOrdenTrabajoidOrdenTrabajo1(selected);
+                try{
+                  presupuestoFacade.edit(p);
+                  vid2 =vid2+1;
+                }catch(Exception ex){
+                    System.out.println("---->"+ex.getMessage());
+                }
+          }
         }
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -324,10 +316,10 @@ public class OrdenTrabajoController implements Serializable {
     }
     
     public void limpiar2(){
-        System.out.println("selected-->"+selected);
+        
         this.selected = null;
-        System.out.println("aqui");
-        System.out.println("selected-->"+selected);
+          this.lvehiculo.clear();
+          this.lvehiculo = new ArrayList<>();
     }    
     
     public void agregarRepuesto(){

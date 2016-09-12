@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenTrabajoEditDlg" widgetVar="OrdenTrabajoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOrdenTrabajoTitle}">
+            <h:form id="OrdenTrabajoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenTrabajoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_idOrdenTrabajo}" for="idOrdenTrabajo" />
+                        <p:inputText id="idOrdenTrabajo" value="#{ordenTrabajoController.selected.idOrdenTrabajo}" title="#{bundle.EditOrdenTrabajoTitle_idOrdenTrabajo}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_idOrdenTrabajo}"/>
+                        
+                        <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy" value="#{ordenTrabajoController.selected.fechaEntrega}" title="#{bundle.EditOrdenTrabajoTitle_fechaEntrega}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_garantiaHasta}" for="garantiaHasta" />
+                        <p:calendar id="garantiaHasta" pattern="MM/dd/yyyy" value="#{ordenTrabajoController.selected.garantiaHasta}" title="#{bundle.EditOrdenTrabajoTitle_garantiaHasta}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_adelanto}" for="adelanto" />
+                        <p:inputText id="adelanto" value="#{ordenTrabajoController.selected.adelanto}" title="#{bundle.EditOrdenTrabajoTitle_adelanto}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_solicutudCliente}" for="solicutudCliente" />
+                        <p:inputText id="solicutudCliente" value="#{ordenTrabajoController.selected.solicutudCliente}" title="#{bundle.EditOrdenTrabajoTitle_solicutudCliente}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_notasInternas}" for="notasInternas" />
+                        <p:inputText id="notasInternas" value="#{ordenTrabajoController.selected.notasInternas}" title="#{bundle.EditOrdenTrabajoTitle_notasInternas}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_notasCotizacion}" for="notasCotizacion" />
+                        <p:inputText id="notasCotizacion" value="#{ordenTrabajoController.selected.notasCotizacion}" title="#{bundle.EditOrdenTrabajoTitle_notasCotizacion}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_diagnostico}" for="diagnostico" />
+                        <p:inputText id="diagnostico" value="#{ordenTrabajoController.selected.diagnostico}" title="#{bundle.EditOrdenTrabajoTitle_diagnostico}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_repuestos}" for="repuestos" />
+                        <p:selectBooleanCheckbox id="repuestos" value="#{ordenTrabajoController.selected.repuestos}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_materiales}" for="materiales" />
+                        <p:selectBooleanCheckbox id="materiales" value="#{ordenTrabajoController.selected.materiales}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_trabajoExterno}" for="trabajoExterno" />
+                        <p:selectBooleanCheckbox id="trabajoExterno" value="#{ordenTrabajoController.selected.trabajoExterno}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalRespuesto}" for="totalRespuesto" />
+                        <p:inputText id="totalRespuesto" value="#{ordenTrabajoController.selected.totalRespuesto}" title="#{bundle.EditOrdenTrabajoTitle_totalRespuesto}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalManoObra}" for="totalManoObra" />
+                        <p:inputText id="totalManoObra" value="#{ordenTrabajoController.selected.totalManoObra}" title="#{bundle.EditOrdenTrabajoTitle_totalManoObra}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalIva}" for="totalIva" />
+                        <p:inputText id="totalIva" value="#{ordenTrabajoController.selected.totalIva}" title="#{bundle.EditOrdenTrabajoTitle_totalIva}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalGravado}" for="totalGravado" />
+                        <p:inputText id="totalGravado" value="#{ordenTrabajoController.selected.totalGravado}" title="#{bundle.EditOrdenTrabajoTitle_totalGravado}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_vehiculoidvehiculo}" for="vehiculoidvehiculo" />
+                        <p:selectOneMenu id="vehiculoidvehiculo" value="#{ordenTrabajoController.selected.vehiculoidvehiculo}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_vehiculoidvehiculo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoidvehiculoItem"
+                                           itemValue="#{vehiculoidvehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_usuarioidUsuario}" for="usuarioidUsuario" />
+                        <p:selectOneMenu id="usuarioidUsuario" value="#{ordenTrabajoController.selected.usuarioidUsuario}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_usuarioidUsuario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioidUsuarioItem"
+                                           itemValue="#{usuarioidUsuarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_tipoPagoidTipoPago}" for="tipoPagoidTipoPago" />
+                        <p:selectOneMenu id="tipoPagoidTipoPago" value="#{ordenTrabajoController.selected.tipoPagoidTipoPago}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_tipoPagoidTipoPago}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPagoidTipoPagoItem"
+                                           itemValue="#{tipoPagoidTipoPagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_estadoOrdenidEstadoOrden}" for="estadoOrdenidEstadoOrden" />
+                        <p:selectOneMenu id="estadoOrdenidEstadoOrden" value="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_estadoOrdenidEstadoOrden}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoOrdenController.itemsAvailableSelectOne}"
+                                           var="estadoOrdenidEstadoOrdenItem"
+                                           itemValue="#{estadoOrdenidEstadoOrdenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_clienteidCliente}" for="clienteidCliente" />
+                        <p:selectOneMenu id="clienteidCliente" value="#{ordenTrabajoController.selected.clienteidCliente}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_clienteidCliente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteidClienteItem"
+                                           itemValue="#{clienteidClienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenTrabajoController.update}" value="#{bundle.Save}" update="display,:OrdenTrabajoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OrdenTrabajoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrdenTrabajoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListOrdenTrabajoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="OrdenTrabajoListForm">
+                <p:panel header="#{bundle.ListOrdenTrabajoTitle}">
+                    <p:dataTable id="datalist" value="#{ordenTrabajoController.items}" var="item"
+                                 selectionMode="single" selection="#{ordenTrabajoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idOrdenTrabajo}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_idOrdenTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idOrdenTrabajo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_fechaEntrega}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaEntrega}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_garantiaHasta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.garantiaHasta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_adelanto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adelanto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_solicutudCliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.solicutudCliente}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_notasInternas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.notasInternas}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_notasCotizacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.notasCotizacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_diagnostico}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.diagnostico}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_repuestos}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.repuestos}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_materiales}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.materiales}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_trabajoExterno}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.trabajoExterno}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_totalRespuesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalRespuesto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_totalManoObra}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalManoObra}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_totalIva}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalIva}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_totalGravado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalGravado}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_vehiculoidvehiculo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vehiculoidvehiculo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_usuarioidUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuarioidUsuario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_tipoPagoidTipoPago}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoPagoidTipoPago}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_estadoOrdenidEstadoOrden}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoOrdenidEstadoOrden}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOrdenTrabajoTitle_clienteidCliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clienteidCliente}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ordenTrabajoController.prepareCreate}" update=":OrdenTrabajoCreateForm" oncomplete="PF('OrdenTrabajoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":OrdenTrabajoViewForm" oncomplete="PF('OrdenTrabajoViewDialog').show()" disabled="#{empty ordenTrabajoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":OrdenTrabajoEditForm" oncomplete="PF('OrdenTrabajoEditDialog').show()" disabled="#{empty ordenTrabajoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ordenTrabajoController.destroy}" update=":growl,datalist" disabled="#{empty ordenTrabajoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

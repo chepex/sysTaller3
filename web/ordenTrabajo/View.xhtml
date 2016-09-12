@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenTrabajoViewDlg" widgetVar="OrdenTrabajoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOrdenTrabajoTitle}">
+            <h:form id="OrdenTrabajoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenTrabajoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_idOrdenTrabajo}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.idOrdenTrabajo}" title="#{bundle.ViewOrdenTrabajoTitle_idOrdenTrabajo}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_fechaEntrega}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.fechaEntrega}" title="#{bundle.ViewOrdenTrabajoTitle_fechaEntrega}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_garantiaHasta}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.garantiaHasta}" title="#{bundle.ViewOrdenTrabajoTitle_garantiaHasta}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_adelanto}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.adelanto}" title="#{bundle.ViewOrdenTrabajoTitle_adelanto}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_solicutudCliente}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.solicutudCliente}" title="#{bundle.ViewOrdenTrabajoTitle_solicutudCliente}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_notasInternas}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.notasInternas}" title="#{bundle.ViewOrdenTrabajoTitle_notasInternas}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_notasCotizacion}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.notasCotizacion}" title="#{bundle.ViewOrdenTrabajoTitle_notasCotizacion}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_diagnostico}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.diagnostico}" title="#{bundle.ViewOrdenTrabajoTitle_diagnostico}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_repuestos}"/>
+                        <p:selectBooleanCheckbox value="#{ordenTrabajoController.selected.repuestos}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_materiales}"/>
+                        <p:selectBooleanCheckbox value="#{ordenTrabajoController.selected.materiales}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_trabajoExterno}"/>
+                        <p:selectBooleanCheckbox value="#{ordenTrabajoController.selected.trabajoExterno}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_totalRespuesto}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.totalRespuesto}" title="#{bundle.ViewOrdenTrabajoTitle_totalRespuesto}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_totalManoObra}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.totalManoObra}" title="#{bundle.ViewOrdenTrabajoTitle_totalManoObra}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_totalIva}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.totalIva}" title="#{bundle.ViewOrdenTrabajoTitle_totalIva}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_totalGravado}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.totalGravado}" title="#{bundle.ViewOrdenTrabajoTitle_totalGravado}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_vehiculoidvehiculo}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.vehiculoidvehiculo}" title="#{bundle.ViewOrdenTrabajoTitle_vehiculoidvehiculo}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_usuarioidUsuario}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.usuarioidUsuario}" title="#{bundle.ViewOrdenTrabajoTitle_usuarioidUsuario}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_tipoPagoidTipoPago}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.tipoPagoidTipoPago}" title="#{bundle.ViewOrdenTrabajoTitle_tipoPagoidTipoPago}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_estadoOrdenidEstadoOrden}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden}" title="#{bundle.ViewOrdenTrabajoTitle_estadoOrdenidEstadoOrden}"/>
+                        <h:outputText value="#{bundle.ViewOrdenTrabajoLabel_clienteidCliente}"/>
+                        <h:outputText value="#{ordenTrabajoController.selected.clienteidCliente}" title="#{bundle.ViewOrdenTrabajoTitle_clienteidCliente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OrdenTrabajoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

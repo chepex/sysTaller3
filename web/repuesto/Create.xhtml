@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RepuestoCreateDlg" widgetVar="RepuestoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRepuestoTitle}">
+            <h:form id="RepuestoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{repuestoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_idRepuesto}" for="idRepuesto" />
+                        <p:inputText id="idRepuesto" value="#{repuestoController.selected.idRepuesto}" title="#{bundle.CreateRepuestoTitle_idRepuesto}" required="true" requiredMessage="#{bundle.CreateRepuestoRequiredMessage_idRepuesto}"/>
+                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{repuestoController.selected.nombre}" title="#{bundle.CreateRepuestoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateRepuestoRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{repuestoController.selected.precio}" title="#{bundle.CreateRepuestoTitle_precio}" />
+                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{repuestoController.selected.descripcion}" title="#{bundle.CreateRepuestoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_activo}" for="activo" />
+                        <p:selectBooleanCheckbox id="activo" value="#{repuestoController.selected.activo}" />
+                        <p:outputLabel value="#{bundle.CreateRepuestoLabel_categoriaidCategoria}" for="categoriaidCategoria" />
+                        <p:selectOneMenu id="categoriaidCategoria" value="#{repuestoController.selected.categoriaidCategoria}" required="true" requiredMessage="#{bundle.EditRepuestoRequiredMessage_categoriaidCategoria}">
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
+                                           var="categoriaidCategoriaItem"
+                                           itemValue="#{categoriaidCategoriaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{repuestoController.create}" value="#{bundle.Save}" update="display,:RepuestoListForm:datalist,:growl" oncomplete="handleSubmit(args,'RepuestoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RepuestoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

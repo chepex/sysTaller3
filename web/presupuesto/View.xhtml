@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PresupuestoViewDlg" widgetVar="PresupuestoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPresupuestoTitle}">
+            <h:form id="PresupuestoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{presupuestoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_idpresupuesto}"/>
+                        <h:outputText value="#{presupuestoController.selected.idpresupuesto}" title="#{bundle.ViewPresupuestoTitle_idpresupuesto}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_cantidad}"/>
+                        <h:outputText value="#{presupuestoController.selected.cantidad}" title="#{bundle.ViewPresupuestoTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_precio}"/>
+                        <h:outputText value="#{presupuestoController.selected.precio}" title="#{bundle.ViewPresupuestoTitle_precio}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_iva}"/>
+                        <h:outputText value="#{presupuestoController.selected.iva}" title="#{bundle.ViewPresupuestoTitle_iva}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_factura}"/>
+                        <h:outputText value="#{presupuestoController.selected.factura}" title="#{bundle.ViewPresupuestoTitle_factura}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_ordenTrabajoidOrdenTrabajo}"/>
+                        <h:outputText value="#{presupuestoController.selected.ordenTrabajoidOrdenTrabajo}" title="#{bundle.ViewPresupuestoTitle_ordenTrabajoidOrdenTrabajo}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_tipoPagoidTipoPago}"/>
+                        <h:outputText value="#{presupuestoController.selected.tipoPagoidTipoPago}" title="#{bundle.ViewPresupuestoTitle_tipoPagoidTipoPago}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_repuestoidRepuesto}"/>
+                        <h:outputText value="#{presupuestoController.selected.repuestoidRepuesto}" title="#{bundle.ViewPresupuestoTitle_repuestoidRepuesto}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_proveedoridProveedor}"/>
+                        <h:outputText value="#{presupuestoController.selected.proveedoridProveedor}" title="#{bundle.ViewPresupuestoTitle_proveedoridProveedor}"/>
+                        <h:outputText value="#{bundle.ViewPresupuestoLabel_ordenTrabajoidOrdenTrabajo1}"/>
+                        <h:outputText value="#{presupuestoController.selected.ordenTrabajoidOrdenTrabajo1}" title="#{bundle.ViewPresupuestoTitle_ordenTrabajoidOrdenTrabajo1}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PresupuestoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

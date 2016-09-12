@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPresupuestoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PresupuestoListForm">
+                <p:panel header="#{bundle.ListPresupuestoTitle}">
+                    <p:dataTable id="datalist" value="#{presupuestoController.items}" var="item"
+                                 selectionMode="single" selection="#{presupuestoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idpresupuesto}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_idpresupuesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idpresupuesto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_cantidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_precio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_iva}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iva}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_factura}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.factura}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_ordenTrabajoidOrdenTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ordenTrabajoidOrdenTrabajo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_tipoPagoidTipoPago}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoPagoidTipoPago}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_repuestoidRepuesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.repuestoidRepuesto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_proveedoridProveedor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proveedoridProveedor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_ordenTrabajoidOrdenTrabajo1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ordenTrabajoidOrdenTrabajo1}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{presupuestoController.prepareCreate}" update=":PresupuestoCreateForm" oncomplete="PF('PresupuestoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PresupuestoViewForm" oncomplete="PF('PresupuestoViewDialog').show()" disabled="#{empty presupuestoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PresupuestoEditForm" oncomplete="PF('PresupuestoEditDialog').show()" disabled="#{empty presupuestoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{presupuestoController.destroy}" update=":growl,datalist" disabled="#{empty presupuestoController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

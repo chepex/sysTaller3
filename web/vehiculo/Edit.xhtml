@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoEditDlg" widgetVar="VehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVehiculoTitle}">
+            <h:form id="VehiculoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_idvehiculo}" for="idvehiculo" />
+                        <p:inputText id="idvehiculo" value="#{vehiculoController.selected.idvehiculo}" title="#{bundle.EditVehiculoTitle_idvehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_idvehiculo}"/>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{vehiculoController.selected.anio}" title="#{bundle.EditVehiculoTitle_anio}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_anio}"/>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_numPlaca}" for="numPlaca" />
+                        <p:inputText id="numPlaca" value="#{vehiculoController.selected.numPlaca}" title="#{bundle.EditVehiculoTitle_numPlaca}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_numPlaca}"/>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_numMotor}" for="numMotor" />
+                        <p:inputText id="numMotor" value="#{vehiculoController.selected.numMotor}" title="#{bundle.EditVehiculoTitle_numMotor}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_numMotor}"/>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_tipoVehiculoidTipoVehiculo}" for="tipoVehiculoidTipoVehiculo" />
+                        <p:selectOneMenu id="tipoVehiculoidTipoVehiculo" value="#{vehiculoController.selected.tipoVehiculoidTipoVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_tipoVehiculoidTipoVehiculo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoVehiculoController.itemsAvailableSelectOne}"
+                                           var="tipoVehiculoidTipoVehiculoItem"
+                                           itemValue="#{tipoVehiculoidTipoVehiculoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_modeloidModelo}" for="modeloidModelo" />
+                        <p:selectOneMenu id="modeloidModelo" value="#{vehiculoController.selected.modeloidModelo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_modeloidModelo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{modeloController.itemsAvailableSelectOne}"
+                                           var="modeloidModeloItem"
+                                           itemValue="#{modeloidModeloItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_marcaidMarca}" for="marcaidMarca" />
+                        <p:selectOneMenu id="marcaidMarca" value="#{vehiculoController.selected.marcaidMarca}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_marcaidMarca}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
+                                           var="marcaidMarcaItem"
+                                           itemValue="#{marcaidMarcaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoLabel_clienteidCliente}" for="clienteidCliente" />
+                        <p:selectOneMenu id="clienteidCliente" value="#{vehiculoController.selected.clienteidCliente}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_clienteidCliente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteidClienteItem"
+                                           itemValue="#{clienteidClienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculoController.update}" value="#{bundle.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

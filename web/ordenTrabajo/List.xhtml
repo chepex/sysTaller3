@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListOrdenTrabajoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="OrdenTrabajoListForm">
+                <p:commandButton actionListener="#{ordenTrabajoController.prepareCreate()}" disabled="#{ordenTrabajoController.selected!=null}" value="Nuevo" update="@form" />
+                <p:commandButton actionListener="#{ordenTrabajoController.create()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{empty ordenTrabajoController.selected}" value="Crear"  />
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="F8" actionListener="#{ordenTrabajoController.update}"   rendered="#{ordenTrabajoController.selected==null}"  disabled="#{empty ordenTrabajoController.selected}"/>
+                <p:commandButton actionListener="#{ordenTrabajoController.limpiar2()}"  disabled="#{ordenTrabajoController.selected==null}" value="Limpiar" update="@form" />
+                <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar" update="@form" />
+                <center>
+                <p:panelGrid columns="2"    rendered="#{ordenTrabajoController.selected!=null}" >
+                        <p:panelGrid style="margin-top:20px"  rendered="#{ordenTrabajoController.selected!=null}">
+                         <p:row>
+                            <p:column style="font-weight: bold;">
+                                <p:outputLabel value="Cliente  " for="cliente" />
+                            </p:column>   
+                             <p:column style="font-weight: bold;" colspan="2">
+                                <p:autoComplete id="cliente" minQueryLength="3" 
+                                                value="#{ordenTrabajoController.selected.clienteidCliente}"                                         
+                                              var="cliente"
+                                              itemLabel="#{cliente.nombre }" 
+                                              itemValue="#{cliente}"
+                                              completeMethod="#{clienteController.autoCompleteCliente(valor)}" 
+                                              converter="#{ClienteControllerConverter}" 
+                                              effect="fade" >
+                                   <p:ajax  event="itemSelect"  listener="#{ordenTrabajoController.llenarVehiculo()}" update="@form" />
+                              </p:autoComplete> 
+                            </p:column>
+                            <p:column style="font-weight: bold;">                     
+                               
+                            </p:column>
+                             </p:row>
+                             <p:row>
+                            <p:column style="font-weight: bold;">                     
+                                <p:outputLabel value="Vehiculo" for="vehiculo" />
+                            </p:column>
+                             <p:column style="font-weight: bold;" colspan="2" >                     
+                                 <p:selectOneMenu id="vehiculo" value="#{ordenTrabajoController.selected.vehiculoidvehiculo}"   requiredMessage="#{bundle.EditVehiculoRequiredMessage_clienteidCliente}">
+                               <f:selectItems value="#{ordenTrabajoController.lvehiculo}"
+                                                  var="vehiculoItem"
+                                                  itemLabel="#{vehiculoItem.marcaidMarca.nombre} - #{vehiculoItem.modeloidModelo.nombre}"
+                                                  itemValue="#{vehiculoItem}"/>
+                               </p:selectOneMenu>
+                             </p:column>
+                                  <p:column style="font-weight: bold;">                     
+                                      
+                            </p:column>
+                         </p:row> 
+                         <p:row>
+                           <p:column style="font-weight: bold;">   
+                              <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_garantiaHasta}" for="garantiaHasta" />
+                            </p:column> 
+                             <p:column> 
+                                <p:calendar id="garantiaHasta" pattern="MM/dd/yyyy" value="#{ordenTrabajoController.selected.garantiaHasta}" title="#{bundle.EditOrdenTrabajoTitle_garantiaHasta}"  showOn="button"/>  
+                            </p:column>  
+                            <p:column style="font-weight: bold;">  
+                                  <p:outputLabel value="Tipo de Pago" for="tipoPagoidTipoPago" />
+                        
+                            </p:column>
+                            <p:column> 
+                               <p:selectOneMenu id="tipoPagoidTipoPago" value="#{ordenTrabajoController.selected.tipoPagoidTipoPago}"   requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_tipoPagoidTipoPago}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPagoidTipoPagoItem"
+                                           itemLabel="#{tipoPagoidTipoPagoItem.nombre}"
+                                           itemValue="#{tipoPagoidTipoPagoItem}"/>
+                        </p:selectOneMenu> 
+                            </p:column>
+                         </p:row>
+                        <p:row> 
+                            <p:column style="font-weight: bold;">  
+                                <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_fechaEntrega}" for="fechaEntrega" />
+                            </p:column>
+                            <p:column>
+                                <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy" value="#{ordenTrabajoController.selected.fechaEntrega}" title="#{bundle.EditOrdenTrabajoTitle_fechaEntrega}"  showOn="button"/>
+                            </p:column>
+                              <p:column style="font-weight: bold;"> 
+                                     <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_adelanto}" for="adelanto" />
+                              </p:column>
+                            <p:column>
+                                <p:inputText id="adelanto" value="#{ordenTrabajoController.selected.adelanto}" title="#{bundle.EditOrdenTrabajoTitle_adelanto}" />
+                            </p:column>
+                            
+                        </p:row>                            
+                        </p:panelGrid>
+                    <p:panel header="Totales">
+                    <p:panelGrid columns="2">
+                        
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalRespuesto}" for="totalRespuesto" />
+                        <p:outputLabel id="totalRespuesto" value="$ #{ordenTrabajoController.selected.totalRespuesto}" title="#{bundle.EditOrdenTrabajoTitle_totalRespuesto}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalManoObra}" for="totalManoObra" />
+                        <p:outputLabel id="totalManoObra" value="$ #{ordenTrabajoController.selected.totalManoObra}" title="#{bundle.EditOrdenTrabajoTitle_totalManoObra}" />
+                        <p:outputLabel value="Total Trabajo Externo" for="totalTrabajoExterno" />
+                        <p:outputLabel id="totalTrabajoExterno" value="$ #{ordenTrabajoController.selected.totalTrabajoExterno}" title="#{bundle.EditOrdenTrabajoTitle_totalManoObra}" />
+                             <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalIva}" for="totalIva" />
+                        <p:outputLabel id="totalIva" value="$ #{ordenTrabajoController.selected.totalIva}" title="#{bundle.EditOrdenTrabajoTitle_totalIva}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_totalGravado}" for="totalGravado" />
+                        <p:outputLabel id="totalGravado" value="$ #{ordenTrabajoController.selected.totalGravado}" title="#{bundle.EditOrdenTrabajoTitle_totalGravado}" />                        
+                    </p:panelGrid>
+                    </p:panel>                
+
+                    </p:panelGrid>
+                </center>
+             
+    <p:tabView rendered="#{ordenTrabajoController.selected!=null}">
+        <p:tab title="Notas ">
+                <center>
+                    <p:panel header="Notas">
+            <h:panelGrid columns="2"  >
+            
+                <p:outputLabel value="Solicitud Cliente" for="idSolicitudCliente" />
+                <p:inputTextarea rows="5" cols="60" id="idSolicitudCliente" value="#{ordenTrabajoController.selected.solicutudCliente}" />
+                <p:outputLabel value="Notas Internas" for="notasInternas" />
+                <p:inputTextarea rows="5" cols="60" id="notasInternas" value="#{ordenTrabajoController.selected.notasInternas}" />                
+                <p:outputLabel value="Notas Cotizacion" for="notasCotizacion" />
+                <p:inputTextarea rows="5" cols="60" id="notasCotizacion" value="#{ordenTrabajoController.selected.notasCotizacion}" />                                
+            
+               
+            </h:panelGrid>
+                        </p:panel>
+                        </center>
+        </p:tab>
+        <p:tab title="Diagnostico">
+            <center>
+                <p:panel header="Notas">
+                <h:panelGrid columns="2"  >
+                <p:outputLabel value="Diagnostico de Falla" for="notasDiagnostico" />
+                <p:inputTextarea rows="5" cols="60" id="notasDiagnostico" value="#{ordenTrabajoController.selected.diagnostico}" />                                             
+                
+                </h:panelGrid>
+                    <p:panelGrid columns="6">
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_repuestos}" for="repuestos" />
+                        <p:selectBooleanCheckbox id="repuestos" value="#{ordenTrabajoController.selected.repuestos}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_materiales}" for="materiales" />
+                        <p:selectBooleanCheckbox id="materiales" value="#{ordenTrabajoController.selected.materiales}" />
+                        <p:outputLabel value="#{bundle.EditOrdenTrabajoLabel_trabajoExterno}" for="trabajoExterno" />
+                        <p:selectBooleanCheckbox id="trabajoExterno" value="#{ordenTrabajoController.selected.trabajoExterno}" />
+                    </p:panelGrid>
+                </p:panel>
+            </center>
+        </p:tab>
+        <p:tab title="Repuestos">
+            <center>
+                <p:panel header="Repuestos">
+                    <p:panelGrid columns="8">
+                         <p:outputLabel value="Proveedor" for="proveedor" />
+                          <p:autoComplete id="proveedor" minQueryLength="3" 
+                                          value="#{ordenTrabajoController.proveedor}"                                         
+                                              var="proveedor"
+                                              itemLabel="#{proveedor.nombre }" 
+                                              itemValue="#{proveedor}"
+                                              completeMethod="#{proveedorController.autoCompleteCliente(valor)}" 
+                                              converter="#{ProveedorControllerConverter}" 
+                                              effect="fade" >
+                                 
+                        </p:autoComplete> 
+                         <p:outputLabel value="Repuesto" for="repuesto" />
+                         <p:autoComplete id="repuesto" minQueryLength="3" 
+                                                value="#{ordenTrabajoController.repuesto}"                                         
+                                              var="repuesto"
+                                              itemLabel="#{repuesto.nombre }" 
+                                              itemValue="#{repuesto}"
+                                              completeMethod="#{repuestoController.autoCompleteCliente(valor)}" 
+                                              converter="#{RepuestoControllerConverter}" 
+                                              effect="fade" >
+                                 
+                        </p:autoComplete>  
+                        <p:outputLabel value="Cantidad" for="cantidad" />
+                        <p:inputText   id="cantidad" style="width:50px;" value="#{ordenTrabajoController.cantidad}" />
+                        <p:outputLabel value="Precio" for="precio" />
+                        <p:inputText   id="precio"  style="width:50px;" value="#{ordenTrabajoController.precio}" />   
+                        <p:outputLabel value="Factura" for="factura" />
+                        <p:inputText   id="factura" value="#{ordenTrabajoController.factura}" />    
+                        <p:outputLabel value="Tipo Pago" for="tipoPagoidTipoPago" />
+                        <p:selectOneMenu id="tipoPagoidTipoPago" value="#{ordenTrabajoController.tpago}"   >
+                            <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPagoidTipoPagoItem"
+                                           itemLabel="#{tipoPagoidTipoPagoItem.nombre}"
+                                           itemValue="#{tipoPagoidTipoPagoItem}"/>
+                        </p:selectOneMenu>
+                         <p:commandButton actionListener="#{ordenTrabajoController.agregarRepuesto()}"   value="+" update="@form,:growl" />
+                    </p:panelGrid>
+                    <p:dataTable id="datalist" value="#{ordenTrabajoController.lpresupuesto}" var="item"
+                                 selectionMode="single" selection="#{presupuestoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idpresupuesto}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+ 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.repuestoidRepuesto}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText value="#{item.repuestoidRepuesto.nombre   }"/>
+                        </p:column>  
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Proveedor"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proveedoridProveedor.nombre}"/>
+                        </p:column>                         
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_cantidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_precio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_iva}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iva}"/>
+                        </p:column>
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_factura}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.factura}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Forma de Pago"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoPagoidTipoPago.nombre}"/>
+                        </p:column>
+                 
+                    </p:dataTable> 
+                </p:panel>
+            </center>
+        </p:tab>
+        
+        <p:tab title="Trabajo Externo">
+             <center>
+                 <p:panel header="Trabajo Externo">
+           
+                    <p:dataTable id="datalist2" value="#{ordenTrabajoController.lpresupuesto}" var="item"
+                                 selectionMode="single" selection="#{presupuestoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idpresupuesto}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+ 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="id "/>
+                            </f:facet>
+                            <h:outputText value="#{item.repuestoidRepuesto}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_repuestoidRepuesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.repuestoidRepuesto.nombre   }"/>
+                        </p:column>                         
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_cantidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_precio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_iva}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iva}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_proveedoridProveedor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proveedoridProveedor}"/>
+                        </p:column>                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPresupuestoTitle_factura}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.factura}"/>
+                        </p:column> 
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Forma de Pago"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoPagoidTipoPago}"/>
+                        </p:column>
+                 
+                    </p:dataTable> 
+                </p:panel>                     
+                 
+             </center>
+        </p:tab>        
+    </p:tabView>
+                
+            </h:form>
+
+ 
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PresupuestoCreateDlg" widgetVar="PresupuestoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePresupuestoTitle}">
+            <h:form id="PresupuestoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{presupuestoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_idpresupuesto}" for="idpresupuesto" />
+                        <p:inputText id="idpresupuesto" value="#{presupuestoController.selected.idpresupuesto}" title="#{bundle.CreatePresupuestoTitle_idpresupuesto}" required="true" requiredMessage="#{bundle.CreatePresupuestoRequiredMessage_idpresupuesto}"/>
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{presupuestoController.selected.cantidad}" title="#{bundle.CreatePresupuestoTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{presupuestoController.selected.precio}" title="#{bundle.CreatePresupuestoTitle_precio}" />
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_iva}" for="iva" />
+                        <p:inputText id="iva" value="#{presupuestoController.selected.iva}" title="#{bundle.CreatePresupuestoTitle_iva}" />
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_factura}" for="factura" />
+                        <p:inputText id="factura" value="#{presupuestoController.selected.factura}" title="#{bundle.CreatePresupuestoTitle_factura}" />
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_ordenTrabajoidOrdenTrabajo}" for="ordenTrabajoidOrdenTrabajo" />
+                        <p:inputText id="ordenTrabajoidOrdenTrabajo" value="#{presupuestoController.selected.ordenTrabajoidOrdenTrabajo}" title="#{bundle.CreatePresupuestoTitle_ordenTrabajoidOrdenTrabajo}" required="true" requiredMessage="#{bundle.CreatePresupuestoRequiredMessage_ordenTrabajoidOrdenTrabajo}"/>
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_tipoPagoidTipoPago}" for="tipoPagoidTipoPago" />
+                        <p:selectOneMenu id="tipoPagoidTipoPago" value="#{presupuestoController.selected.tipoPagoidTipoPago}" required="true" requiredMessage="#{bundle.EditPresupuestoRequiredMessage_tipoPagoidTipoPago}">
+                            <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPagoidTipoPagoItem"
+                                           itemValue="#{tipoPagoidTipoPagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_repuestoidRepuesto}" for="repuestoidRepuesto" />
+                        <p:selectOneMenu id="repuestoidRepuesto" value="#{presupuestoController.selected.repuestoidRepuesto}" required="true" requiredMessage="#{bundle.EditPresupuestoRequiredMessage_repuestoidRepuesto}">
+                            <f:selectItems value="#{repuestoController.itemsAvailableSelectOne}"
+                                           var="repuestoidRepuestoItem"
+                                           itemValue="#{repuestoidRepuestoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_proveedoridProveedor}" for="proveedoridProveedor" />
+                        <p:selectOneMenu id="proveedoridProveedor" value="#{presupuestoController.selected.proveedoridProveedor}" required="true" requiredMessage="#{bundle.EditPresupuestoRequiredMessage_proveedoridProveedor}">
+                            <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
+                                           var="proveedoridProveedorItem"
+                                           itemValue="#{proveedoridProveedorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePresupuestoLabel_ordenTrabajoidOrdenTrabajo1}" for="ordenTrabajoidOrdenTrabajo1" />
+                        <p:selectOneMenu id="ordenTrabajoidOrdenTrabajo1" value="#{presupuestoController.selected.ordenTrabajoidOrdenTrabajo1}" required="true" requiredMessage="#{bundle.EditPresupuestoRequiredMessage_ordenTrabajoidOrdenTrabajo1}">
+                            <f:selectItems value="#{ordenTrabajoController.itemsAvailableSelectOne}"
+                                           var="ordenTrabajoidOrdenTrabajo1Item"
+                                           itemValue="#{ordenTrabajoidOrdenTrabajo1Item}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{presupuestoController.create}" value="#{bundle.Save}" update="display,:PresupuestoListForm:datalist,:growl" oncomplete="handleSubmit(args,'PresupuestoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PresupuestoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

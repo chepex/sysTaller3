@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenTrabajoCreateDlg" widgetVar="OrdenTrabajoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOrdenTrabajoTitle}">
+            <h:form id="OrdenTrabajoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenTrabajoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOrdenTrabajoLabel_clienteidCliente}" for="clienteidCliente" />
+                        <p:selectOneMenu id="clienteidCliente" value="#{ordenTrabajoController.selected.clienteidCliente}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_clienteidCliente}">
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteidClienteItem"
+                                           itemValue="#{clienteidClienteItem}"/>
+                        </p:selectOneMenu>                       
+                        <p:outputLabel value="#{bundle.CreateOrdenTrabajoLabel_vehiculoidvehiculo}" for="vehiculoidvehiculo" />
+                        <p:selectOneMenu id="vehiculoidvehiculo" value="#{ordenTrabajoController.selected.vehiculoidvehiculo}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_vehiculoidvehiculo}">
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoidvehiculoItem"
+                                           itemValue="#{vehiculoidvehiculoItem}"/>
+                        </p:selectOneMenu>
+                       
+                        <p:outputLabel value="#{bundle.CreateOrdenTrabajoLabel_tipoPagoidTipoPago}" for="tipoPagoidTipoPago" />
+                        <p:selectOneMenu id="tipoPagoidTipoPago" value="#{ordenTrabajoController.selected.tipoPagoidTipoPago}" required="true" requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_tipoPagoidTipoPago}">
+                            <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPagoidTipoPagoItem"
+                                           itemValue="#{tipoPagoidTipoPagoItem}"/>
+                        </p:selectOneMenu>
+ 
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenTrabajoController.create}" value="#{bundle.Save}" update="display,:OrdenTrabajoListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrdenTrabajoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrdenTrabajoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

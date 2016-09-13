@@ -17,73 +17,77 @@
             <h:form id="ClienteListForm">
                 <p:commandButton id="nuevoButton" icon="ui-icon-plus"   value="Nuevo" actionListener="#{clienteController.prepareCreate}" disabled="#{clienteController.selected != null}" update="@form,:growl" />
                 <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{clienteController.create()}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
-             <p:commandButton id="limpiarButton" icon="ui-icon-trash"   value="Limpiar" actionListener="#{clienteController.limpiar}" update="@form,:growl" />
+                <p:commandButton id="limpiarButton" icon="ui-icon-trash"   value="Limpiar" actionListener="#{clienteController.limpiar}" update="@form,:growl" />
+                <p:commandButton id="searchButton" icon="ui-icon-search"   value="Buscar"   rendered="#{clienteController.selected == null}"   update=":buscarClienteForm" oncomplete="PF('BuscarDialog').show()" />
              <p:panel header="Cliente">
                  <center>
-                     <h:panelGroup id="display" rendered="#{clienteController.selected != null}">
-                    <p:panelGrid columns="4" >
+                    <h:panelGroup id="display" rendered="#{clienteController.selected != null}">
+                    <p:panelGrid columns="6" >
                       
                         <p:outputLabel value="#{bundle.CreateClienteLabel_empresa}" for="empresa" />
-                        <p:inputText id="empresa" value="#{clienteController.selected.empresa}" title="#{bundle.CreateClienteTitle_empresa}" />
+                        <p:inputText id="empresa" value="#{clienteController.selected.empresa}" required="true" title="#{bundle.CreateClienteTitle_empresa}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_telefonoFijo}" for="telefonoFijo" />
-                        <p:inputText id="telefonoFijo" value="#{clienteController.selected.telefonoFijo}" title="#{bundle.CreateClienteTitle_telefonoFijo}" />
+                        <p:inputText id="telefonoFijo" value="#{clienteController.selected.telefonoFijo}" required="true" title="#{bundle.CreateClienteTitle_telefonoFijo}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_direccion}" for="direccion" />
-                        <p:inputText id="direccion" value="#{clienteController.selected.direccion}" title="#{bundle.CreateClienteTitle_direccion}" />
+                        <p:inputText id="direccion" value="#{clienteController.selected.direccion}" required="true" title="#{bundle.CreateClienteTitle_direccion}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_nit}" for="nit" />
-                        <p:inputText id="nit" value="#{clienteController.selected.nit}" title="#{bundle.CreateClienteTitle_nit}" />
+                        <p:inputText id="nit" value="#{clienteController.selected.nit}" required="true" title="#{bundle.CreateClienteTitle_nit}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_registroFiscal}" for="registroFiscal" />
-                        <p:inputText id="registroFiscal" value="#{clienteController.selected.registroFiscal}" title="#{bundle.CreateClienteTitle_registroFiscal}" />
+                        <p:inputText id="registroFiscal" value="#{clienteController.selected.registroFiscal}" required="true" title="#{bundle.CreateClienteTitle_registroFiscal}" />
+                        <p:outputLabel value="*"  />
+                        <p:outputLabel value="*"  />
+                 
                         <p:outputLabel value="#{bundle.CreateClienteLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{bundle.CreateClienteTitle_nombre}"  requiredMessage="#{bundle.CreateClienteRequiredMessage_nombre}"/>
+                        <p:inputText id="nombre" value="#{clienteController.selected.nombre}" required="true" title="#{bundle.CreateClienteTitle_nombre}"  requiredMessage="#{bundle.CreateClienteRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateClienteLabel_apellido}" for="apellido" />
-                        <p:inputText id="apellido" value="#{clienteController.selected.apellido}" title="#{bundle.CreateClienteTitle_apellido}" />
+                        <p:inputText id="apellido" value="#{clienteController.selected.apellido}" required="true" title="#{bundle.CreateClienteTitle_apellido}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_celular}" for="celular" />
-                        <p:inputText id="celular" value="#{clienteController.selected.celular}" title="#{bundle.CreateClienteTitle_celular}"  requiredMessage="#{bundle.CreateClienteRequiredMessage_celular}"/>
+                        <p:inputText id="celular" value="#{clienteController.selected.celular}" required="true" title="#{bundle.CreateClienteTitle_celular}"  requiredMessage="#{bundle.CreateClienteRequiredMessage_celular}"/>
                         <p:outputLabel value="#{bundle.CreateClienteLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{clienteController.selected.correo}" title="#{bundle.CreateClienteTitle_correo}" />
+                        <p:inputText id="correo" value="#{clienteController.selected.correo}" required="true" title="#{bundle.CreateClienteTitle_correo}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_ciudad}" for="ciudad" />
-                        <p:inputText id="ciudad" value="#{clienteController.selected.ciudad}" title="#{bundle.CreateClienteTitle_ciudad}" requiredMessage="#{bundle.CreateClienteRequiredMessage_ciudad}"/>
+                        <p:inputText id="ciudad" value="#{clienteController.selected.ciudad}" required="true" title="#{bundle.CreateClienteTitle_ciudad}" requiredMessage="#{bundle.CreateClienteRequiredMessage_ciudad}"/>
                         <p:outputLabel value="#{bundle.CreateClienteLabel_departamento}" for="departamento" />
-                        <p:inputText id="departamento"  value="#{clienteController.selected.departamento}" title="#{bundle.EditClienteTitle_departamento}"  requiredMessage="#{bundle.EditClienteRequiredMessage_departamento}"  />
+                        <p:inputText id="departamento"  value="#{clienteController.selected.departamento}" required="true" title="#{bundle.EditClienteTitle_departamento}"  requiredMessage="#{bundle.EditClienteRequiredMessage_departamento}"  />
                     </p:panelGrid>
                      
                 </h:panelGroup>
              </center>
               </p:panel>
              <center>
-             <p:panel header="Vehiculos" rendered="#{clienteController.selectedvehiculo != null}">
-                    <p:panelGrid columns="7" >
+             <p:panel header="Vehiculos" >
+                    <p:panelGrid columns="7" rendered="#{clienteController.selectedvehiculo != null}" >
                       
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_anio}" for="anio" />
-                        <p:inputText id="anio" value="#{clienteController.selectedvehiculo.anio}" title="#{bundle.CreateVehiculoTitle_anio}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_anio}"/>
+                        <p:inputText id="anio" value="#{clienteController.selectedvehiculo.anio}" title="#{bundle.CreateVehiculoTitle_anio}" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_anio}"/>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_numPlaca}" for="numPlaca" />
-                        <p:inputText id="numPlaca" value="#{clienteController.selectedvehiculo.numPlaca}" title="#{bundle.CreateVehiculoTitle_numPlaca}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_numPlaca}"/>
+                        <p:inputText id="numPlaca" value="#{clienteController.selectedvehiculo.numPlaca}" title="#{bundle.CreateVehiculoTitle_numPlaca}"  requiredMessage="#{bundle.CreateVehiculoRequiredMessage_numPlaca}"/>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_numMotor}" for="numMotor" />
-                        <p:inputText id="numMotor" value="#{clienteController.selectedvehiculo.numMotor}" title="#{bundle.CreateVehiculoTitle_numMotor}" required="true" requiredMessage="#{bundle.CreateVehiculoRequiredMessage_numMotor}"/>
+                        <p:inputText id="numMotor" value="#{clienteController.selectedvehiculo.numMotor}" title="#{bundle.CreateVehiculoTitle_numMotor}"  requiredMessage="#{bundle.CreateVehiculoRequiredMessage_numMotor}"/>
                         *
                         <p:outputLabel value="Tipo" for="tipoVehiculoidTipoVehiculo" />
-                        <p:selectOneMenu id="tipoVehiculoidTipoVehiculo" value="#{clienteController.selectedvehiculo.tipoVehiculoidTipoVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_tipoVehiculoidTipoVehiculo}">
+                        <p:selectOneMenu id="tipoVehiculoidTipoVehiculo" value="#{clienteController.selectedvehiculo.tipoVehiculoidTipoVehiculo}"  requiredMessage="#{bundle.EditVehiculoRequiredMessage_tipoVehiculoidTipoVehiculo}">
                             <f:selectItems value="#{tipoVehiculoController.itemsAvailableSelectOne}"
                                            var="tipoVehiculoidTipoVehiculoItem"
                                            itemLabel="#{tipoVehiculoidTipoVehiculoItem.nombre}"
                                            itemValue="#{tipoVehiculoidTipoVehiculoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Marca" for="marcaidMarca" />
-                        <p:selectOneMenu id="marcaidMarca" value="#{clienteController.selectedvehiculo.marcaidMarca}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_marcaidMarca}">
+                        <p:selectOneMenu id="marcaidMarca" value="#{clienteController.selectedvehiculo.marcaidMarca}"  requiredMessage="#{bundle.EditVehiculoRequiredMessage_marcaidMarca}">
                             <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
                                            var="marcaidMarcaItem"
                                            itemLabel="#{marcaidMarcaItem.nombre}"
                                            itemValue="#{marcaidMarcaItem}"/>
                         </p:selectOneMenu>                        
                         <p:outputLabel value="Modelo" for="modeloidModelo" />
-                        <p:selectOneMenu id="modeloidModelo" value="#{clienteController.selectedvehiculo.modeloidModelo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_modeloidModelo}">
+                        <p:selectOneMenu id="modeloidModelo" value="#{clienteController.selectedvehiculo.modeloidModelo}"  requiredMessage="#{bundle.EditVehiculoRequiredMessage_modeloidModelo}">
                             <f:selectItems value="#{modeloController.itemsAvailableSelectOne}"
                                            var="modeloidModeloItem"
                                            itemLabel="#{modeloidModeloItem.nombre}"
                                            itemValue="#{modeloidModeloItem}"/>
                         </p:selectOneMenu>
                       
-                          <p:commandButton id="agregarButton" icon="ui-icon-plus"    actionListener="#{clienteController.addVechiculo()}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
+                        <p:commandButton id="agregarButton" icon="ui-icon-plus"    actionListener="#{clienteController.addVechiculo()}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
                        
                           
                           
@@ -99,19 +103,19 @@
                             <f:facet name="header">
                                 <h:outputText value="Tipo"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipoVehiculoidTipoVehiculo}"/>
+                            <h:outputText value="#{item.tipoVehiculoidTipoVehiculo.nombre}"/>
                         </p:column>                     
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Marca"/>
                             </f:facet>
-                            <h:outputText value="#{item.marcaidMarca}"/>
+                            <h:outputText value="#{item.marcaidMarca.nombre}"/>
                         </p:column>                   
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Modelo"/>
                             </f:facet>
-                            <h:outputText value="#{item.modeloidModelo}"/>
+                            <h:outputText value="#{item.modeloidModelo.nombre}"/>
                         </p:column>                     
                         <p:column>
                             <f:facet name="header">
@@ -143,7 +147,7 @@
              
             </h:form>
 
-            
+             <ui:include src="Buscar.xhtml"/>
         </ui:define>
     </ui:composition>
 

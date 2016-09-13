@@ -48,17 +48,17 @@ public class Vehiculo implements Serializable {
     private Integer idvehiculo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+ 
     @Column(name = "anio")
     private String anio;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+  
     @Column(name = "num_placa")
     private String numPlaca;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+ 
     @Column(name = "num_motor")
     private String numMotor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculoidvehiculo")

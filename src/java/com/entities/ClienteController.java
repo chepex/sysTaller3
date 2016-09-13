@@ -24,14 +24,32 @@ public class ClienteController implements Serializable {
 
     @EJB
     private com.entities.ClienteFacade ejbFacade;
+    @EJB
+    private com.entities.VehiculoFacade vehiculoFacade;    
     private List<Cliente> items = null;
     private Cliente selected;
     private Vehiculo selectedvehiculo;
     private List<Vehiculo> lvehiculo =new ArrayList<>();
+    private String nombre;
+  
     
     public ClienteController() {
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+   
+
+ 
+ 
+
+    
     public List<Vehiculo> getLvehiculo() {
         return lvehiculo;
     }
@@ -76,15 +94,25 @@ public class ClienteController implements Serializable {
         selected = new Cliente();
         initializeEmbeddableKey();
         selectedvehiculo = new  Vehiculo(0);
+        lvehiculo =new ArrayList<>();
         return selected;
     }
 
     public void create() {
-        System.out.println("aqui guardado-->");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClienteCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
+        
+      
+               int vid= this.ejbFacade.findById();
+               selected.setIdCliente(vid);
+               persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClienteCreated"));
+               if (!JsfUtil.isValidationFailed()) {
+                   items = null;    // Invalidate list of items to trigger re-query.
+               }
+               for(Vehiculo v :this.lvehiculo){
+                   v.setClienteidCliente(selected);
+                   vehiculoFacade.edit(v);
+               }        
+        
+       
     
     }
 
@@ -101,9 +129,7 @@ public class ClienteController implements Serializable {
     }
 
     public List<Cliente> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+       
         return items;
     }
 
@@ -196,7 +222,28 @@ public class ClienteController implements Serializable {
     
     public void addVechiculo(){
     
-    this.lvehiculo.add(selectedvehiculo);
+        this.lvehiculo.add(selectedvehiculo);
+    }
+    
+    public void buscarCliente(){    
+        this.items = this.ejbFacade.findByNombreCedulaNit(nombre);
+    }
+    
+    public void selecionar(){
+      this.lvehiculo=  vehiculoFacade.findByCliente(selected);
+      this.selectedvehiculo = new Vehiculo();
+    }
+    
+    
+    public String  validar(){
+        String msg ="ok";
+        /*validar nombre empresa*/     
+        /*validar nit*/     
+        /*validar tel*/     
+        /*validar fijo*/     
+        /*validar registro fiscal*/     
+                
+         return msg;
     }
 
 }

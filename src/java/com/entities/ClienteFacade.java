@@ -36,6 +36,27 @@ public class ClienteFacade extends AbstractFacade<Cliente> {
                 .setParameter("nombre", "%"+nombre+"%");
               
         return q.getResultList();
-    }     
+    }  
+    
+    public List<Cliente> findByNombreCedulaNit(String  nombre ) {
+        TypedQuery<Cliente> q = null;
+     
+             q = em.createNamedQuery("Cliente.findByNombreNit",Cliente.class)               
+                .setParameter("nombre", "%"+nombre+"%")               
+                .setParameter("nit", "%"+nombre+"%");
+              
+        return q.getResultList();
+    }       
+    
+    public Integer findById( ) {
+       int vid=0;
+        try{
+        vid=  em.createQuery(" Select MAX(c.idCliente)+1 id FROM Cliente c ", Integer.class).getSingleResult();
+        }catch(Exception ex){
+        vid= 1;
+        }
+              
+        return vid;
+    }       
     
 }

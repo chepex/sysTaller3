@@ -302,7 +302,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPresupuestoTitle_proveedoridProveedor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.proveedoridProveedor}"/>
+                            <h:outputText value="#{item.proveedoridProveedor.nombre}"/>
                         </p:column>                        
                         <p:column>
                             <f:facet name="header">
@@ -314,7 +314,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Forma de Pago"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipoPagoidTipoPago}"/>
+                            <h:outputText value="#{item.tipoPagoidTipoPago.nombre}"/>
                         </p:column>
                  
                     </p:dataTable> 

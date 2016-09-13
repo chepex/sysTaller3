@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByNit", query = "SELECT c FROM Cliente c WHERE c.nit = :nit"),
     @NamedQuery(name = "Cliente.findByRegistroFiscal", query = "SELECT c FROM Cliente c WHERE c.registroFiscal = :registroFiscal"),
     @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre like :nombre"),
+    @NamedQuery(name = "Cliente.findByNombreNit", query = "SELECT c FROM Cliente c WHERE c.nombre like :nombre or c.nit like :nit "),    
     @NamedQuery(name = "Cliente.findByApellido", query = "SELECT c FROM Cliente c WHERE c.apellido = :apellido"),
     @NamedQuery(name = "Cliente.findByCelular", query = "SELECT c FROM Cliente c WHERE c.celular = :celular"),
     @NamedQuery(name = "Cliente.findByCorreo", query = "SELECT c FROM Cliente c WHERE c.correo = :correo"),
@@ -51,39 +52,38 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "idCliente")
     private Integer idCliente;
-    @Size(max = 45)
+    @NotNull
     @Column(name = "empresa")
     private String empresa;
-    @Size(max = 45)
+    @NotNull
     @Column(name = "telefono_fijo")
     private String telefonoFijo;
-    @Size(max = 45)
+    @NotNull
     @Column(name = "direccion")
     private String direccion;
-    @Size(max = 45)
+    @NotNull
+    @Size(min = 14, max = 14)
     @Column(name = "nit")
     private String nit;
-    @Size(max = 45)
+    @NotNull
     @Column(name = "registro_fiscal")
     private String registroFiscal;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull 
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 45)
+    @NotNull
     @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull   
     @Column(name = "celular")
     private String celular;
-    @Size(max = 45)
+    @NotNull
     @Column(name = "correo")
     private String correo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

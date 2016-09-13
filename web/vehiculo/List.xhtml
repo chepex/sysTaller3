@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_idvehiculo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idvehiculo}"/>
-                        </p:column>
+                    
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListVehiculoTitle_anio}"/>
@@ -53,27 +48,27 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_tipoVehiculoidTipoVehiculo}"/>
+                                <h:outputText value="Tipo"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipoVehiculoidTipoVehiculo}"/>
+                            <h:outputText value="#{item.tipoVehiculoidTipoVehiculo.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_modeloidModelo}"/>
+                                <h:outputText value="Modelo"/>
                             </f:facet>
-                            <h:outputText value="#{item.modeloidModelo}"/>
+                            <h:outputText value="#{item.modeloidModelo.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_marcaidMarca}"/>
+                                <h:outputText value="Marca"/>
                             </f:facet>
-                            <h:outputText value="#{item.marcaidMarca}"/>
+                            <h:outputText value="#{item.marcaidMarca.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListVehiculoTitle_clienteidCliente}"/>
+                                <h:outputText value="Cliente"/>
                             </f:facet>
-                            <h:outputText value="#{item.clienteidCliente}"/>
+                            <h:outputText value="#{item.clienteidCliente.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vehiculoController.prepareCreate}" update=":VehiculoCreateForm" oncomplete="PF('VehiculoCreateDialog').show()"/>

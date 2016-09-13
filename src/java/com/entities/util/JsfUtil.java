@@ -67,4 +67,16 @@ public class JsfUtil {
         DELETE,
         UPDATE
     }
+    
+    public static boolean isNum(String strNum) {
+        boolean ret = true;
+        try {
+
+            Double.parseDouble(strNum);
+
+        }catch (NumberFormatException e) {
+            ret = false;
+        }
+        return ret;
+    }    
 }

@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByNit", query = "SELECT c FROM Cliente c WHERE c.nit = :nit"),
     @NamedQuery(name = "Cliente.findByRegistroFiscal", query = "SELECT c FROM Cliente c WHERE c.registroFiscal = :registroFiscal"),
     @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre like :nombre"),
+    @NamedQuery(name = "Cliente.findByNombre2", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre"),    
     @NamedQuery(name = "Cliente.findByNombreNit", query = "SELECT c FROM Cliente c WHERE c.nombre like :nombre or c.nit like :nit "),    
     @NamedQuery(name = "Cliente.findByApellido", query = "SELECT c FROM Cliente c WHERE c.apellido = :apellido"),
     @NamedQuery(name = "Cliente.findByCelular", query = "SELECT c FROM Cliente c WHERE c.celular = :celular"),

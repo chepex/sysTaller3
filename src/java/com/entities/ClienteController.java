@@ -102,7 +102,10 @@ public class ClienteController implements Serializable {
         
       
                int vid= this.ejbFacade.findById();
-               selected.setIdCliente(vid);
+               if(selected.getIdCliente()==0){
+                   selected.setIdCliente(vid);
+               }
+               
                persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClienteCreated"));
                if (!JsfUtil.isValidationFailed()) {
                    items = null;    // Invalidate list of items to trigger re-query.
@@ -211,7 +214,7 @@ public class ClienteController implements Serializable {
     }   
     
     public List<Cliente> autoCompleteCliente(String valor) {
-        System.out.println("valor--->"+valor);
+       
         return getFacade().findByNombreCodigo(valor);
         
     } 
@@ -237,13 +240,43 @@ public class ClienteController implements Serializable {
     
     public String  validar(){
         String msg ="ok";
-        /*validar nombre empresa*/     
+        /*validar nombre empresa*/  
+        
+        List<Cliente> vnombre  = this.ejbFacade.findByNombre(selected.getEmpresa());
+        System.out.println(" nombre empresa-->"+selected.getEmpresa());
+        System.out.println(" nombre empresa2-->"+vnombre);
+        if(!vnombre.isEmpty()){
+            msg ="Nombre empresa ya registrado, cliente:"+ vnombre.get(0).getIdCliente();
+        }
+        List<Cliente> vnit  = this.ejbFacade.findByNit(selected.getNit());
+        System.out.println(" vnit-->"+selected.getNit());
+        System.out.println(" vnit-->"+vnit);
+        if(!vnit.isEmpty()){
+            msg ="Nit ya registrado , vnit:"+ vnit.get(0).getIdCliente();
+        }   
+        List<Cliente> vfijo  = this.ejbFacade.findByTelefonoFijo(selected.getTelefonoFijo());
+        System.out.println(" vfijo-->"+selected.getTelefonoFijo());
+        System.out.println(" vfijo-->"+vfijo);
+        if(!vfijo.isEmpty()){
+            msg ="Numero fijo ya registrado , cliente:"+ vfijo.get(0).getIdCliente();
+        }   
+        List<Cliente> vfiscal  = this.ejbFacade.findByRegistroFiscal(selected.getRegistroFiscal());
+        System.out.println(" vfiscal-->"+selected.getRegistroFiscal());
+        System.out.println(" vfiscal-->"+vfiscal);
+        if(!vfiscal.isEmpty()){
+            msg ="Registro fiscal ya registrado , cliente:"+ vfiscal.get(0).getIdCliente();
+        }         
+        
         /*validar nit*/     
         /*validar tel*/     
         /*validar fijo*/     
         /*validar registro fiscal*/     
-                
-         return msg;
+        if(msg.equals("ok"))    {
+            this.create();
+        }else{
+            JsfUtil.addErrorMessage(msg);
+        }
+         return "";
     }
 
 }

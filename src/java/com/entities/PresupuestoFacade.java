@@ -5,9 +5,11 @@
  */
 package com.entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -37,5 +39,16 @@ public class PresupuestoFacade extends AbstractFacade<Presupuesto> {
         
         return vid;
     }      
+    
+    public List<Presupuesto> findByOrden(OrdenTrabajo  orden ) {
+        TypedQuery<Presupuesto> q = null;
+        System.out.println("orden-->"+orden);
+             q = em.createNamedQuery("Presupuesto.findByOrden",Presupuesto.class)               
+                .setParameter("orden", orden.getIdOrdenTrabajo());               
+             
+                
+              
+        return q.getResultList();
+    }    
     
 }

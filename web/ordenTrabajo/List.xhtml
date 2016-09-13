@@ -19,7 +19,7 @@
                 <p:commandButton actionListener="#{ordenTrabajoController.create()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{empty ordenTrabajoController.selected}" value="Crear"  />
                 <p:commandButton id="editButton"   icon="ui-icon-pencil" value="F8" actionListener="#{ordenTrabajoController.update}"   rendered="#{ordenTrabajoController.selected==null}"  disabled="#{empty ordenTrabajoController.selected}"/>
                 <p:commandButton actionListener="#{ordenTrabajoController.limpiar2()}"  disabled="#{ordenTrabajoController.selected==null}" value="Limpiar" update="@form" />
-                <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar" update="@form" />
+                <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar"  update=":buscarOrderForm" oncomplete="PF('BuscarDialog').show()" />
                 <center>
                 <p:panelGrid columns="2"    rendered="#{ordenTrabajoController.selected!=null}" >
                         <p:panelGrid style="margin-top:20px"  rendered="#{ordenTrabajoController.selected!=null}">
@@ -326,7 +326,7 @@
                 
             </h:form>
 
- 
+          <ui:include src="Buscar.xhtml"/> 
         </ui:define>
     </ui:composition>
 

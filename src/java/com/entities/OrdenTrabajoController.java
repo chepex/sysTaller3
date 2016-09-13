@@ -45,11 +45,21 @@ public class OrdenTrabajoController implements Serializable {
     private Proveedor proveedor;
     private TipoPago tpago;
     private int idDetalle;
-    
+    private String vbuscar;
     
     
     public OrdenTrabajoController() {
     }
+
+    public String getVbuscar() {
+        return vbuscar;
+    }
+
+    public void setVbuscar(String vbuscar) {
+        this.vbuscar = vbuscar;
+    }
+    
+    
 
     public TipoPago getTpago() {
         return tpago;
@@ -157,6 +167,7 @@ public class OrdenTrabajoController implements Serializable {
         this.selected.setTotalRespuesto(new BigDecimal("0"));
         this.selected.setTotalTrabajoExterno(new BigDecimal("0"));
         idDetalle = 0;
+        lpresupuesto=new ArrayList<>();
         return selected;
     }
 
@@ -170,8 +181,10 @@ public class OrdenTrabajoController implements Serializable {
         
         int vid= this.ejbFacade.findById();
         
-        System.out.println("vid"+vid);
-        this.selected.setIdOrdenTrabajo( vid);
+       if(this.selected.getIdOrdenTrabajo()==0){
+                this.selected.setIdOrdenTrabajo( vid);
+       }
+        System.out.println("id-->"+this.selected.getIdOrdenTrabajo());
        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("OrdenTrabajoCreated"));
           int vid2= this.presupuestoFacade.findById();
@@ -179,7 +192,8 @@ public class OrdenTrabajoController implements Serializable {
             for(Presupuesto p : this.lpresupuesto){
                 if(p.getIdpresupuesto()==0){
                     p.setIdpresupuesto(vid2);
-                }            
+                }       
+                System.out.println("id-->"+this.selected.getIdOrdenTrabajo());
                 p.setOrdenTrabajoidOrdenTrabajo1(selected);
                 try{
                   presupuestoFacade.edit(p);
@@ -207,9 +221,7 @@ public class OrdenTrabajoController implements Serializable {
     }
 
     public List<OrdenTrabajo> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+       
         return items;
     }
 
@@ -323,30 +335,46 @@ public class OrdenTrabajoController implements Serializable {
     }    
     
     public void agregarRepuesto(){
-    idDetalle= idDetalle+1;
-    Presupuesto presupuesto = new Presupuesto(idDetalle);
-    presupuesto.setIdpresupuesto(0);
-    presupuesto.setCantidad(cantidad);
-    presupuesto.setFactura(factura);
-    presupuesto.setRepuestoidRepuesto(repuesto);
-    presupuesto.setProveedoridProveedor(proveedor);    
-    BigDecimal vcantidad  = new BigDecimal(cantidad);
-    presupuesto.setPrecio(precio);
-    presupuesto.setTipoPagoidTipoPago(tpago);
-     BigDecimal total = new BigDecimal("0");
+        idDetalle= idDetalle+1;
+        Presupuesto presupuesto = new Presupuesto(idDetalle);
+        presupuesto.setIdpresupuesto(0);
+        presupuesto.setCantidad(cantidad);
+        presupuesto.setFactura(factura);
+        presupuesto.setRepuestoidRepuesto(repuesto);
+        presupuesto.setProveedoridProveedor(proveedor);    
+        BigDecimal vcantidad  = new BigDecimal(cantidad);
+        presupuesto.setPrecio(precio);
+        presupuesto.setTipoPagoidTipoPago(tpago);
+        BigDecimal total = new BigDecimal("0");
         total = presupuesto.getPrecio().multiply(vcantidad);
-    presupuesto.setIva(vcantidad.multiply( precio).multiply( new BigDecimal(".13")));
-    presupuesto.setOrdenTrabajoidOrdenTrabajo1(selected);
+        presupuesto.setIva(vcantidad.multiply( precio).multiply( new BigDecimal(".13")));
+        presupuesto.setOrdenTrabajoidOrdenTrabajo1(selected);
         System.out.println("---->"+this.tpago);
-    lpresupuesto.add(presupuesto);
-    this.selected.setTotalIva(this.selected.getTotalIva().add(presupuesto.getIva()));
-    this.selected.setTotalManoObra(this.selected.getTotalManoObra().add(total));
-    BigDecimal total2 = new BigDecimal("0");
-    total2 = selected.getTotalGravado().add(selected.getTotalManoObra()).add(selected.getTotalRespuesto()).add(selected.getTotalTrabajoExterno()).add(selected.getTotalIva());
-    
-    this.selected.setTotalGravado(total2);
-    JsfUtil.addSuccessMessage("Repuesto agregado correctamente");
+        lpresupuesto.add(presupuesto);
+        this.selected.setTotalIva(this.selected.getTotalIva().add(presupuesto.getIva()));
+        this.selected.setTotalManoObra(this.selected.getTotalManoObra().add(total));
+        BigDecimal total2 = new BigDecimal("0");
+        total2 = selected.getTotalGravado().add(selected.getTotalManoObra()).add(selected.getTotalRespuesto()).add(selected.getTotalTrabajoExterno()).add(selected.getTotalIva());
+
+        this.selected.setTotalGravado(total2);
+        JsfUtil.addSuccessMessage("Repuesto agregado correctamente");
     }
+
+    public void buscarOrden(){    
+        
+        if(JsfUtil.isNum(vbuscar)){
+           
+           int val = Integer.valueOf(vbuscar);
+            this.items = this.ejbFacade.findByOrden( val );
+        }else{
+            this.items = this.ejbFacade.findByEmpresaNombre(this.vbuscar);
+        }
+        
+    } 
     
+    public void selecionar(){
+        this.lpresupuesto = presupuestoFacade.findByOrden(selected);
+       
+    }    
     
 }

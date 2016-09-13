@@ -59,4 +59,45 @@ public class ClienteFacade extends AbstractFacade<Cliente> {
         return vid;
     }       
     
+    public List<Cliente> findByNombre (String  nombre ) {
+        TypedQuery<Cliente> q = null;
+     
+             q = em.createNamedQuery("Cliente.findByNombre2",Cliente.class)               
+                .setParameter("nombre", nombre);               
+                
+              
+        return q.getResultList();
+    }      
+    
+    public List<Cliente> findByNit (String  nit ) {
+        TypedQuery<Cliente> q = null;
+     
+             q = em.createNamedQuery("Cliente.findByNit",Cliente.class)               
+                .setParameter("nit", nit);               
+                
+              
+        return q.getResultList();
+    }   
+    
+    public List<Cliente> findByTelefonoFijo (String  telefonoFijo ) {
+        TypedQuery<Cliente> q = null;
+     
+             q = em.createNamedQuery("Cliente.findByTelefonoFijo",Cliente.class)               
+                .setParameter("telefonoFijo", telefonoFijo);               
+                
+              
+        return q.getResultList();
+    }  
+    
+    public List<Cliente> findByRegistroFiscal (String  registroFiscal ) {
+        TypedQuery<Cliente> q = null;
+     
+             q = em.createNamedQuery("Cliente.findByRegistroFiscal",Cliente.class)               
+                .setParameter("registroFiscal", registroFiscal);               
+                
+              
+        return q.getResultList();
+    }     
+        
+    
 }

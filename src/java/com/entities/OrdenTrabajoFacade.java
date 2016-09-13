@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
  
 
 /**
@@ -43,5 +44,30 @@ public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> {
               
         return vid;
     }         
+    
+    
+    public List<OrdenTrabajo> findByEmpresaNombre(String  nombre ) {
+        TypedQuery<OrdenTrabajo> q = null;
+     
+             q = em.createNamedQuery("OrdenTrabajo.findByEmpresaNombre",OrdenTrabajo.class)               
+                .setParameter("nombre", "%"+nombre+"%");               
+             
+                
+              
+        return q.getResultList();
+    }       
+    
+    public List<OrdenTrabajo> findByOrden(int    orden ) {
+        TypedQuery<OrdenTrabajo> q = null;
+     
+             q = em.createNamedQuery("OrdenTrabajo.findByOrden",OrdenTrabajo.class)               
+                .setParameter("orden",orden);               
+                
+                
+              
+        return q.getResultList();
+    }       
+            
+        
     
 }

@@ -16,7 +16,8 @@
         <ui:define name="body">
             <h:form id="ClienteListForm">
                 <p:commandButton id="nuevoButton" icon="ui-icon-plus"   value="Nuevo" actionListener="#{clienteController.prepareCreate}" disabled="#{clienteController.selected != null}" update="@form,:growl" />
-                <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{clienteController.create()}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
+                <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{clienteController.validar()}" disabled="#{clienteController.selected.idCliente>0}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
+                <p:commandButton id="updateButton" icon="ui-icon-plus"   value="Guardar" actionListener="#{clienteController.create()}"  disabled="#{clienteController.selected.idCliente==0}" rendered="#{clienteController.selected != null}" update="@form,:growl " />                
                 <p:commandButton id="limpiarButton" icon="ui-icon-trash"   value="Limpiar" actionListener="#{clienteController.limpiar}" update="@form,:growl" />
                 <p:commandButton id="searchButton" icon="ui-icon-search"   value="Buscar"   rendered="#{clienteController.selected == null}"   update=":buscarClienteForm" oncomplete="PF('BuscarDialog').show()" />
              <p:panel header="Cliente">
@@ -25,15 +26,15 @@
                     <p:panelGrid columns="6" >
                       
                         <p:outputLabel value="#{bundle.CreateClienteLabel_empresa}" for="empresa" />
-                        <p:inputText id="empresa" value="#{clienteController.selected.empresa}" required="true" title="#{bundle.CreateClienteTitle_empresa}" />
+                        <p:inputText id="empresa" disabled="#{clienteController.selected.idCliente>0}" value="#{clienteController.selected.empresa}" required="true" title="#{bundle.CreateClienteTitle_empresa}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_telefonoFijo}" for="telefonoFijo" />
-                        <p:inputText id="telefonoFijo" value="#{clienteController.selected.telefonoFijo}" required="true" title="#{bundle.CreateClienteTitle_telefonoFijo}" />
+                        <p:inputText id="telefonoFijo" disabled="#{clienteController.selected.idCliente>0}" value="#{clienteController.selected.telefonoFijo}" required="true" title="#{bundle.CreateClienteTitle_telefonoFijo}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_direccion}" for="direccion" />
                         <p:inputText id="direccion" value="#{clienteController.selected.direccion}" required="true" title="#{bundle.CreateClienteTitle_direccion}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_nit}" for="nit" />
-                        <p:inputText id="nit" value="#{clienteController.selected.nit}" required="true" title="#{bundle.CreateClienteTitle_nit}" />
+                        <p:inputText id="nit" disabled="#{clienteController.selected.idCliente>0}" value="#{clienteController.selected.nit}" required="true" title="#{bundle.CreateClienteTitle_nit}" />
                         <p:outputLabel value="#{bundle.CreateClienteLabel_registroFiscal}" for="registroFiscal" />
-                        <p:inputText id="registroFiscal" value="#{clienteController.selected.registroFiscal}" required="true" title="#{bundle.CreateClienteTitle_registroFiscal}" />
+                        <p:inputText id="registroFiscal" disabled="#{clienteController.selected.idCliente>0}" value="#{clienteController.selected.registroFiscal}" required="true" title="#{bundle.CreateClienteTitle_registroFiscal}" />
                         <p:outputLabel value="*"  />
                         <p:outputLabel value="*"  />
                  

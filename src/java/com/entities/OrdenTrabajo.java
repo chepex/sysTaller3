@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OrdenTrabajo.findByFechaEntrega", query = "SELECT o FROM OrdenTrabajo o WHERE o.fechaEntrega = :fechaEntrega"),
     @NamedQuery(name = "OrdenTrabajo.findByGarantiaHasta", query = "SELECT o FROM OrdenTrabajo o WHERE o.garantiaHasta = :garantiaHasta"),
     @NamedQuery(name = "OrdenTrabajo.findByAdelanto", query = "SELECT o FROM OrdenTrabajo o WHERE o.adelanto = :adelanto"),
+    @NamedQuery(name = "OrdenTrabajo.findByEmpresaNombre", query = "SELECT o FROM OrdenTrabajo o WHERE  o.clienteidCliente.empresa like :nombre  or o.clienteidCliente.nombre like :nombre"),
+    @NamedQuery(name = "OrdenTrabajo.findByOrden", query = "SELECT o FROM OrdenTrabajo o WHERE  o.idOrdenTrabajo = :orden  "),
+    
     @NamedQuery(name = "OrdenTrabajo.findBySolicutudCliente", query = "SELECT o FROM OrdenTrabajo o WHERE o.solicutudCliente = :solicutudCliente"),
     @NamedQuery(name = "OrdenTrabajo.findByNotasInternas", query = "SELECT o FROM OrdenTrabajo o WHERE o.notasInternas = :notasInternas"),
     @NamedQuery(name = "OrdenTrabajo.findByNotasCotizacion", query = "SELECT o FROM OrdenTrabajo o WHERE o.notasCotizacion = :notasCotizacion"),

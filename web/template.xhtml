@@ -20,22 +20,25 @@
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="Categoria" outcome="/categoria/List.xhtml" />
-                            <p:menuitem value="Cliente" outcome="/cliente/List.xhtml" />
+                        <p:submenu label="Administracion">
+                            <p:menuitem value="Rol" outcome="/rol/List.xhtml" />
+                            <p:menuitem value="Usuario" outcome="/usuario/List.xhtml" />
+                            <p:menuitem value="TipoPago" outcome="/tipoPago/List.xhtml" />                            
+                            <p:menuitem value="Categoria" outcome="/categoria/List.xhtml" />                          
                             <p:menuitem value="EstadoOrden" outcome="/estadoOrden/List.xhtml" />
+                            <p:menuitem value="TipoVehiculo" outcome="/tipoVehiculo/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Mantenimiento">
                             <p:menuitem value="Marca" outcome="/marca/List.xhtml" />
                             <p:menuitem value="Modelo" outcome="/modelo/List.xhtml" />
-                            <p:menuitem value="OrdenTrabajo" outcome="/ordenTrabajo/List.xhtml" />
-                            <p:menuitem value="Presupuesto" outcome="/presupuesto/List.xhtml" />
                             <p:menuitem value="Proveedor" outcome="/proveedor/List.xhtml" />
                             <p:menuitem value="Repuesto" outcome="/repuesto/List.xhtml" />
-                            <p:menuitem value="Rol" outcome="/rol/List.xhtml" />
-                            <p:menuitem value="TipoPago" outcome="/tipoPago/List.xhtml" />
-                            <p:menuitem value="TipoVehiculo" outcome="/tipoVehiculo/List.xhtml" />
-                            <p:menuitem value="Usuario" outcome="/usuario/List.xhtml" />
                             <p:menuitem value="Vehiculo" outcome="/vehiculo/List.xhtml" />
                         </p:submenu>
+                        <p:submenu label="Proceso">
+                            <p:menuitem value="Cliente" outcome="/cliente/List.xhtml" />
+                            <p:menuitem value="OrdenTrabajo" outcome="/ordenTrabajo/List.xhtml" />
+                        </p:submenu>                        
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>

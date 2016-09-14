@@ -16,8 +16,8 @@
         <ui:define name="body">
             <h:form id="OrdenTrabajoListForm">
                 <p:commandButton actionListener="#{ordenTrabajoController.prepareCreate()}" disabled="#{ordenTrabajoController.selected!=null}" value="Nuevo" update="@form" />
-                <p:commandButton actionListener="#{ordenTrabajoController.create()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{empty ordenTrabajoController.selected}" value="Crear"  />
-                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="F8" actionListener="#{ordenTrabajoController.update}"   rendered="#{ordenTrabajoController.selected==null}"  disabled="#{empty ordenTrabajoController.selected}"/>
+                <p:commandButton actionListener="#{ordenTrabajoController.validar()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo>0}" value="Crear"  />
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Guardar" update=":growl" actionListener="#{ordenTrabajoController.update}"   rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"/>
                 <p:commandButton actionListener="#{ordenTrabajoController.limpiar2()}"  disabled="#{ordenTrabajoController.selected==null}" value="Limpiar" update="@form" />
                 <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar"  update=":buscarOrderForm" oncomplete="PF('BuscarDialog').show()" />
                 <center>
@@ -33,7 +33,7 @@
                                               var="cliente"
                                               itemLabel="#{cliente.nombre } #{cliente.apellido }" 
                                               itemValue="#{cliente}"
-                                              completeMethod="#{clienteController.autoCompleteCliente(valor)}" 
+                                              completeMethod="#{clienteController.autoCompleteCliente}" 
                                               converter="#{ClienteControllerConverter}" 
                                               effect="fade" >
                                    <p:ajax  event="itemSelect"  listener="#{ordenTrabajoController.llenarVehiculo()}" update="@form" />
@@ -162,7 +162,7 @@
                                               var="proveedor"
                                               itemLabel="#{proveedor.nombre }" 
                                               itemValue="#{proveedor}"
-                                              completeMethod="#{proveedorController.autoCompleteCliente(valor)}" 
+                                              completeMethod="#{proveedorController.autoCompleteCliente}" 
                                               converter="#{ProveedorControllerConverter}" 
                                               effect="fade" >
                                  
@@ -173,7 +173,7 @@
                                               var="repuesto"
                                               itemLabel="#{repuesto.nombre }" 
                                               itemValue="#{repuesto}"
-                                              completeMethod="#{repuestoController.autoCompleteCliente(valor)}" 
+                                              completeMethod="#{repuestoController.autoCompleteCliente}" 
                                               converter="#{RepuestoControllerConverter}" 
                                               effect="fade" >
                                  

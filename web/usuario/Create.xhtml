@@ -23,6 +23,7 @@
                         <p:selectOneMenu id="rolidRol" value="#{usuarioController.selected.rolidRol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_rolidRol}">
                             <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
                                            var="rolidRolItem"
+                                           itemLabel="#{rolidRolItem.nombre}"
                                            itemValue="#{rolidRolItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

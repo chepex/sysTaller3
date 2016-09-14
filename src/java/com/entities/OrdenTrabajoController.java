@@ -196,7 +196,7 @@ public class OrdenTrabajoController implements Serializable {
                 System.out.println("id-->"+this.selected.getIdOrdenTrabajo());
                 p.setOrdenTrabajoidOrdenTrabajo1(selected);
                 try{
-                  presupuestoFacade.edit(p);
+                 presupuestoFacade.edit(p);
                   vid2 =vid2+1;
                 }catch(Exception ex){
                     System.out.println("---->"+ex.getMessage());
@@ -374,7 +374,30 @@ public class OrdenTrabajoController implements Serializable {
     
     public void selecionar(){
         this.lpresupuesto = presupuestoFacade.findByOrden(selected);
-       
+         this.lvehiculo=  vehiculoFacade.findByCliente(this.selected.getClienteidCliente());
     }    
     
+    public void validar(){ 
+        String msg ="ok";
+        if(this.selected.getClienteidCliente()==null){
+            msg ="Selecione un cliente";
+        }
+        if(this.selected.getVehiculoidvehiculo()==null){
+            msg ="Selecione un vehiculo";
+        }  
+        if(this.selected.getFechaEntrega()==null){
+            msg ="Fecha de entrega no valida";
+        }          
+        if(this.selected.getGarantiaHasta()==null){
+            msg ="Fecha de garantia no valida";
+        } 
+        if(this.selected.getTipoPagoidTipoPago()==null){
+            msg ="Tipo de pago no valido";
+        }          
+        if(!msg.equals("ok")){
+           JsfUtil.addErrorMessage(msg);
+        }else{
+            this.create();
+        }
+    }
 }

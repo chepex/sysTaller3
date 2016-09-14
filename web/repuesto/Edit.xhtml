@@ -27,6 +27,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
                                            var="categoriaidCategoriaItem"
+                                           itemLabel="#{categoriaidCategoriaItem.nombre}"
                                            itemValue="#{categoriaidCategoriaItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

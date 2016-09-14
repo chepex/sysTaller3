@@ -6,22 +6,19 @@
 package com.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+ 
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+ 
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+ 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -91,7 +88,7 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ciudad")
-    private BigDecimal ciudad;
+    private String ciudad;
     @Basic(optional = false)
     @NotNull
     @Column(name = "departamento") 
@@ -108,7 +105,7 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
 
-    public Cliente(Integer idCliente, String nombre, String celular, BigDecimal ciudad, String departamento) {
+    public Cliente(Integer idCliente, String nombre, String celular, String ciudad, String departamento) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.celular = celular;
@@ -196,11 +193,11 @@ public class Cliente implements Serializable {
         this.correo = correo;
     }
 
-    public BigDecimal getCiudad() {
+    public String getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(BigDecimal ciudad) {
+    public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
 

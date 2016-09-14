@@ -25,6 +25,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
                                            var="rolidRolItem"
+                                            itemLabel="#{rolidRolItem.nombre}"
                                            itemValue="#{rolidRolItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

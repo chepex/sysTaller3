@@ -25,6 +25,7 @@
                         <p:selectOneMenu id="categoriaidCategoria" value="#{repuestoController.selected.categoriaidCategoria}" required="true" requiredMessage="#{bundle.EditRepuestoRequiredMessage_categoriaidCategoria}">
                             <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
                                            var="categoriaidCategoriaItem"
+                                           itemLabel="#{categoriaidCategoriaItem.nombre}"
                                            itemValue="#{categoriaidCategoriaItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

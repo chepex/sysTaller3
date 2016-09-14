@@ -23,7 +23,7 @@
                         <h:outputText value="#{bundle.ViewRepuestoLabel_activo}"/>
                         <p:selectBooleanCheckbox value="#{repuestoController.selected.activo}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewRepuestoLabel_categoriaidCategoria}"/>
-                        <h:outputText value="#{repuestoController.selected.categoriaidCategoria}" title="#{bundle.ViewRepuestoTitle_categoriaidCategoria}"/>
+                        <h:outputText value="#{repuestoController.selected.categoriaidCategoria.nombre}" title="#{bundle.ViewRepuestoTitle_categoriaidCategoria}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="RepuestoViewDialog.hide()"/>
                 </h:panelGroup>

@@ -214,8 +214,16 @@ public class ClienteController implements Serializable {
     }   
     
     public List<Cliente> autoCompleteCliente(String valor) {
-       
-        return getFacade().findByNombreCodigo(valor);
+       List<Cliente > lcliente = getFacade().findByNombreCodigo(valor);
+        System.out.println("buscar-->"+valor    );
+       if(!lcliente.isEmpty()){
+            for(Cliente c : lcliente){
+             System.out.println("lcliente--->"+c);
+           }
+       }
+      
+      
+        return lcliente;
         
     } 
     
@@ -224,7 +232,7 @@ public class ClienteController implements Serializable {
     }
     
     public void addVechiculo(){
-    
+        
         this.lvehiculo.add(selectedvehiculo);
     }
     
@@ -234,7 +242,7 @@ public class ClienteController implements Serializable {
     
     public void selecionar(){
       this.lvehiculo=  vehiculoFacade.findByCliente(selected);
-      this.selectedvehiculo = new Vehiculo();
+      this.selectedvehiculo = new Vehiculo(0);
     }
     
     

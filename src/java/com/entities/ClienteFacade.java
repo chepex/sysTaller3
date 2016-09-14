@@ -33,7 +33,7 @@ public class ClienteFacade extends AbstractFacade<Cliente> {
         TypedQuery<Cliente> q = null;
      
              q = em.createNamedQuery("Cliente.findByNombre",Cliente.class)               
-                .setParameter("nombre", "%"+nombre+"%");
+                .setParameter("nombre",  nombre );
               
         return q.getResultList();
     }  

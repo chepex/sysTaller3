@@ -21,7 +21,7 @@
                         <h:outputText value="#{bundle.ViewUsuarioLabel_activo}"/>
                         <p:selectBooleanCheckbox value="#{usuarioController.selected.activo}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_rolidRol}"/>
-                        <h:outputText value="#{usuarioController.selected.rolidRol}" title="#{bundle.ViewUsuarioTitle_rolidRol}"/>
+                        <h:outputText value="#{usuarioController.selected.rolidRol.nombre}" title="#{bundle.ViewUsuarioTitle_rolidRol}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UsuarioViewDialog.hide()"/>
                 </h:panelGroup>

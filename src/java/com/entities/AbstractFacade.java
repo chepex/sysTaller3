@@ -5,8 +5,16 @@
  */
 package com.entities;
 
+import com.entities.util.JsfUtil;
 import java.util.List;
+import java.util.Set;
+ 
 import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import static javax.ws.rs.client.Entity.entity;
+import static javax.ws.rs.client.Entity.entity;
 
 /**
  *
@@ -26,6 +34,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public void edit(T entity) {
+       
         getEntityManager().merge(entity);
     }
 

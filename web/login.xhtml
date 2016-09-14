@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Systema de Cable 2.0</title>
+                
+            </f:facet>
+            <h:outputStylesheet name="css/bootstrap3.css"/>
+            <h:outputStylesheet name="css/login.css"/>
+        </h:head>
+
+        <h:body> 
+              <script type="text/javascript">
+                  $(document).ready(function()
+                    {
+                    $(window).bind("beforeunload", function() { 
+                      mas();
+                      
+                    });
+                    function mas (){
+                        
+                     doAwesomeness();
+                    }
+                });
+            
+              </script>
+            <p:growl id="mensajes" showDetail="true" life="2000"/>
+            <div class="container">
+            <div class="row"  id="pwd-container">
+                <div class="col-md-4"></div>    
+                <div class="col-md-4">
+                    <section class="login-form">
+                            <h:form id="usrForm" role="login">
+                                 <p:remoteCommand name="doAwesomeness" actionListener="#{loginBean.logout()}"
+         />
+                                  <p:graphicImage url="/resources/img/logo.jpeg" library="images" class="img-responsive" alt="" />
+                                <p:inputText id="username" value="#{loginBean.username}" class="form-control input-lg" placeholder="usuario" required="true" />                          
+                                <p:password id="password" value="#{loginBean.password}" class="form-control input-lg"  placeholder="password" required="true" />  
+                             <p:commandButton id="cmdLog" class="btn btn-lg btn-primary btn-block" action="#{loginBean.login}" ajax="false" update="@all" value="Ingresar"  />
+                            </h:form>
+                        </section>
+                         <div class="form-links">
+                      
+                    </div>
+
+                  </div>
+        <div class="col-md-4"></div>
+  </div>
+  
+</div>
+
+        </h:body>
+
+    </f:view>
+</html>
+

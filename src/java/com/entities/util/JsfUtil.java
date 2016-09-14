@@ -1,5 +1,6 @@
 package com.entities.util;
 
+import java.security.MessageDigest;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -78,5 +79,24 @@ public class JsfUtil {
             ret = false;
         }
         return ret;
+    }    
+    
+    
+    public static String EncriptadorMD5(String txt) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] b = md.digest(txt.getBytes());
+        int size = b.length;
+        StringBuffer h = new StringBuffer(size);
+        // algoritmo y arreglo md5
+        for (int i = 0; i < size; i++) {
+            int u = b[i] & 255;
+            if (u < 16) {
+                h.append("0" + Integer.toHexString(u));
+            } else {
+                h.append(Integer.toHexString(u));
+            }
+        }
+        // clave encriptada
+        return h.toString();
     }    
 }

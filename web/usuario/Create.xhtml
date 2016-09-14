@@ -16,7 +16,7 @@
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.CreateUsuarioTitle_nombre}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre}"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}"/>
+                         <p:password id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_activo}" for="activo" />
                         <p:selectBooleanCheckbox id="activo" value="#{usuarioController.selected.activo}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_rolidRol}" for="rolidRol" />

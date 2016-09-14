@@ -17,23 +17,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "usuarioController")
+@ManagedBean(name = "rolMenuController")
 @SessionScoped
-public class UsuarioController implements Serializable {
+public class RolMenuController implements Serializable {
 
     @EJB
-    private com.entities.UsuarioFacade ejbFacade;
-    private List<Usuario> items = null;
-    private Usuario selected;
+    private com.entities.RolMenuFacade ejbFacade;
+    private List<RolMenu> items = null;
+    private RolMenu selected;
 
-    public UsuarioController() {
+    public RolMenuController() {
     }
 
-    public Usuario getSelected() {
+    public RolMenu getSelected() {
         return selected;
     }
 
-    public void setSelected(Usuario selected) {
+    public void setSelected(RolMenu selected) {
         this.selected = selected;
     }
 
@@ -41,44 +41,38 @@ public class UsuarioController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
-        this.selected.setIdUsuario(0);
     }
 
-    private UsuarioFacade getFacade() {
+    private RolMenuFacade getFacade() {
         return ejbFacade;
     }
 
-    public Usuario prepareCreate() {
-        selected = new Usuario();
+    public RolMenu prepareCreate() {
+        selected = new RolMenu();
         initializeEmbeddableKey();
         return selected;
     }
 
-    public void create() throws Exception {
-        String pass = this.selected.getPassword().toUpperCase();
-        this.selected.setPassword(JsfUtil.EncriptadorMD5(pass));
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
+    public void create() {
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RolMenuCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public void update() throws Exception {
-        
-        String pass = this.selected.getPassword().toUpperCase();
-        this.selected.setPassword(JsfUtil.EncriptadorMD5(pass));
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+    public void update() {
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("RolMenuUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("RolMenuDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Usuario> getItems() {
+    public List<RolMenu> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -113,24 +107,24 @@ public class UsuarioController implements Serializable {
         }
     }
 
-    public List<Usuario> getItemsAvailableSelectMany() {
+    public List<RolMenu> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Usuario> getItemsAvailableSelectOne() {
+    public List<RolMenu> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Usuario.class)
-    public static class UsuarioControllerConverter implements Converter {
+    @FacesConverter(forClass = RolMenu.class)
+    public static class RolMenuControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            UsuarioController controller = (UsuarioController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "usuarioController");
+            RolMenuController controller = (RolMenuController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "rolMenuController");
             return controller.getFacade().find(getKey(value));
         }
 
@@ -151,11 +145,11 @@ public class UsuarioController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Usuario) {
-                Usuario o = (Usuario) object;
-                return getStringKey(o.getIdUsuario());
+            if (object instanceof RolMenu) {
+                RolMenu o = (RolMenu) object;
+                return getStringKey(o.getIdrolMenu());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Usuario.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), RolMenu.class.getName()});
                 return null;
             }
         }

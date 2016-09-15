@@ -41,6 +41,7 @@ public class MenuController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        this.selected.setIdMenu(0);
     }
 
     private MenuFacade getFacade() {

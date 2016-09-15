@@ -12,8 +12,7 @@
             <h:form id="RolMenuViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolMenuController.selected != null}">
-                        <h:outputText value="#{bundle.ViewRolMenuLabel_idrolMenu}"/>
-                        <h:outputText value="#{rolMenuController.selected.idrolMenu}" title="#{bundle.ViewRolMenuTitle_idrolMenu}"/>
+                       
                         <h:outputText value="#{bundle.ViewRolMenuLabel_activo}"/>
                         <p:selectBooleanCheckbox value="#{rolMenuController.selected.activo}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewRolMenuLabel_idrol}"/>

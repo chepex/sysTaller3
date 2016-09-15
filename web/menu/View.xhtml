@@ -12,8 +12,7 @@
             <h:form id="MenuViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMenuLabel_idMenu}"/>
-                        <h:outputText value="#{menuController.selected.idMenu}" title="#{bundle.ViewMenuTitle_idMenu}"/>
+                        
                         <h:outputText value="#{bundle.ViewMenuLabel_nombre}"/>
                         <h:outputText value="#{menuController.selected.nombre}" title="#{bundle.ViewMenuTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewMenuLabel_destino}"/>

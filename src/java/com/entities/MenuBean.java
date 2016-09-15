@@ -9,7 +9,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+ 
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -35,35 +35,8 @@ public class MenuBean implements Serializable {
         item.setIcon("ui-icon-home");
         vmodulos.addElement(item);
         
-        /*DefaultSubMenu subMenu = new DefaultSubMenu();
-        subMenu.setLabel("Mantenimiento");
-        
-        DefaultMenuItem modulo = new DefaultMenuItem();
-        modulo.setValue("Modulo");
-        modulo.setOutcome("/Home/modulo/index");
-        
-        DefaultMenuItem menu = new DefaultMenuItem();
-        menu.setValue("Menu");
-        menu.setOutcome("/Home/menu/index");
-        
-        DefaultMenuItem role = new DefaultMenuItem();
-        role.setValue("Roles");
-        role.setOutcome("/Home/rolesXMenus/index");
-        
-        subMenu.addElement(modulo);
-        subMenu.addElement(menu);
-        subMenu.addElement(role);
-        vmodulos.addElement(subMenu);*/
-        
-      
-        
-        
-         //   short CodMod = (short) session.getAttribute("SSCODMOD");
-         //   BigDecimal cod_puesto =  (BigDecimal) session.getAttribute("SSCODPUESTO");
-          //  short CodMod = (short)1;
-            
-         //   LoginBean lg = new LoginBean();
-          //  short CodCia = lg.sscia();
+       
+       
           int mas= 1;
       System.out.println("roles--->");
       System.out.println("roles--->"+mas );

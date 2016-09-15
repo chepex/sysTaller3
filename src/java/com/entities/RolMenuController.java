@@ -4,6 +4,7 @@ import com.entities.util.JsfUtil;
 import com.entities.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DualListModel;
 
 @ManagedBean(name = "rolMenuController")
 @SessionScoped
@@ -23,12 +25,49 @@ public class RolMenuController implements Serializable {
 
     @EJB
     private com.entities.RolMenuFacade ejbFacade;
+    @EJB
+    private com.entities.MenuFacade menuFacade;    
+    @EJB
+    private com.entities.RolFacade rolFacade;    
+    private DualListModel<RolMenu> privilegios;    
     private List<RolMenu> items = null;
+    private List<Rol> lrol = null;    
     private RolMenu selected;
+    private Rol  selectedRol;
 
     public RolMenuController() {
     }
 
+    public Rol getSelectedRol() {
+        return selectedRol;
+    }
+
+    public void setSelectedRol(Rol selectedRol) {
+        this.selectedRol = selectedRol;
+    }
+
+    
+    public List<Rol> getLrol() {
+        if(lrol==null){
+            lrol= rolFacade.findAll();
+        }
+        return lrol;
+    }
+
+    public void setLrol(List<Rol> lrol) {
+        this.lrol = lrol;
+    }
+
+    
+    public DualListModel<RolMenu> getPrivilegios() {
+        return privilegios;
+    }
+
+    public void setPrivilegios(DualListModel<RolMenu> privilegios) {
+        this.privilegios = privilegios;
+    }
+
+    
     public RolMenu getSelected() {
         return selected;
     }
@@ -41,6 +80,7 @@ public class RolMenuController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+        selected.setIdrolMenu(0);
     }
 
     private RolMenuFacade getFacade() {
@@ -154,6 +194,26 @@ public class RolMenuController implements Serializable {
             }
         }
 
+    }
+    public List<RolMenu> llenarViejo(){
+        List<RolMenu> lrm = new ArrayList<>();
+        List<Menu> lmenu = this.menuFacade.findAll();
+        for(Menu m:lmenu){
+        RolMenu rm = new RolMenu();
+        rm.setIdmenu(m);
+        rm.setIdrol(selectedRol);
+        lrm.add(rm);
+        }
+        
+        return lrm;
+        
+    }
+    
+    public void consultar(){
+        List<RolMenu> viejo = llenarViejo();
+        List<RolMenu> nuevo = this.ejbFacade.findByRol( this.selectedRol);         
+        privilegios = new DualListModel<RolMenu>(viejo, nuevo);
+    
     }
 
 }

@@ -12,8 +12,7 @@
             <h:form id="RolMenuEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolMenuController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditRolMenuLabel_idrolMenu}" for="idrolMenu" />
-                        <p:inputText id="idrolMenu" value="#{rolMenuController.selected.idrolMenu}" title="#{bundle.EditRolMenuTitle_idrolMenu}" required="true" requiredMessage="#{bundle.EditRolMenuRequiredMessage_idrolMenu}"/>
+                      
                         <p:outputLabel value="#{bundle.EditRolMenuLabel_activo}" for="activo" />
                         <p:selectBooleanCheckbox id="activo" value="#{rolMenuController.selected.activo}" />
                         <p:outputLabel value="#{bundle.EditRolMenuLabel_idrol}" for="idrol" />

@@ -5,9 +5,11 @@
  */
 package com.entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,5 +28,16 @@ public class RolMenuFacade extends AbstractFacade<RolMenu> {
     public RolMenuFacade() {
         super(RolMenu.class);
     }
+    
+    public List<RolMenu> findByRol(Rol  rol ) {
+        TypedQuery<RolMenu> q = null;
+     
+             q = em.createNamedQuery("RolMenu.findByRol",RolMenu.class)               
+                .setParameter("rol",rol.getIdRol());               
+             
+                
+              
+        return q.getResultList();
+    }     
     
 }

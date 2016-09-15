@@ -12,8 +12,7 @@
             <h:form id="MenuCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMenuLabel_idMenu}" for="idMenu" />
-                        <p:inputText id="idMenu" value="#{menuController.selected.idMenu}" title="#{bundle.CreateMenuTitle_idMenu}" required="true" requiredMessage="#{bundle.CreateMenuRequiredMessage_idMenu}"/>
+                      
                         <p:outputLabel value="#{bundle.CreateMenuLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{menuController.selected.nombre}" title="#{bundle.CreateMenuTitle_nombre}" />
                         <p:outputLabel value="#{bundle.CreateMenuLabel_destino}" for="destino" />

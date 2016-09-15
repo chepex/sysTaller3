@@ -15,6 +15,27 @@
 
         <ui:define name="body">
             <h:form id="RolMenuListForm">
+            <p:panelGrid columns="3">
+                <p:outputLabel for="roles" value="Roles" />
+                <p:selectOneMenu id="roles" value="#{rolMenuController.selectedRol}" >
+                    <f:selectItems value="#{rolMenuController.lrol}"
+                               var="rolItem"
+                               itemLabel="#{rolItem.nombre}"
+                               itemValue="#{rolItem}"/>
+                </p:selectOneMenu>             
+                <p:commandButton id="consultaBtn" icon="ui-icon-plus"   value="Consultar" actionListener="#{rolMenuController.consultar()}" update="@form"  />    
+            </p:panelGrid>  
+            <p:panel header="Privilegios" rendered="#{rolMenuController.privilegios!=null}">
+                <center>
+                    <p:pickList id="PojoPickList" value="#{rolMenuController.privilegios}" var="theme" effect="bounce"
+                            itemValue="#{theme}" itemLabel="#{theme.idmenu.nombre}"  showCheckbox="true" responsive="true"
+                        showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  converter="#{RolMenuControllerConverter}" >                      
+                        <p:column style="width:100%;">
+                            <h:outputText value="#{theme.idmenu.nombre}" />
+                        </p:column>
+                    </p:pickList>
+                 </center>
+            </p:panel>
                 <p:panel header="#{bundle.ListRolMenuTitle}">
                     <p:dataTable id="datalist" value="#{rolMenuController.items}" var="item"
                                  selectionMode="single" selection="#{rolMenuController.selected}"
@@ -27,12 +48,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolMenuTitle_idrolMenu}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idrolMenu}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRolMenuTitle_activo}"/>

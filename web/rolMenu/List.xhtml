@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="RolMenuListForm">
-            <p:panelGrid columns="3">
+            <p:panelGrid columns="4">
                 <p:outputLabel for="roles" value="Roles" />
                 <p:selectOneMenu id="roles" value="#{rolMenuController.selectedRol}" >
                     <f:selectItems value="#{rolMenuController.lrol}"
@@ -24,62 +24,29 @@
                                itemValue="#{rolItem}"/>
                 </p:selectOneMenu>             
                 <p:commandButton id="consultaBtn" icon="ui-icon-plus"   value="Consultar" actionListener="#{rolMenuController.consultar()}" update="@form"  />    
+                <p:commandButton id="guardarBtn" icon="ui-icon-plus"   value="Guardar" actionListener="#{rolMenuController.actualizarRol()}" update="@form,:growl"  />    
             </p:panelGrid>  
             <p:panel header="Privilegios" rendered="#{rolMenuController.privilegios!=null}">
                 <center>
                     <p:pickList id="PojoPickList" value="#{rolMenuController.privilegios}" var="theme" effect="bounce"
-                            itemValue="#{theme}" itemLabel="#{theme.idmenu.nombre}"  showCheckbox="true" responsive="true"
-                        showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  converter="#{RolMenuControllerConverter}" >                      
+                            itemValue="#{theme}" 
+                            itemLabel="#{theme}"
+                            showCheckbox="true"
+                            responsive="true"
+                        showSourceFilter="true"
+                        showTargetFilter="true"
+                        filterMatchMode="contains"
+                          >                      
                         <p:column style="width:100%;">
-                            <h:outputText value="#{theme.idmenu.nombre}" />
+                            <h:outputText value="#{theme}" />
                         </p:column>
                     </p:pickList>
                  </center>
             </p:panel>
-                <p:panel header="#{bundle.ListRolMenuTitle}">
-                    <p:dataTable id="datalist" value="#{rolMenuController.items}" var="item"
-                                 selectionMode="single" selection="#{rolMenuController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.idrolMenu}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
-
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                        
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolMenuTitle_activo}"/>
-                            </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.activo}" disabled="true"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolMenuTitle_idrol}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idrol}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolMenuTitle_idmenu}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idmenu}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rolMenuController.prepareCreate}" update=":RolMenuCreateForm" oncomplete="PF('RolMenuCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RolMenuViewForm" oncomplete="PF('RolMenuViewDialog').show()" disabled="#{empty rolMenuController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RolMenuEditForm" oncomplete="PF('RolMenuEditDialog').show()" disabled="#{empty rolMenuController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rolMenuController.destroy}" update=":growl,datalist" disabled="#{empty rolMenuController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
+                
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+           
         </ui:define>
     </ui:composition>
 

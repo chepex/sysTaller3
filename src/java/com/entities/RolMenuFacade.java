@@ -34,8 +34,6 @@ public class RolMenuFacade extends AbstractFacade<RolMenu> {
      
              q = em.createNamedQuery("RolMenu.findByRol",RolMenu.class)               
                 .setParameter("rol",rol.getIdRol());               
-             
-                
               
         return q.getResultList();
     }     

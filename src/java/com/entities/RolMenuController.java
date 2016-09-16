@@ -5,12 +5,14 @@ import com.entities.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -29,7 +31,7 @@ public class RolMenuController implements Serializable {
     private com.entities.MenuFacade menuFacade;    
     @EJB
     private com.entities.RolFacade rolFacade;    
-    private DualListModel<RolMenu> privilegios;    
+    private DualListModel<String> privilegios;    
     private List<RolMenu> items = null;
     private List<Rol> lrol = null;    
     private RolMenu selected;
@@ -59,11 +61,11 @@ public class RolMenuController implements Serializable {
     }
 
     
-    public DualListModel<RolMenu> getPrivilegios() {
+    public DualListModel<String> getPrivilegios() {
         return privilegios;
     }
 
-    public void setPrivilegios(DualListModel<RolMenu> privilegios) {
+    public void setPrivilegios(DualListModel<String> privilegios) {
         this.privilegios = privilegios;
     }
 
@@ -94,6 +96,8 @@ public class RolMenuController implements Serializable {
     }
 
     public void create() {
+        
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RolMenuCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -195,24 +199,75 @@ public class RolMenuController implements Serializable {
         }
 
     }
-    public List<RolMenu> llenarViejo(){
-        List<RolMenu> lrm = new ArrayList<>();
+    public List<String> llenarViejo(){
+        List<String> lrm = new ArrayList<>();
         List<Menu> lmenu = this.menuFacade.findAll();
-        for(Menu m:lmenu){
-        RolMenu rm = new RolMenu();
-        rm.setIdmenu(m);
-        rm.setIdrol(selectedRol);
-        lrm.add(rm);
-        }
-        
-        return lrm;
-        
+        for(Menu m:lmenu){   
+            lrm.add(m.getNombre());
+        }        
+        return lrm;       
     }
     
+    public List<String> llenarNuevo(){
+        List<String> lrm = new ArrayList<>();
+        List<RolMenu> lmenu = this.ejbFacade.findByRol( this.selectedRol);
+        for(RolMenu m:lmenu){   
+            lrm.add(m.getIdmenu().getNombre());
+        }        
+        return lrm;       
+    }    
+    
     public void consultar(){
-        List<RolMenu> viejo = llenarViejo();
-        List<RolMenu> nuevo = this.ejbFacade.findByRol( this.selectedRol);         
-        privilegios = new DualListModel<RolMenu>(viejo, nuevo);
+        
+        List<String> viejo = llenarViejo();
+        List<String> nuevo =llenarNuevo() ;         
+        privilegios = new DualListModel<String>(viejo, nuevo);
+    
+    }
+    
+    public void actualizarRol(){
+       
+        try{
+        
+        
+        Iterator<String> crunchifyIterator =  privilegios.getTarget().listIterator();
+                int i =0;
+                borrarRol();
+		while (crunchifyIterator.hasNext()) {
+                    RolMenu rm = new RolMenu(0);
+                    rm.setActivo(Boolean.TRUE);
+                    rm.setIdrol(selectedRol);
+                    List<Menu> m = menuFacade.findByNombre(crunchifyIterator.next());
+                    rm.setIdmenu(m.get(0));
+                    this.ejbFacade.edit(rm);
+                    i++;
+		}
+                
+                FacesMessage msg = new FacesMessage();
+                msg.setSeverity(FacesMessage.SEVERITY_INFO);
+                msg.setSummary("Privilegios guardados correctamente");
+                msg.setDetail( "total:"+i);
+
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+        }catch(Exception ex){
+            JsfUtil.addErrorMessage("Surgio un error grave-->"+ex.getMessage());
+        }        
+        
+        
+    
+    }
+    
+    public void borrarRol(){
+        
+        try{
+            List<RolMenu> lmenu = this.ejbFacade.findByRol(selectedRol);
+            for( RolMenu rolm: lmenu){
+                this.ejbFacade.remove(rolm);
+            }    
+        }catch(Exception ex){
+              JsfUtil.addErrorMessage("Surgio un error grave-->"+ex.getMessage());
+        }
+        
     
     }
 

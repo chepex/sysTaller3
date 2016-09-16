@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompaniaEditDlg" widgetVar="CompaniaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCompaniaTitle}">
+            <h:form id="CompaniaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{companiaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_idCompania}" for="idCompania" />
+                        <p:inputText id="idCompania" value="#{companiaController.selected.idCompania}" title="#{bundle.EditCompaniaTitle_idCompania}" required="true" requiredMessage="#{bundle.EditCompaniaRequiredMessage_idCompania}"/>
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{companiaController.selected.nombre}" title="#{bundle.EditCompaniaTitle_nombre}" required="true" requiredMessage="#{bundle.EditCompaniaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{companiaController.selected.telefono}" title="#{bundle.EditCompaniaTitle_telefono}" required="true" requiredMessage="#{bundle.EditCompaniaRequiredMessage_telefono}"/>
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{companiaController.selected.correo}" title="#{bundle.EditCompaniaTitle_correo}" required="true" requiredMessage="#{bundle.EditCompaniaRequiredMessage_correo}"/>
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{companiaController.selected.direccion}" title="#{bundle.EditCompaniaTitle_direccion}" required="true" requiredMessage="#{bundle.EditCompaniaRequiredMessage_direccion}"/>
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_tasaIva}" for="tasaIva" />
+                        <p:inputText id="tasaIva" value="#{companiaController.selected.tasaIva}" title="#{bundle.EditCompaniaTitle_tasaIva}" />
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_nit}" for="nit" />
+                        <p:inputText id="nit" value="#{companiaController.selected.nit}" title="#{bundle.EditCompaniaTitle_nit}" />
+                        <p:outputLabel value="#{bundle.EditCompaniaLabel_numRegistroIva}" for="numRegistroIva" />
+                        <p:inputText id="numRegistroIva" value="#{companiaController.selected.numRegistroIva}" title="#{bundle.EditCompaniaTitle_numRegistroIva}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{companiaController.update}" value="#{bundle.Save}" update="display,:CompaniaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompaniaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompaniaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

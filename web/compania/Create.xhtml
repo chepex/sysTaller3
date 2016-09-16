@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompaniaCreateDlg" widgetVar="CompaniaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCompaniaTitle}">
+            <h:form id="CompaniaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{companiaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_idCompania}" for="idCompania" />
+                        <p:inputText id="idCompania" value="#{companiaController.selected.idCompania}" title="#{bundle.CreateCompaniaTitle_idCompania}" required="true" requiredMessage="#{bundle.CreateCompaniaRequiredMessage_idCompania}"/>
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{companiaController.selected.nombre}" title="#{bundle.CreateCompaniaTitle_nombre}" required="true" requiredMessage="#{bundle.CreateCompaniaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{companiaController.selected.telefono}" title="#{bundle.CreateCompaniaTitle_telefono}" required="true" requiredMessage="#{bundle.CreateCompaniaRequiredMessage_telefono}"/>
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{companiaController.selected.correo}" title="#{bundle.CreateCompaniaTitle_correo}" required="true" requiredMessage="#{bundle.CreateCompaniaRequiredMessage_correo}"/>
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{companiaController.selected.direccion}" title="#{bundle.CreateCompaniaTitle_direccion}" required="true" requiredMessage="#{bundle.CreateCompaniaRequiredMessage_direccion}"/>
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_tasaIva}" for="tasaIva" />
+                        <p:inputText id="tasaIva" value="#{companiaController.selected.tasaIva}" title="#{bundle.CreateCompaniaTitle_tasaIva}" />
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_nit}" for="nit" />
+                        <p:inputText id="nit" value="#{companiaController.selected.nit}" title="#{bundle.CreateCompaniaTitle_nit}" />
+                        <p:outputLabel value="#{bundle.CreateCompaniaLabel_numRegistroIva}" for="numRegistroIva" />
+                        <p:inputText id="numRegistroIva" value="#{companiaController.selected.numRegistroIva}" title="#{bundle.CreateCompaniaTitle_numRegistroIva}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{companiaController.create}" value="#{bundle.Save}" update="display,:CompaniaListForm:datalist,:growl" oncomplete="handleSubmit(args,'CompaniaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompaniaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

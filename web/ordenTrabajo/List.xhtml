@@ -17,9 +17,11 @@
             <h:form id="OrdenTrabajoListForm">
                 <p:commandButton actionListener="#{ordenTrabajoController.prepareCreate()}" disabled="#{ordenTrabajoController.selected!=null}" value="Nuevo" update="@form" />
                 <p:commandButton actionListener="#{ordenTrabajoController.validar()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo>0}" value="Crear"  />
-                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Guardar" update=":growl" actionListener="#{ordenTrabajoController.update}"   rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"/>
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Guardar" update=":growl" actionListener="#{ordenTrabajoController.create}"   rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"/>
                 <p:commandButton actionListener="#{ordenTrabajoController.limpiar2()}"  disabled="#{ordenTrabajoController.selected==null}" value="Limpiar" update="@form" />
                 <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar"  update=":buscarOrderForm" oncomplete="PF('BuscarDialog').show()" />
+                <p:commandButton id="btnprint"   icon="ui-icon ui-icon-print"   actionListener="#{ordenTrabajoController.reporteOrdenTrabajo}" rendered="#{ordenTrabajoController.selected!=null}" disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}" ajax="false" update="@form :growl" />
+                
                 <center>
                 <p:panelGrid columns="2"    rendered="#{ordenTrabajoController.selected!=null}" >
                         <p:panelGrid style="margin-top:20px"  rendered="#{ordenTrabajoController.selected!=null}">

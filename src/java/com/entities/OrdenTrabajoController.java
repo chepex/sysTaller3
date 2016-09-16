@@ -2,11 +2,14 @@ package com.entities;
 
 import com.entities.util.JsfUtil;
 import com.entities.util.JsfUtil.PersistAction;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.SQLException;
  
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,6 +23,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.naming.NamingException;
+import net.sf.jasperreports.engine.JRException;
 
 @ManagedBean(name = "ordenTrabajoController")
 @SessionScoped
@@ -31,6 +36,10 @@ public class OrdenTrabajoController implements Serializable {
     private com.entities.VehiculoFacade vehiculoFacade;    
     @EJB
     private com.entities.PresupuestoFacade presupuestoFacade;  
+    @EJB
+    private com.entities.SB_Reportes reportes;      
+    
+    
       
     private List<OrdenTrabajo> items = null;
     private OrdenTrabajo selected;
@@ -187,9 +196,10 @@ public class OrdenTrabajoController implements Serializable {
         System.out.println("id-->"+this.selected.getIdOrdenTrabajo());
        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("OrdenTrabajoCreated"));
-          int vid2= this.presupuestoFacade.findById();
+          
           if(!lpresupuesto.isEmpty()){
             for(Presupuesto p : this.lpresupuesto){
+                int vid2= this.presupuestoFacade.findById();
                 if(p.getIdpresupuesto()==0){
                     p.setIdpresupuesto(vid2);
                 }       
@@ -197,7 +207,7 @@ public class OrdenTrabajoController implements Serializable {
                 p.setOrdenTrabajoidOrdenTrabajo1(selected);
                 try{
                  presupuestoFacade.edit(p);
-                  vid2 =vid2+1;
+                 
                 }catch(Exception ex){
                     System.out.println("---->"+ex.getMessage());
                 }
@@ -362,9 +372,8 @@ public class OrdenTrabajoController implements Serializable {
 
     public void buscarOrden(){    
         
-        if(JsfUtil.isNum(vbuscar)){
-           
-           int val = Integer.valueOf(vbuscar);
+        if(JsfUtil.isNum(vbuscar)){           
+            int val = Integer.valueOf(vbuscar);
             this.items = this.ejbFacade.findByOrden( val );
         }else{
             this.items = this.ejbFacade.findByEmpresaNombre(this.vbuscar);
@@ -400,4 +409,18 @@ public class OrdenTrabajoController implements Serializable {
             this.create();
         }
     }
+    
+     public String reporteOrdenTrabajo() throws NamingException, SQLException, JRException, IOException{         
+         try{
+            HashMap params = new HashMap();  
+           params.put("ORDEN",selected.getIdOrdenTrabajo() );         
+           reportes.GenerarReporte("/ordenTrabajo/ordenTrabajo.jasper", params);
+         }catch(Exception ex){
+         
+              JsfUtil.addErrorMessage("error"+ex);
+         }
+        
+        
+        return "";           
+    }      
 }

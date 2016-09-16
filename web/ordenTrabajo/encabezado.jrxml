@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af7f3b01-109a-4285-a437-5652dee4768c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select nombre, direccion, telefono, correo from compania]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<textField>
+				<reportElement x="154" y="0" width="257" height="20" uuid="e39a5252-017f-422a-ba8a-ce45f20fe038"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="21" width="257" height="20" uuid="994d8c12-8a43-4a20-bce7-379f6d26453d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="41" width="77" height="20" uuid="0f354814-c20d-4ebd-bf6e-a77b50c12e20"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="41" width="76" height="20" uuid="7e9f895a-89c0-47b4-bbf9-2b61d229d7f2"/>
+				<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="41" width="100" height="20" uuid="12f8b6a0-36a6-4bc2-ba9a-41cd548f71dd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="154" y="41" width="45" height="20" uuid="ccde1c82-6e9a-43c4-b180-dc203629111a"/>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="41" width="40" height="20" uuid="fbc5ef5a-9c5a-428c-ad85-5159e82883c7"/>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<image>
+				<reportElement x="18" y="0" width="100" height="50" uuid="cefa59a2-9c45-49a3-8a22-d7f08c1cab68"/>
+				<imageExpression><![CDATA["../resources/img/logo.jpeg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+</jasperReport>

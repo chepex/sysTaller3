@@ -17,7 +17,7 @@ o.solicutud_cliente ,
 c1.nombre categoria, 
 r.nombre repuesto,
 p.cantidad
- FROM sysTaller.orden_trabajo o, cliente c, vehiculo v, marca m , modelo d, presupuesto p , repuesto r,categoria c1
+ FROM orden_trabajo o, cliente c, vehiculo v, marca m , modelo d, presupuesto p , repuesto r,categoria c1
 where  o.Cliente_idCliente = c.idCliente
 and o.Vehiculo_idvehiculo = v.idvehiculo
 and v.Marca_idMarca = m.idMarca

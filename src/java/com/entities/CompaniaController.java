@@ -8,14 +8,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpServletResponse;
 
 @ManagedBean(name = "companiaController")
 @SessionScoped
@@ -23,13 +26,15 @@ public class CompaniaController implements Serializable {
 
     @EJB
     private com.entities.CompaniaFacade ejbFacade;
+    @EJB
+    private com.entities.SB_privilegios sb_privilegios;    
     private List<Compania> items = null;
     private Compania selected;
 
     public CompaniaController() {
     }
-
-    public Compania getSelected() {
+    
+     public Compania getSelected() {
         return selected;
     }
 
@@ -154,6 +159,18 @@ public class CompaniaController implements Serializable {
             }
         }
 
+    }
+    
+    public void install(){
+        
+       String msg = this.ejbFacade.install();
+       if(msg.equals("ok")){
+                JsfUtil.addSuccessMessage("Instalacion completa");
+       }else{
+           JsfUtil.addErrorMessage("Surgio un error"+msg);
+       }
+    
+    
     }
 
 }

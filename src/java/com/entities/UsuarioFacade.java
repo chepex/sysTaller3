@@ -5,9 +5,11 @@
  */
 package com.entities;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,5 +28,23 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
+    
+    public List<Usuario> findByNombre(String nombre ) {
+        TypedQuery<Usuario> q = null;
+      List<Usuario> lusuario = null;
+             q = em.createNamedQuery("Usuario.findByNombre",Usuario.class)               
+                .setParameter("nombre",nombre);               
+              try{
+             lusuario =  q.getResultList();
+              }catch(Exception ex){
+                  System.out.println("error->>>");
+                  System.out.println("error->>>");
+                  System.out.println("error->>>");
+                  System.out.println("error->>>");
+                  System.out.println("error->>>"+ex.getMessage());
+              return lusuario;
+              }
+        return lusuario;
+    }      
     
 }

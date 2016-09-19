@@ -14,7 +14,11 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="OrdenTrabajoListForm">
+            
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="OrdenTrabajoListForm"  rendered="#{loginBean.acceso()}">
                 <p:commandButton actionListener="#{ordenTrabajoController.prepareCreate()}" disabled="#{ordenTrabajoController.selected!=null}" value="Nuevo" update="@form" />
                 <p:commandButton actionListener="#{ordenTrabajoController.validar()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo>0}" value="Crear"  />
                 <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Guardar" update=":growl" actionListener="#{ordenTrabajoController.create}"   rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"/>
@@ -29,7 +33,7 @@
                             <p:column style="font-weight: bold;">
                                 <p:outputLabel value="Cliente  " for="cliente" />
                             </p:column>   
-                             <p:column style="font-weight: bold;" colspan="2">
+                             <p:column style="font-weight: bold;" colspan="">
                                 <p:autoComplete id="cliente" minQueryLength="3" 
                                                 value="#{ordenTrabajoController.selected.clienteidCliente}"                                         
                                               var="cliente"
@@ -42,7 +46,17 @@
                               </p:autoComplete> 
                             </p:column>
                             <p:column style="font-weight: bold;">                     
-                               
+                                <p:outputLabel value="Estado  " for="estado" />
+                            </p:column>
+                               <p:column style="font-weight: bold;">                     
+                                <p:selectOneMenu id="estado" value="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden}" >
+                                <f:selectItems value="#{estadoOrdenController.items}"
+                                                  var="estadoItem"
+                                                  itemLabel="#{estadoItem.nombre}"
+                                                  itemValue="#{estadoItem}"/>
+                               </p:selectOneMenu>
+                                  
+                           
                             </p:column>
                              </p:row>
                              <p:row>
@@ -74,7 +88,7 @@
                             </p:column>
                             <p:column> 
                                <p:selectOneMenu id="tipoPagoidTipoPago" value="#{ordenTrabajoController.selected.tipoPagoidTipoPago}"   requiredMessage="#{bundle.EditOrdenTrabajoRequiredMessage_tipoPagoidTipoPago}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                          
                             <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
                                            var="tipoPagoidTipoPagoItem"
                                            itemLabel="#{tipoPagoidTipoPagoItem.nombre}"
@@ -154,7 +168,7 @@
                 </p:panel>
             </center>
         </p:tab>
-        <p:tab title="Repuestos">
+        <p:tab title="Repuestos/Mano Obra">
             <center>
                 <p:panel header="Repuestos">
                     <p:panelGrid columns="8">
@@ -175,7 +189,7 @@
                                               var="repuesto"
                                               itemLabel="#{repuesto.nombre }" 
                                               itemValue="#{repuesto}"
-                                              completeMethod="#{repuestoController.autoCompleteCliente}" 
+                                              completeMethod="#{repuestoController.autoCompleteRepuesto}" 
                                               converter="#{RepuestoControllerConverter}" 
                                               effect="fade" >
                                  
@@ -261,8 +275,45 @@
         <p:tab title="Trabajo Externo">
              <center>
                  <p:panel header="Trabajo Externo">
-           
-                    <p:dataTable id="datalist2" value="#{ordenTrabajoController.lpresupuesto}" var="item"
+                        <p:panelGrid columns="8">
+                         <p:outputLabel value="Proveedor" for="proveedor2" />
+                          <p:autoComplete id="proveedor2" minQueryLength="3" 
+                                          value="#{ordenTrabajoController.proveedor2}"                                         
+                                              var="proveedor"
+                                              itemLabel="#{proveedor.nombre }" 
+                                              itemValue="#{proveedor}"
+                                              completeMethod="#{proveedorController.autoCompleteCliente}" 
+                                              converter="#{ProveedorControllerConverter}" 
+                                              effect="fade" >
+                                 
+                        </p:autoComplete> 
+                         <p:outputLabel value="Repuesto" for="repuesto2" />
+                         <p:autoComplete id="repuesto2" minQueryLength="3" 
+                                                value="#{ordenTrabajoController.repuesto2}"                                         
+                                              var="repuesto"
+                                              itemLabel="#{repuesto.nombre }" 
+                                              itemValue="#{repuesto}"
+                                              completeMethod="#{repuestoController.autoCompleteFuera}" 
+                                              converter="#{RepuestoControllerConverter}" 
+                                              effect="fade" >
+                                 
+                        </p:autoComplete>  
+                        <p:outputLabel value="Cantidad" for="cantidad2" />
+                        <p:inputText   id="cantidad2" style="width:50px;" value="#{ordenTrabajoController.cantidad2}" />
+                        <p:outputLabel value="Precio" for="precio2" />
+                        <p:inputText   id="precio2"  style="width:50px;" value="#{ordenTrabajoController.precio2}" />   
+                        <p:outputLabel value="Factura" for="factura2" />
+                        <p:inputText   id="factura2" value="#{ordenTrabajoController.factura2}" />    
+                        <p:outputLabel value="Tipo Pago" for="tipoPagoidTipoPago2" />
+                        <p:selectOneMenu id="tipoPagoidTipoPago2" value="#{ordenTrabajoController.tpago2}"   >
+                            <f:selectItems value="#{tipoPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPagoidTipoPagoItem"
+                                           itemLabel="#{tipoPagoidTipoPagoItem.nombre}"
+                                           itemValue="#{tipoPagoidTipoPagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton actionListener="#{ordenTrabajoController.agregarTrabajoFuera()}"   value="+" update="@form,:growl" />
+                    </p:panelGrid>
+                     <p:dataTable id="datalist2" value="#{ordenTrabajoController.listTrabajo}" var="item"
                                  selectionMode="single" selection="#{presupuestoController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idpresupuesto}"

@@ -2,12 +2,14 @@ package com.entities;
 
 import com.entities.util.JsfUtil;
 import com.entities.util.JsfUtil.PersistAction;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -23,12 +25,17 @@ public class CategoriaController implements Serializable {
 
     @EJB
     private com.entities.CategoriaFacade ejbFacade;
+    @EJB
+    private com.entities.SB_privilegios sb_privilegios;   
     private List<Categoria> items = null;
     private Categoria selected;
 
     public CategoriaController() {
+    
     }
-
+    
+ 
+    
     public Categoria getSelected() {
         return selected;
     }

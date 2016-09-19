@@ -23,7 +23,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/login.xhtml</welcome-file>
     </welcome-file-list>
     <login-config>
         <auth-method>FORM</auth-method>
@@ -40,5 +40,9 @@
     <security-role>
         <description/>
         <role-name>administrador</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>root</role-name>
     </security-role>
 </web-app>

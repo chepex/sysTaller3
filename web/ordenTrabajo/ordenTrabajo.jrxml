@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/mmixco/NetBeansProjects/sysTaller3/web/ordenTrabajo/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\Users\\Desarrollo\\Documents\\NetBeansProjects\\sysTaller3\\web\\ordenTrabajo\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ORDEN" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -79,15 +79,15 @@ and o.idorden_trabajo = $P{ORDEN}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="75" splitType="Stretch">
+		<band height="78" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="76" width="555" height="1" uuid="53186628-10d0-42e5-a52e-da516f0b9ece"/>
+			</line>
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="73" uuid="8c01ab1b-5726-439a-a696-925bce27127b"/>
+				<reportElement x="12" y="0" width="540" height="73" uuid="4168b1c5-a8c3-4579-91fa-d5356eb3cedc"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "encabezado.jasper"]]></subreportExpression>
 			</subreport>
-			<line>
-				<reportElement x="0" y="73" width="555" height="1" uuid="53186628-10d0-42e5-a52e-da516f0b9ece"/>
-			</line>
 		</band>
 	</title>
 	<pageHeader>

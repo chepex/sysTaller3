@@ -55,6 +55,7 @@ public class UsuarioController implements Serializable {
     }
 
     public void create() throws Exception {
+       this.selected.setNombre(this.selected.getNombre().toUpperCase()); 
         String pass = this.selected.getPassword().toUpperCase();
         this.selected.setPassword(JsfUtil.EncriptadorMD5(pass));
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
@@ -64,7 +65,7 @@ public class UsuarioController implements Serializable {
     }
 
     public void update() throws Exception {
-        
+        this.selected.setNombre(this.selected.getNombre().toUpperCase()); 
         String pass = this.selected.getPassword().toUpperCase();
         this.selected.setPassword(JsfUtil.EncriptadorMD5(pass));
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));

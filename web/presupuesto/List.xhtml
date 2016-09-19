@@ -14,7 +14,10 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="PresupuestoListForm">
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="PresupuestoListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListPresupuestoTitle}">
                     <p:dataTable id="datalist" value="#{presupuestoController.items}" var="item"
                                  selectionMode="single" selection="#{presupuestoController.selected}"

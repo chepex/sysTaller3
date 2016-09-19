@@ -14,7 +14,10 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="RolMenuListForm">
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="RolMenuListForm"  rendered="#{loginBean.acceso()}">
             <p:panelGrid columns="4">
                 <p:outputLabel for="roles" value="Roles" />
                 <p:selectOneMenu id="roles" value="#{rolMenuController.selectedRol}" >

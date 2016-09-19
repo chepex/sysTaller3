@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Presupuesto.findAll", query = "SELECT p FROM Presupuesto p"),
     @NamedQuery(name = "Presupuesto.findByIdpresupuesto", query = "SELECT p FROM Presupuesto p WHERE p.idpresupuesto = :idpresupuesto"),
     @NamedQuery(name = "Presupuesto.findByCantidad", query = "SELECT p FROM Presupuesto p WHERE p.cantidad = :cantidad"),
-    @NamedQuery(name = "Presupuesto.findByOrden", query = "SELECT p FROM Presupuesto p WHERE p.ordenTrabajoidOrdenTrabajo1.idOrdenTrabajo = :orden "),
+    @NamedQuery(name = "Presupuesto.findByOrden", query = "SELECT p FROM Presupuesto p WHERE p.ordenTrabajoidOrdenTrabajo1.idOrdenTrabajo = :orden  "),
+    @NamedQuery(name = "Presupuesto.findByOrdenRepuesto", query = "SELECT p FROM Presupuesto p WHERE p.ordenTrabajoidOrdenTrabajo1.idOrdenTrabajo = :orden   and p.repuestoidRepuesto.categoriaidCategoria.idCategoria in (1,2)"),    
+    @NamedQuery(name = "Presupuesto.findByOrdenTrabajoFuera", query = "SELECT p FROM Presupuesto p WHERE p.ordenTrabajoidOrdenTrabajo1.idOrdenTrabajo = :orden   and p.repuestoidRepuesto.categoriaidCategoria.idCategoria in ( 3)"),        
     @NamedQuery(name = "Presupuesto.findByPrecio", query = "SELECT p FROM Presupuesto p WHERE p.precio = :precio"),
     @NamedQuery(name = "Presupuesto.findByIva", query = "SELECT p FROM Presupuesto p WHERE p.iva = :iva"),
     @NamedQuery(name = "Presupuesto.findByFactura", query = "SELECT p FROM Presupuesto p WHERE p.factura = :factura")

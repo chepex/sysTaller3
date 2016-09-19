@@ -14,7 +14,10 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="TipoPagoListForm">
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="TipoPagoListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListTipoPagoTitle}">
                     <p:dataTable id="datalist" value="#{tipoPagoController.items}" var="item"
                                  selectionMode="single" selection="#{tipoPagoController.selected}"
@@ -49,7 +52,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoPagoController.prepareCreate}" update=":TipoPagoCreateForm" oncomplete="PF('TipoPagoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoPagoViewForm" oncomplete="PF('TipoPagoViewDialog').show()" disabled="#{empty tipoPagoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoPagoEditForm" oncomplete="PF('TipoPagoEditDialog').show()" disabled="#{empty tipoPagoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoPagoController.destroy}" update=":growl,datalist" disabled="#{empty tipoPagoController.selected}"/>
+                            <p:commandButton id="deleteButton"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoPagoController.destroy}" update=":growl,datalist" disabled="#{empty tipoPagoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -33,8 +33,10 @@ public class LoginBean {
     private String correo;
     @EJB
     private  UsuarioFacade  usuarioFacade;    
+    @EJB
+    private  SB_privilegios  sb_privilegios;     
     private String serverIP;
-    
+  
  
     
 
@@ -77,11 +79,11 @@ public class LoginBean {
                 System.out.println("request.getSession().getMaxInactiveInterval()--->"+request.getSession().getMaxInactiveInterval());
                 System.out.println("Principal--->"+request.getUserPrincipal());
                 System.out.println("Principal--->"+request.getSession().getLastAccessedTime());
-                
-                   FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");    
+                request.getSession().setAttribute("SSUSUARIO", username.toUpperCase());  
+                 FacesContext.getCurrentInstance().getExternalContext().redirect("/sysTaller3/faces/home/inicio.xhtml");    
             
             }else{
-               FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+               FacesContext.getCurrentInstance().getExternalContext().redirect("/sysTaller3/faces/home/inicio.xhtml");
             }
             
             /*request.login(username.toUpperCase(), password);
@@ -100,6 +102,12 @@ public class LoginBean {
         }
     }
      
+     public void validatAcceso(String pagina){
+         System.out.println("pagina-->"+pagina);    
+         System.out.println("pagina-->"+pagina);    
+         
+     }
+     
      
  
     public void logout() throws ServletException, IOException{
@@ -107,14 +115,14 @@ public class LoginBean {
         System.gc();
         System.out.println(" salir ");
         System.out.println(" salir ");
-        System.out.println(" salir ");
+        System.out.println(" salir -->"+ip);
         
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         if (request.getSession() != null) {
             request.getSession().invalidate();
         }      
         request.logout();
-        FacesContext.getCurrentInstance().getExternalContext().redirect("http://"+ip+"/tag/login.xhtml");        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/sysTaller3/faces/login.xhtml");        
     }
     
     public String ssuser () {
@@ -207,6 +215,19 @@ public class LoginBean {
         return serverIP;
     }	 
     
+  
+    public boolean  acceso( ){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String viewId = facesContext.getViewRoot().getViewId();
+        viewId = viewId.replace(".xhtml", " ");
+      
+        
+        String msg = sb_privilegios.validar(viewId);
+        if(msg.equals("ok")){
+        return true;
+        }
+        return false;
+    }
     
 	
             

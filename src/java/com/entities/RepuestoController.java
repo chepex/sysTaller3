@@ -157,10 +157,16 @@ public class RepuestoController implements Serializable {
 
     }
     
-    public List<Repuesto> autoCompleteCliente(String valor) {
+    public List<Repuesto> autoCompleteRepuesto(String valor) {
         System.out.println("valor--->"+valor);
-        return getFacade().findByNombreCodigo(valor);
+        return getFacade().findByNombreCodigoRepuesto(valor);
         
     }     
+    
+    public List<Repuesto> autoCompleteFuera(String valor) {
+        System.out.println("valor--->"+valor);
+        return getFacade().findByNombreCodigoFuera(valor);
+        
+    }      
 
 }

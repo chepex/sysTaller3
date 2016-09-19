@@ -13,8 +13,15 @@
             <h:outputText value="#{bundle.ListCompaniaTitle}"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
-            <h:form id="CompaniaListForm">
+        <ui:define name="body"   >
+          <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+          
+             
+            <h:form id="CompaniaListForm" rendered="#{loginBean.acceso()}">
+                
+                
                 <p:panel header="#{bundle.ListCompaniaTitle}">
                     <p:dataTable id="datalist" value="#{companiaController.items}" var="item"
                                  selectionMode="single" selection="#{companiaController.selected}"
@@ -79,7 +86,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{companiaController.prepareCreate}" update=":CompaniaCreateForm" oncomplete="PF('CompaniaCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CompaniaViewForm" oncomplete="PF('CompaniaViewDialog').show()" disabled="#{empty companiaController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CompaniaEditForm" oncomplete="PF('CompaniaEditDialog').show()" disabled="#{empty companiaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{companiaController.destroy}" update=":growl,datalist" disabled="#{empty companiaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  value="#{bundle.Delete}" actionListener="#{companiaController.destroy}" update=":growl,datalist" disabled="#{empty companiaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -40,15 +40,40 @@ public class PresupuestoFacade extends AbstractFacade<Presupuesto> {
         return vid;
     }      
     
-    public List<Presupuesto> findByOrden(OrdenTrabajo  orden ) {
+    public List<Presupuesto> findByOrden(OrdenTrabajo  orden , String cat) {
         TypedQuery<Presupuesto> q = null;
-        System.out.println("orden-->"+orden);
+      
              q = em.createNamedQuery("Presupuesto.findByOrden",Presupuesto.class)               
-                .setParameter("orden", orden.getIdOrdenTrabajo());               
+                .setParameter("orden", orden.getIdOrdenTrabajo())  ;          
+             
              
                 
               
         return q.getResultList();
     }    
+    
+    public List<Presupuesto> findByOrdenRepuesto(OrdenTrabajo  orden ) {
+        TypedQuery<Presupuesto> q = null;
+      
+             q = em.createNamedQuery("Presupuesto.findByOrdenRepuesto",Presupuesto.class)               
+                .setParameter("orden", orden.getIdOrdenTrabajo())  ;          
+             
+             
+                
+              
+        return q.getResultList();
+    }  
+    
+    public List<Presupuesto> findByOrdenTrabajoFuera(OrdenTrabajo  orden  ) {
+        TypedQuery<Presupuesto> q = null;
+      
+             q = em.createNamedQuery("Presupuesto.findByOrdenTrabajoFuera",Presupuesto.class)               
+                .setParameter("orden", orden.getIdOrdenTrabajo())   ;         
+             
+             
+                
+              
+        return q.getResultList();
+    }      
     
 }

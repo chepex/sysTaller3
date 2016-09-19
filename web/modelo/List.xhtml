@@ -14,7 +14,11 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ModeloListForm">
+            
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="ModeloListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListModeloTitle}">
                     <p:dataTable id="datalist" value="#{modeloController.items}" var="item"
                                  selectionMode="single" selection="#{modeloController.selected}"
@@ -49,7 +53,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{modeloController.prepareCreate}" update=":ModeloCreateForm" oncomplete="PF('ModeloCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ModeloViewForm" oncomplete="PF('ModeloViewDialog').show()" disabled="#{empty modeloController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ModeloEditForm" oncomplete="PF('ModeloEditDialog').show()" disabled="#{empty modeloController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{modeloController.destroy}" update=":growl,datalist" disabled="#{empty modeloController.selected}"/>
+                            <p:commandButton id="deleteButton"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{modeloController.destroy}" update=":growl,datalist" disabled="#{empty modeloController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

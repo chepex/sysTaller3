@@ -11,6 +11,11 @@
     <principal-name>administrador</principal-name>
     <group-name>administrador</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>root</role-name>
+    <principal-name>root</principal-name>
+    <group-name>root</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

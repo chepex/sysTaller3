@@ -29,8 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RolMenu.findAll", query = "SELECT r FROM RolMenu r"),
-    @NamedQuery(name = "RolMenu.findByIdrolMenu", query = "SELECT r FROM RolMenu r WHERE r.idrolMenu = :idrolMenu"),
-    @NamedQuery(name = "RolMenu.findByRol", query = "SELECT r FROM RolMenu r WHERE r.idrol.idRol = :rol"),    
+    
+    @NamedQuery(name = "RolMenu.findByRol", query = "SELECT r FROM RolMenu r WHERE r.idrol.idRol = :rol order by r.idmenu.submenu , r.idmenu.Correlativo"),    
+    @NamedQuery(name = "RolMenu.findByRolUrl", query = "SELECT r FROM RolMenu r WHERE r.idrol.idRol = :rol and r.idmenu.destino = :destino "),        
     @NamedQuery(name = "RolMenu.findByActivo", query = "SELECT r FROM RolMenu r WHERE r.activo = :activo")})
 public class RolMenu implements Serializable {
     private static final long serialVersionUID = 1L;

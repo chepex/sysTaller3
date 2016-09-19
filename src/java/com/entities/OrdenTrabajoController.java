@@ -47,19 +47,100 @@ public class OrdenTrabajoController implements Serializable {
        
   
     private List<Presupuesto> lpresupuesto=new ArrayList<>();
+    private List<Presupuesto> listTrabajo=new ArrayList<>();    
+  
     private Repuesto repuesto;
     private String cantidad;
     private BigDecimal precio;
     private String factura;
     private Proveedor proveedor;
     private TipoPago tpago;
+    private Repuesto repuesto2;
+    private String cantidad2;
+    private BigDecimal precio2;
+    private String factura2;
+    private Proveedor proveedor2;
+    private TipoPago tpago2;    
     private int idDetalle;
+    private int idDetalle2;    
     private String vbuscar;
     
     
     public OrdenTrabajoController() {
     }
 
+    public Repuesto getRepuesto2() {
+        return repuesto2;
+    }
+
+    public void setRepuesto2(Repuesto repuesto2) {
+        this.repuesto2 = repuesto2;
+    }
+
+    public String getCantidad2() {
+        return cantidad2;
+    }
+
+    public void setCantidad2(String cantidad2) {
+        this.cantidad2 = cantidad2;
+    }
+
+    public BigDecimal getPrecio2() {
+        return precio2;
+    }
+
+    public void setPrecio2(BigDecimal precio2) {
+        this.precio2 = precio2;
+    }
+
+    public String getFactura2() {
+        return factura2;
+    }
+
+    public void setFactura2(String factura2) {
+        this.factura2 = factura2;
+    }
+
+    public Proveedor getProveedor2() {
+        return proveedor2;
+    }
+
+    public void setProveedor2(Proveedor proveedor2) {
+        this.proveedor2 = proveedor2;
+    }
+
+    public TipoPago getTpago2() {
+        return tpago2;
+    }
+
+    public void setTpago2(TipoPago tpago2) {
+        this.tpago2 = tpago2;
+    }
+
+    public int getIdDetalle2() {
+        return idDetalle2;
+    }
+
+    public void setIdDetalle2(int idDetalle2) {
+        this.idDetalle2 = idDetalle2;
+    }
+
+    
+    
+    
+    public List<Presupuesto> getListTrabajo() {
+        return listTrabajo;
+    }
+
+    public void setListTrabajo(List<Presupuesto> listTrabajo) {
+        this.listTrabajo = listTrabajo;
+    }
+
+   
+    
+
+    
+    
     public String getVbuscar() {
         return vbuscar;
     }
@@ -176,7 +257,9 @@ public class OrdenTrabajoController implements Serializable {
         this.selected.setTotalRespuesto(new BigDecimal("0"));
         this.selected.setTotalTrabajoExterno(new BigDecimal("0"));
         idDetalle = 0;
+        idDetalle2 = 0;    
         lpresupuesto=new ArrayList<>();
+        listTrabajo=new ArrayList<>();
         return selected;
     }
 
@@ -213,6 +296,24 @@ public class OrdenTrabajoController implements Serializable {
                 }
           }
         }
+          
+          
+          if(!listTrabajo.isEmpty()){
+            for(Presupuesto p : this.listTrabajo){
+                int vid2= this.presupuestoFacade.findById();
+                if(p.getIdpresupuesto()==0){
+                    p.setIdpresupuesto(vid2);
+                }       
+                System.out.println("id-->"+this.selected.getIdOrdenTrabajo());
+                p.setOrdenTrabajoidOrdenTrabajo1(selected);
+                try{
+                 presupuestoFacade.edit(p);
+                 
+                }catch(Exception ex){
+                    System.out.println("---->"+ex.getMessage());
+                }
+          }
+        }          
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -342,6 +443,8 @@ public class OrdenTrabajoController implements Serializable {
         this.selected = null;
           this.lvehiculo.clear();
           this.lvehiculo = new ArrayList<>();
+          listTrabajo =  new ArrayList<>();
+          this.lpresupuesto=  new ArrayList<>();
     }    
     
     public void agregarRepuesto(){
@@ -352,6 +455,7 @@ public class OrdenTrabajoController implements Serializable {
         presupuesto.setFactura(factura);
         presupuesto.setRepuestoidRepuesto(repuesto);
         presupuesto.setProveedoridProveedor(proveedor);    
+        
         BigDecimal vcantidad  = new BigDecimal(cantidad);
         presupuesto.setPrecio(precio);
         presupuesto.setTipoPagoidTipoPago(tpago);
@@ -359,16 +463,52 @@ public class OrdenTrabajoController implements Serializable {
         total = presupuesto.getPrecio().multiply(vcantidad);
         presupuesto.setIva(vcantidad.multiply( precio).multiply( new BigDecimal(".13")));
         presupuesto.setOrdenTrabajoidOrdenTrabajo1(selected);
-        System.out.println("---->"+this.tpago);
+         
         lpresupuesto.add(presupuesto);
         this.selected.setTotalIva(this.selected.getTotalIva().add(presupuesto.getIva()));
-        this.selected.setTotalManoObra(this.selected.getTotalManoObra().add(total));
+        if(this.repuesto.getCategoriaidCategoria().getIdCategoria()==1){
+            this.selected.setTotalRespuesto(this.selected.getTotalRespuesto().add(total));
+        }
+        if(this.repuesto.getCategoriaidCategoria().getIdCategoria()==2){
+            this.selected.setTotalManoObra(this.selected.getTotalManoObra().add(total));
+        }        
+        
         BigDecimal total2 = new BigDecimal("0");
-        total2 = selected.getTotalGravado().add(selected.getTotalManoObra()).add(selected.getTotalRespuesto()).add(selected.getTotalTrabajoExterno()).add(selected.getTotalIva());
+        total2 =selected.getTotalManoObra().add(selected.getTotalRespuesto()).add(selected.getTotalTrabajoExterno()).add(selected.getTotalIva());
 
         this.selected.setTotalGravado(total2);
         JsfUtil.addSuccessMessage("Repuesto agregado correctamente");
     }
+    
+    
+    public void agregarTrabajoFuera(){
+        idDetalle2= idDetalle2+1;
+        Presupuesto presupuesto = new Presupuesto(idDetalle2);
+        presupuesto.setIdpresupuesto(0);
+        presupuesto.setCantidad(cantidad2);
+        presupuesto.setFactura(factura2);
+        presupuesto.setRepuestoidRepuesto(repuesto2);
+        presupuesto.setProveedoridProveedor(proveedor2);    
+        BigDecimal vcantidad  = new BigDecimal(cantidad2);
+        presupuesto.setPrecio(precio2);
+        presupuesto.setTipoPagoidTipoPago(tpago2);
+        BigDecimal total = new BigDecimal("0");
+        total = presupuesto.getPrecio().multiply(vcantidad);
+        presupuesto.setIva(vcantidad.multiply( precio2).multiply( new BigDecimal(".13")));
+        presupuesto.setOrdenTrabajoidOrdenTrabajo1(selected);
+         
+        this.listTrabajo.add(presupuesto);
+        this.selected.setTotalIva(this.selected.getTotalIva().add(presupuesto.getIva()));
+        this.selected.setTotalTrabajoExterno(this.selected.getTotalTrabajoExterno().add(total));
+        BigDecimal total2 = new BigDecimal("0");
+        total2 =selected.getTotalManoObra().add(selected.getTotalRespuesto()).add(selected.getTotalTrabajoExterno()).add(selected.getTotalIva());
+
+        this.selected.setTotalGravado(total2);
+        JsfUtil.addSuccessMessage("Repuesto agregado correctamente");
+    }    
+    
+    
+    
 
     public void buscarOrden(){    
         
@@ -382,8 +522,9 @@ public class OrdenTrabajoController implements Serializable {
     } 
     
     public void selecionar(){
-        this.lpresupuesto = presupuestoFacade.findByOrden(selected);
-         this.lvehiculo=  vehiculoFacade.findByCliente(this.selected.getClienteidCliente());
+        this.lpresupuesto = presupuestoFacade.findByOrdenRepuesto(selected );
+        this.listTrabajo = presupuestoFacade.findByOrdenTrabajoFuera(selected );
+        this.lvehiculo=  vehiculoFacade.findByCliente(this.selected.getClienteidCliente());
     }    
     
     public void validar(){ 
@@ -413,13 +554,11 @@ public class OrdenTrabajoController implements Serializable {
      public String reporteOrdenTrabajo() throws NamingException, SQLException, JRException, IOException{         
          try{
             HashMap params = new HashMap();  
-           params.put("ORDEN",selected.getIdOrdenTrabajo() );         
-           reportes.GenerarReporte("/ordenTrabajo/ordenTrabajo.jasper", params);
-         }catch(Exception ex){
-         
+            params.put("ORDEN",selected.getIdOrdenTrabajo() );         
+            reportes.GenerarReporte("/ordenTrabajo/ordenTrabajo.jasper", params);
+         }catch(Exception ex){         
               JsfUtil.addErrorMessage("error"+ex);
          }
-        
         
         return "";           
     }      

@@ -9,7 +9,7 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-               <title>SysTaller</title>
+                <title>Systema de Cable 2.0</title>
                 
             </f:facet>
             <h:outputStylesheet name="css/bootstrap3.css"/>
@@ -37,13 +37,9 @@
                 <div class="col-md-4"></div>    
                 <div class="col-md-4">
                     <section class="login-form">
-                            <h:form id="usrForm" role="login">
-                                
-                                  <p:graphicImage url="/resources/img/logo.jpeg" library="images" class="img-responsive" alt="" />
-                                <p:inputText id="username" value="#{loginBean.username}" class="form-control input-lg" placeholder="usuario" required="true" />                          
-                                <p:password id="password" value="#{loginBean.password}" class="form-control input-lg"  placeholder="password" required="true" />  
-                             <p:commandButton id="cmdLog" class="btn btn-lg btn-primary btn-block" action="#{loginBean.login}" ajax="false" update="@all" value="Ingresar"  />
-                            </h:form>
+                              <h:form id="install">
+                                  <p:commandButton    value="Instalar" actionListener="#{companiaController.install()}" update="@form,:mensajes" />
+        </h:form>
                         </section>
                          <div class="form-links">
                       

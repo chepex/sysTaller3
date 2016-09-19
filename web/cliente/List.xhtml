@@ -14,7 +14,10 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ClienteListForm">
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="ClienteListForm"  rendered="#{loginBean.acceso()}">
                 <p:commandButton id="nuevoButton" icon="ui-icon-plus"   value="Nuevo" actionListener="#{clienteController.prepareCreate}" disabled="#{clienteController.selected != null}" update="@form,:growl" />
                 <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{clienteController.validar()}" disabled="#{clienteController.selected.idCliente>0}" rendered="#{clienteController.selected != null}" update="@form,:growl " />
                 <p:commandButton id="updateButton" icon="ui-icon-plus"   value="Guardar" actionListener="#{clienteController.create()}"  disabled="#{clienteController.selected.idCliente==0}" rendered="#{clienteController.selected != null}" update="@form,:growl " />                

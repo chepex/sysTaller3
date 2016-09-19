@@ -13,10 +13,11 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class EjbOrdenTrabajo {
-
-    public String createCliente(){
     
-    return "ok";
+
+    public void createCliente(String pagina){
+    
+        
     }
     
     

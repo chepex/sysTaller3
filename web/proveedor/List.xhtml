@@ -14,7 +14,10 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ProveedorListForm">
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="ProveedorListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListProveedorTitle}">
                     <p:dataTable id="datalist" value="#{proveedorController.items}" var="item"
                                  selectionMode="single" selection="#{proveedorController.selected}"
@@ -61,7 +64,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{proveedorController.prepareCreate}" update=":ProveedorCreateForm" oncomplete="PF('ProveedorCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ProveedorViewForm" oncomplete="PF('ProveedorViewDialog').show()" disabled="#{empty proveedorController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProveedorEditForm" oncomplete="PF('ProveedorEditDialog').show()" disabled="#{empty proveedorController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{proveedorController.destroy}" update=":growl,datalist" disabled="#{empty proveedorController.selected}"/>
+                            <p:commandButton id="deleteButton"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{proveedorController.destroy}" update=":growl,datalist" disabled="#{empty proveedorController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

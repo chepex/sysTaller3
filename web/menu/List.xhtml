@@ -14,7 +14,11 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="MenuListForm">
+            
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="MenuListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListMenuTitle}">
                     <p:dataTable id="datalist" value="#{menuController.items}" var="item"
                                  selectionMode="single" selection="#{menuController.selected}"
@@ -62,7 +66,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{menuController.prepareCreate}" update=":MenuCreateForm" oncomplete="PF('MenuCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MenuViewForm" oncomplete="PF('MenuViewDialog').show()" disabled="#{empty menuController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MenuEditForm" oncomplete="PF('MenuEditDialog').show()" disabled="#{empty menuController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{menuController.destroy}" update=":growl,datalist" disabled="#{empty menuController.selected}"/>
+                            <p:commandButton id="deleteButton"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{menuController.destroy}" update=":growl,datalist" disabled="#{empty menuController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

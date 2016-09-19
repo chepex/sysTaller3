@@ -14,7 +14,10 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="RepuestoListForm">
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="RepuestoListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListRepuestoTitle}">
                     <p:dataTable id="datalist" value="#{repuestoController.items}" var="item"
                                  selectionMode="single" selection="#{repuestoController.selected}"
@@ -67,7 +70,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{repuestoController.prepareCreate}" update=":RepuestoCreateForm" oncomplete="PF('RepuestoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RepuestoViewForm" oncomplete="PF('RepuestoViewDialog').show()" disabled="#{empty repuestoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RepuestoEditForm" oncomplete="PF('RepuestoEditDialog').show()" disabled="#{empty repuestoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{repuestoController.destroy}" update=":growl,datalist" disabled="#{empty repuestoController.selected}"/>
+                            <p:commandButton id="deleteButton"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{repuestoController.destroy}" update=":growl,datalist" disabled="#{empty repuestoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

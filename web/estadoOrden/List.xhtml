@@ -14,7 +14,11 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="EstadoOrdenListForm">
+            
+                 <center>
+                <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
+            </center>
+            <h:form id="EstadoOrdenListForm"  rendered="#{loginBean.acceso()}">
                 <p:panel header="#{bundle.ListEstadoOrdenTitle}">
                     <p:dataTable id="datalist" value="#{estadoOrdenController.items}" var="item"
                                  selectionMode="single" selection="#{estadoOrdenController.selected}"
@@ -50,7 +54,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{estadoOrdenController.prepareCreate}" update=":EstadoOrdenCreateForm" oncomplete="PF('EstadoOrdenCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EstadoOrdenViewForm" oncomplete="PF('EstadoOrdenViewDialog').show()" disabled="#{empty estadoOrdenController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EstadoOrdenEditForm" oncomplete="PF('EstadoOrdenEditDialog').show()" disabled="#{empty estadoOrdenController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{estadoOrdenController.destroy}" update=":growl,datalist" disabled="#{empty estadoOrdenController.selected}"/>
+                            <p:commandButton id="deleteButton"  rendered="#{facesContext.externalContext.isUserInRole('root')}"  icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{estadoOrdenController.destroy}" update=":growl,datalist" disabled="#{empty estadoOrdenController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

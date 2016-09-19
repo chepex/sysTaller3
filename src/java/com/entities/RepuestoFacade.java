@@ -36,6 +36,26 @@ public class RepuestoFacade extends AbstractFacade<Repuesto> {
                 .setParameter("nombre", "%"+nombre+"%");
               
         return q.getResultList();
-    }     
+    }  
+    
+    public List<Repuesto> findByNombreCodigoRepuesto(String  nombre) {
+        TypedQuery<Repuesto> q = null;
+     
+             q = em.createNamedQuery("Repuesto.findByNombreCodigoRepuesto",Repuesto.class)               
+                .setParameter("nombre", "%"+nombre+"%");
+              
+        return q.getResultList();
+    }      
+    
+    public List<Repuesto> findByNombreCodigoFuera(String  nombre) {
+        TypedQuery<Repuesto> q = null;
+     
+             q = em.createNamedQuery("Repuesto.findByNombreCodigoFuera",Repuesto.class)               
+                .setParameter("nombre", "%"+nombre+"%");
+              
+        return q.getResultList();
+    }      
+    
+    
     
 }

@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
  
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
@@ -20,27 +21,49 @@ import org.primefaces.model.menu.MenuModel;
 @ViewScoped
 public class MenuBean implements Serializable {
     @EJB
-    private RolMenuFacade rolMenuFacade;    
+    private RolMenuFacade rolMenuFacade; 
+    
+    @EJB
+    private UsuarioFacade usuarioFacade;     
+    
+ 
+    
+       
     private MenuModel menus;
 
     
     public MenuModel generarMenus() {
         
-        MenuModel vmodulos =  new DefaultMenuModel();
-        DefaultSubMenu firstSubmenu = null;
+         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);  
+           String usuario="";
+          try{
+                   usuario = (String) session.getAttribute("SSUSUARIO") ;	      
+                  }catch(Exception ex){
+                    usuario = "";   
+                  }
+          
         
+        MenuModel vmodulos =  new DefaultMenuModel();
+      
+            
+            
+        DefaultSubMenu firstSubmenu = null;        
         DefaultMenuItem item = new DefaultMenuItem();
         item.setValue("Home");
         item.setOutcome("/index");
         item.setIcon("ui-icon-home");
-        vmodulos.addElement(item);
+        vmodulos.addElement(item);  
         
-       
-       
-          int mas= 1;
-      System.out.println("roles--->");
-      System.out.println("roles--->"+mas );
-            List<RolMenu> lstRolesXMenus = rolMenuFacade.findAll();
+          if(usuario!=null){
+              
+              System.out.println("usuario--->"+usuario);
+              System.out.println("usuario--->"+usuario);
+              System.out.println("usuario--->"+usuario);
+            List<Usuario> usu = usuarioFacade.findByNombre(usuario);
+            if(!usu.isEmpty()){
+         int mas= 1;
+      
+            List<RolMenu> lstRolesXMenus = rolMenuFacade.findByRol(usu.get(0).getRolidRol());
             System.out.println("roles--->"+lstRolesXMenus);
             for(RolMenu rm :lstRolesXMenus) {
                 String existeMenu= "";
@@ -74,6 +97,9 @@ public class MenuBean implements Serializable {
                     }
                 }
             }
+        }
+        }
+      
       
         vmodulos.generateUniqueIds();
         return vmodulos;

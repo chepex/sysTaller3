@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Desarrollo\\Documents\\NetBeansProjects\\sysTaller3\\web\\ordenTrabajo\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="ORDEN" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>

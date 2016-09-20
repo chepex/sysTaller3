@@ -7,6 +7,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 public class JsfUtil {
 
@@ -99,4 +100,19 @@ public class JsfUtil {
         // clave encriptada
         return h.toString();
     }    
+    
+    public static String  nombreUsuario(){
+        String vuser ="";
+        
+        try{
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);  
+            vuser = (String) session.getAttribute("SSUSUARIO") ;	      
+        }catch(Exception  ex){
+        
+            vuser = "";
+        }
+        
+        return vuser;
+    
+    }
 }

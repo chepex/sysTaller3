@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 import net.sf.jasperreports.engine.JRException;
 
 @ManagedBean(name = "ordenTrabajoController")
@@ -36,6 +37,8 @@ public class OrdenTrabajoController implements Serializable {
     private com.entities.VehiculoFacade vehiculoFacade;    
     @EJB
     private com.entities.PresupuestoFacade presupuestoFacade;  
+    @EJB
+    private com.entities.UsuarioFacade usuarioFacade;      
     @EJB
     private com.entities.SB_Reportes reportes;      
     
@@ -263,10 +266,21 @@ public class OrdenTrabajoController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public String  create() {
        
         EstadoOrden estado = new EstadoOrden(1);
-        Usuario usuario = new Usuario(1 );
+        
+         String username = JsfUtil.nombreUsuario();
+        List<Usuario> lu=  usuarioFacade.findByNombre(username);
+          Usuario usuario = null;
+         if(!lu.isEmpty()){
+             usuario = lu.get(0);
+         }else{
+              JsfUtil.addErrorMessage("El usuario :"+username +" no esta registrado");
+             
+            return "error" ;
+         }
+        
        
         this.selected.setUsuarioidUsuario(usuario); 
         this.selected.setEstadoOrdenidEstadoOrden(estado);
@@ -317,6 +331,8 @@ public class OrdenTrabajoController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        
+        return "ok";
     }
 
     public void update() {

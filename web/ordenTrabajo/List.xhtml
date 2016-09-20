@@ -47,32 +47,70 @@
             </center>
             <h:form id="OrdenTrabajoListForm"  rendered="#{loginBean.acceso()}">
                 <p:commandButton actionListener="#{ordenTrabajoController.prepareCreate()}" disabled="#{ordenTrabajoController.selected!=null}" value="Nuevo" update="@form" />
-                <p:commandButton actionListener="#{ordenTrabajoController.validar()}" update=":growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo>0}" value="Crear"  />
-                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Guardar" update=":growl" actionListener="#{ordenTrabajoController.create}"   rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"/>
+                <p:commandButton actionListener="#{ordenTrabajoController.validar()}" update="@form, :growl"  rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo>0}" value="Crear"  />
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Guardar" update="@form, :growl" actionListener="#{ordenTrabajoController.create}"   rendered="#{ordenTrabajoController.selected!=null}"  disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"/>
                 <p:commandButton actionListener="#{ordenTrabajoController.limpiar2()}"  disabled="#{ordenTrabajoController.selected==null}" value="Limpiar" update="@form" />
                 <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar"  update=":buscarOrderForm" oncomplete="PF('BuscarDialog').show()" />
                 <p:commandButton id="btnprint"   icon="ui-icon ui-icon-print"   actionListener="#{ordenTrabajoController.reporteOrdenTrabajo}" rendered="#{ordenTrabajoController.selected!=null}" disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}" ajax="false" update="@form :growl" />
                                 <center>
+                                  
                     <p:panel header="Orden de Trabajo">
                         <center>
-                    <p:steps readonly="false" activeIndex="0" styleClass="custom">
-                        <p:menuitem value="Cotizacion"  url="#"  />
-                        <p:menuitem value="Aprobada" url="#" />
-                        <p:menuitem value="Reparación" url="#" />
+                            <br/>
+                            <p:steps style=" width:100%;
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:box;
+    box-pack:center;
+    box-align:center;"   activeIndex="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden.idEstadoOrden-1}" styleClass="custom">
+                        <p:menuitem value="Cotizacion"    />
+                        <p:menuitem value="Aprobada"  />
+                        <p:menuitem value="Reparación"   />
                         <p:menuitem value="Facturar" />
                         <p:menuitem value="Terminada" />
-                        <p:menuitem value="Cancelada" />
+                        
+                        
                     </p:steps>
+                            
                             </center>                    
                 <p:panelGrid columns="3"    rendered="#{ordenTrabajoController.selected!=null}" >
-                     <p:commandButton id="nuevoButton2" icon="ui-icon-plus"   value="Aprobar" />
-                    
+                    <p:commandButton id="btnAprovar"  update="@form :growl"  icon="ui-icon-plus"  actionListener="#{ordenTrabajoController.cambiarEstado('2')}"  value="Aprobar" disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}"  rendered="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden.idEstadoOrden== 1}"/>
+                    <p:commandButton id="btnRepracion" update="@form :growl"  icon="ui-icon-plus"  actionListener="#{ordenTrabajoController.cambiarEstado('3')}"  value="Reparacion" rendered="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden.idEstadoOrden== 2}" />
+                    <p:commandButton id="btnFacturar"  update="@form :growl"  icon="ui-icon-plus"  actionListener="#{ordenTrabajoController.cambiarEstado('4')}"  value="Facturar"  rendered="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden.idEstadoOrden== 3}"/>
+                    <p:commandButton id="btnTerminar" update="@form :growl"   icon="ui-icon-plus"  actionListener="#{ordenTrabajoController.cambiarEstado('5')}"  value="Terminada"  rendered="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden.idEstadoOrden== 4}" />
+                     
+                     
+                     
                         <p:panelGrid style="margin-top:20px"  rendered="#{ordenTrabajoController.selected!=null}">
+                            <p:row>
+                                <p:column style="font-weight: bold;">
+                                   Numero Orden
+                                </p:column>
+                                <p:column>
+                                       <p:outputLabel rendered="#{ordenTrabajoController.selected.idOrdenTrabajo>0}">  #{ordenTrabajoController.selected.idOrdenTrabajo}</p:outputLabel> 
+                                </p:column>
+                                  <p:column style="font-weight: bold;">
+                                    Estado
+                                </p:column>
+                                  <p:column >
+                                      <p:outputLabel value="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden.nombre}"></p:outputLabel>
+                                </p:column>                                
+                            </p:row>
                          <p:row>
                             <p:column style="font-weight: bold;">
                                 <p:outputLabel value="Cliente  " for="cliente" />
                             </p:column>   
-                             <p:column style="font-weight: bold;" colspan="">
+                             <p:column  colspan="2">
                                 <p:autoComplete id="cliente" minQueryLength="3" 
                                                 value="#{ordenTrabajoController.selected.clienteidCliente}"                                         
                                               var="cliente"
@@ -84,19 +122,7 @@
                                    <p:ajax  event="itemSelect"  listener="#{ordenTrabajoController.llenarVehiculo()}" update="@form" />
                               </p:autoComplete> 
                             </p:column>
-                            <p:column style="font-weight: bold;">                     
-                                <p:outputLabel value="Estado  " for="estado" />
-                            </p:column>
-                               <p:column style="font-weight: bold;">                     
-                                <p:selectOneMenu id="estado" value="#{ordenTrabajoController.selected.estadoOrdenidEstadoOrden}" >
-                                <f:selectItems value="#{estadoOrdenController.items}"
-                                                  var="estadoItem"
-                                                  itemLabel="#{estadoItem.nombre}"
-                                                  itemValue="#{estadoItem}"/>
-                               </p:selectOneMenu>
-                                  
-                           
-                            </p:column>
+                            
                              </p:row>
                              <p:row>
                             <p:column style="font-weight: bold;">                     

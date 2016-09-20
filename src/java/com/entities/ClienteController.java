@@ -216,6 +216,10 @@ public class ClienteController implements Serializable {
     }   
     
     public List<Cliente> autoCompleteCliente(String valor) {
+        if(valor.charAt(0)== ' '){
+        valor = valor.substring(1 , valor.length());
+        } 
+        
        List<Cliente > lcliente = getFacade().findByNombreCodigo(valor);
         System.out.println("buscar-->"+valor    );
        if(!lcliente.isEmpty()){

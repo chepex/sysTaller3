@@ -33,6 +33,8 @@ public class OrdenTrabajoController implements Serializable {
 
     @EJB
     private com.entities.OrdenTrabajoFacade ejbFacade; 
+   @EJB
+    private com.entities.EstadoOrdenFacade estadoOrdenFacade;     
     @EJB
     private com.entities.VehiculoFacade vehiculoFacade;    
     @EJB
@@ -259,6 +261,8 @@ public class OrdenTrabajoController implements Serializable {
         this.selected.setTotalManoObra(new BigDecimal("0"));
         this.selected.setTotalRespuesto(new BigDecimal("0"));
         this.selected.setTotalTrabajoExterno(new BigDecimal("0"));
+        EstadoOrden est =  estadoOrdenFacade.find(1);
+        selected.setEstadoOrdenidEstadoOrden(est);
         idDetalle = 0;
         idDetalle2 = 0;    
         lpresupuesto=new ArrayList<>();
@@ -268,7 +272,8 @@ public class OrdenTrabajoController implements Serializable {
 
     public String  create() {
        
-        EstadoOrden estado = new EstadoOrden(1);
+        
+        EstadoOrden estado  = this.estadoOrdenFacade.find(1);
         
          String username = JsfUtil.nombreUsuario();
         List<Usuario> lu=  usuarioFacade.findByNombre(username);
@@ -578,4 +583,20 @@ public class OrdenTrabajoController implements Serializable {
         
         return "";           
     }      
+     
+    public void cambiarEstado(String estado) {
+        
+        if(estado!=null){
+            int esta = Integer.valueOf(estado);
+        
+            System.out.println("esttado"+esta);
+            if(selected!=null){
+                EstadoOrden est =  this.estadoOrdenFacade.find(esta);
+                this.selected.setEstadoOrdenidEstadoOrden(est);
+                this.ejbFacade.edit(selected);
+                   JsfUtil.addSuccessMessage("cambio de estado satisfactorio");
+            }
+        }
+    
+    }
 }

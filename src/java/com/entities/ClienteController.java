@@ -31,6 +31,7 @@ public class ClienteController implements Serializable {
     private Vehiculo selectedvehiculo;
     private List<Vehiculo> lvehiculo =new ArrayList<>();
     private String nombre;
+    private int idVehiculo;
   
     
     public ClienteController() {
@@ -93,7 +94,8 @@ public class ClienteController implements Serializable {
        
         selected = new Cliente();
         initializeEmbeddableKey();
-        selectedvehiculo = new  Vehiculo(0);
+        idVehiculo = 1;
+        selectedvehiculo = new  Vehiculo(idVehiculo);
         lvehiculo =new ArrayList<>();
         return selected;
     }
@@ -232,8 +234,10 @@ public class ClienteController implements Serializable {
     }
     
     public void addVechiculo(){
-        
+        idVehiculo =idVehiculo +1;
+        selectedvehiculo.setIdvehiculo(idVehiculo);
         this.lvehiculo.add(selectedvehiculo);
+        selectedvehiculo = new Vehiculo(0);
     }
     
     public void buscarCliente(){    
@@ -242,7 +246,9 @@ public class ClienteController implements Serializable {
     
     public void selecionar(){
       this.lvehiculo=  vehiculoFacade.findByCliente(selected);
-      this.selectedvehiculo = new Vehiculo(0);
+         idVehiculo = 1;
+        
+      this.selectedvehiculo = new Vehiculo(idVehiculo);
     }
     
     

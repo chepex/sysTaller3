@@ -14,7 +14,34 @@
         </ui:define>
 
         <ui:define name="body">
-            
+     <style type="text/css">
+.ui-steps .ui-steps-item {
+    width: 15%;
+}
+ 
+.ui-state-highlight {
+    text-shadow: none !important;
+}
+ 
+.ui-steps.custom {
+    margin-bottom: 30px;
+}
+ 
+.ui-steps.custom .ui-steps-item .ui-menuitem-link {
+    height: 10px;
+    padding: 0 1em;
+}
+ 
+.ui-steps.custom .ui-steps-item .ui-steps-number {
+    background-color: #0081c2;
+    color: #FFFFFF;
+    display: inline-block;
+    width: 30px;
+    border-radius: 10px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+</style>       
                  <center>
                 <p:graphicImage url="/resources/img/accesoDenegado.png" library="images" class="img-responsive" alt=""  rendered="#{!loginBean.acceso()}" />
             </center>
@@ -27,7 +54,21 @@
                 <p:commandButton id="btnprint"   icon="ui-icon ui-icon-print"   actionListener="#{ordenTrabajoController.reporteOrdenTrabajo}" rendered="#{ordenTrabajoController.selected!=null}" disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}" ajax="false" update="@form :growl" />
                 
                 <center>
-                <p:panelGrid columns="2"    rendered="#{ordenTrabajoController.selected!=null}" >
+                    <p:panel header="Orden de Trabajo">
+                        <center>
+                    <p:steps readonly="false" activeIndex="0" styleClass="custom">
+                        <p:menuitem value="Cotizacion"  url="#"  />
+                        <p:menuitem value="Aprobada" url="#" />
+                        <p:menuitem value="Reparación" url="#" />
+                        <p:menuitem value="Facturar" />
+                        <p:menuitem value="Terminada" />
+                        <p:menuitem value="Cancelada" />
+                    </p:steps>
+                            </center>
+                    
+                <p:panelGrid columns="3"    rendered="#{ordenTrabajoController.selected!=null}" >
+                     <p:commandButton id="nuevoButton2" icon="ui-icon-plus"   value="Aprobar" />
+                    
                         <p:panelGrid style="margin-top:20px"  rendered="#{ordenTrabajoController.selected!=null}">
                          <p:row>
                             <p:column style="font-weight: bold;">
@@ -129,6 +170,7 @@
                     </p:panel>                
                     
                     </p:panelGrid>
+                        </p:panel>
                 </center>
              
     <p:tabView rendered="#{ordenTrabajoController.selected!=null}">

@@ -52,8 +52,7 @@
                 <p:commandButton actionListener="#{ordenTrabajoController.limpiar2()}"  disabled="#{ordenTrabajoController.selected==null}" value="Limpiar" update="@form" />
                 <p:commandButton id="buscar"    disabled="#{ordenTrabajoController.selected!=null}" value="Buscar"  update=":buscarOrderForm" oncomplete="PF('BuscarDialog').show()" />
                 <p:commandButton id="btnprint"   icon="ui-icon ui-icon-print"   actionListener="#{ordenTrabajoController.reporteOrdenTrabajo}" rendered="#{ordenTrabajoController.selected!=null}" disabled="#{ordenTrabajoController.selected.idOrdenTrabajo==0}" ajax="false" update="@form :growl" />
-                
-                <center>
+                                <center>
                     <p:panel header="Orden de Trabajo">
                         <center>
                     <p:steps readonly="false" activeIndex="0" styleClass="custom">

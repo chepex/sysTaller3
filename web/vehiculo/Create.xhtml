@@ -23,24 +23,28 @@
                         <p:selectOneMenu id="tipoVehiculoidTipoVehiculo" value="#{vehiculoController.selected.tipoVehiculoidTipoVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_tipoVehiculoidTipoVehiculo}">
                             <f:selectItems value="#{tipoVehiculoController.itemsAvailableSelectOne}"
                                            var="tipoVehiculoidTipoVehiculoItem"
+                                           itemLabel="#{tipoVehiculoidTipoVehiculoItem.nombre}"
                                            itemValue="#{tipoVehiculoidTipoVehiculoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_modeloidModelo}" for="modeloidModelo" />
                         <p:selectOneMenu id="modeloidModelo" value="#{vehiculoController.selected.modeloidModelo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_modeloidModelo}">
                             <f:selectItems value="#{modeloController.itemsAvailableSelectOne}"
                                            var="modeloidModeloItem"
+                                           itemLabel="#{modeloidModeloItem.nombre}"
                                            itemValue="#{modeloidModeloItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_marcaidMarca}" for="marcaidMarca" />
                         <p:selectOneMenu id="marcaidMarca" value="#{vehiculoController.selected.marcaidMarca}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_marcaidMarca}">
                             <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
                                            var="marcaidMarcaItem"
+                                           itemLabel="#{marcaidMarcaItem.nombre}"
                                            itemValue="#{marcaidMarcaItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateVehiculoLabel_clienteidCliente}" for="clienteidCliente" />
                         <p:selectOneMenu id="clienteidCliente" value="#{vehiculoController.selected.clienteidCliente}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_clienteidCliente}">
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
                                            var="clienteidClienteItem"
+                                           itemLabel="#{clienteidClienteItem.nombre}"
                                            itemValue="#{clienteidClienteItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

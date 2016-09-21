@@ -25,6 +25,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{tipoVehiculoController.itemsAvailableSelectOne}"
                                            var="tipoVehiculoidTipoVehiculoItem"
+                                           itemLabel="#{tipoVehiculoidTipoVehiculoItem.nombre}"
                                            itemValue="#{tipoVehiculoidTipoVehiculoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_modeloidModelo}" for="modeloidModelo" />
@@ -32,6 +33,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{modeloController.itemsAvailableSelectOne}"
                                            var="modeloidModeloItem"
+                                           itemLabel="#{modeloidModeloItem.nombre}"
                                            itemValue="#{modeloidModeloItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_marcaidMarca}" for="marcaidMarca" />
@@ -39,6 +41,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"
                                            var="marcaidMarcaItem"
+                                           itemLabel="#{marcaidMarcaItem.nombre}"
                                            itemValue="#{marcaidMarcaItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditVehiculoLabel_clienteidCliente}" for="clienteidCliente" />
@@ -46,6 +49,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
                                            var="clienteidClienteItem"
+                                           itemLabel="#{clienteidClienteItem.nombre}"
                                            itemValue="#{clienteidClienteItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

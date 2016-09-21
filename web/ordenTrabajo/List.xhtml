@@ -110,7 +110,7 @@
                             <p:column style="font-weight: bold;">
                                 <p:outputLabel value="Cliente  " for="cliente" />
                             </p:column>   
-                             <p:column  colspan="2">
+                             <p:column   >
                                 <p:autoComplete id="cliente" minQueryLength="3" 
                                                 value="#{ordenTrabajoController.selected.clienteidCliente}"                                         
                                               var="cliente"
@@ -123,12 +123,11 @@
                               </p:autoComplete> 
                             </p:column>
                             
-                             </p:row>
-                             <p:row>
+                            
                             <p:column style="font-weight: bold;">                     
                                 <p:outputLabel value="Vehiculo" for="vehiculo" />
                             </p:column>
-                             <p:column style="font-weight: bold;" colspan="2" >                     
+                             <p:column style="font-weight: bold;"   >                     
                                  <p:selectOneMenu id="vehiculo" value="#{ordenTrabajoController.selected.vehiculoidvehiculo}"   requiredMessage="#{bundle.EditVehiculoRequiredMessage_clienteidCliente}">
                                <f:selectItems value="#{ordenTrabajoController.lvehiculo}"
                                                   var="vehiculoItem"
@@ -136,9 +135,7 @@
                                                   itemValue="#{vehiculoItem}"/>
                                </p:selectOneMenu>
                              </p:column>
-                                  <p:column style="font-weight: bold;">                     
-                                      
-                            </p:column>
+                                        
                          </p:row> 
                          <p:row>
                            <p:column style="font-weight: bold;">   

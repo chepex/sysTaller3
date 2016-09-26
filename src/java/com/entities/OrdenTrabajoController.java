@@ -273,7 +273,6 @@ public class OrdenTrabajoController implements Serializable {
     public String  create() {
        
         
-        EstadoOrden estado  = this.estadoOrdenFacade.find(1);
         
          String username = JsfUtil.nombreUsuario();
         List<Usuario> lu=  usuarioFacade.findByNombre(username);
@@ -288,7 +287,7 @@ public class OrdenTrabajoController implements Serializable {
         
        
         this.selected.setUsuarioidUsuario(usuario); 
-        this.selected.setEstadoOrdenidEstadoOrden(estado);
+      //  this.selected.setEstadoOrdenidEstadoOrden(estado);
         
         int vid= this.ejbFacade.findById();
         
